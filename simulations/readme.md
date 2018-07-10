@@ -2,8 +2,8 @@
 
 Here you'll find some examples of simulations/programming tasks that you could work on.
 
-* [Langton's Ant](simulations/langtons-ant/)
+* [Langton's Ant](langtons-ant/)
 
-* [Conway's Game of Life](/life/)
+* [Conway's Game of Life](life/)
 
-* [Monopoly](/monopoly-game/)
+* [Monopoly](monopoly-game/)
