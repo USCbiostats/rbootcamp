@@ -1,4 +1,6 @@
-# Objectives
+# Monopoly
+
+## Objectives
 
 What should be the best strategy to play Monopoly (in terms of property purchase)? A question that has keep be awake several nights. The idea is to create a simulation function that provides a solution to this problem. To do so, you need to consider the following:
 
@@ -13,7 +15,15 @@ To ease the simulation, assume that:
 2.  Tthe player has infinite resources (in other words, don't mess with bankrupcy rules), and
 3.  The game ends once the player has passed through all the positions.
 
+If everything goes as expected, you should be getting something like the following plot in which the distribution of the number of times an indivual steps into any of the 40 locations of the board (excluding chance and community chest).
+
+![](monopoly.png)
+
+The simulation was carried out 50000, each time throwing the die 500 times.
+
 To create the simulation, use the following description of the board and cards.
+
+---------------------
 
 # About Monopoly
 
