@@ -24,5 +24,5 @@ The bootcamp will be scheduled as follows:
 
 While we are focusing on incoming M.S. and Ph.D. students, PM faculty and staff are also invited to participate. Please RSVP [here](http://bit.ly/2KQCt55). 
 
-For more details, including a detailed version of the program, please visit [our website](https://github.com/USCbiostats/rbootcamp).
+For more details, including a detailed version of the program, please visit [our website](https://github.com/USCbiostats/rbootcamp), or send an email to **vegayon\@usc.edu**.
 
