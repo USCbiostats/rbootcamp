@@ -1,4 +1,4 @@
-# R Bootcamp for Scientific Computing <img src="trojan-rlogo.svg" width="150px" align="right">
+# R Bootcamp for Scientific Computing <img src="flyer/fig/trojan-rlogo.svg" width="150px" align="right">
 
 </div>
 
@@ -107,6 +107,6 @@ Wickham, H. (2017) *Advanced R*. CRC Press. ([free online](https://adv-r.hadley.
 
 <div align="center">
 
-<img src="flyer/hex-stickers.png" width="600px" align="center">
+<img src="flyer/hex-stickers.png" width="600px">
 
 </div>
