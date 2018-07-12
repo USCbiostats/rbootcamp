@@ -1,6 +1,6 @@
 <div align="center">
 
-![](trojan-rlogo.svg){#fig .class width="200px"}
+<img src="trojan-rlogo.svg" width="200px">
 
 # R Bootcamp for Scientific Computing
 
@@ -29,8 +29,8 @@ For more details, including a detailed version of the program, please visit our 
 ----
 
 <div align="center">
-![Conway's Game of Life](simulations/life/life2.gif){#life .class width="300px"}
-![Social Network](network.png){#life .class width="300px"}
+<img src="simulations/life/life2.gif" width="300px">
+<img src="network.png" width="300px">
 
-![Monopoly](simulations/monopoly-game/monopoly.png){#monopo .class width="600px"}
+<img src="simulations/monopoly-game/monopoly.png" width="600px">
 </div>
