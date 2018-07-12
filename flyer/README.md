@@ -14,11 +14,13 @@ The Division of Biostatistics will be holding a **bootcamp for Master and Ph.D. 
 
 The bootcamp will be scheduled as follows:
 
-* **Lecture 1**: Monday, August 13, 10 AM to 2 PM, SSB Room 116 
-* **Lecture 2**: Tuesday, August 14, 10 AM to 2 PM, SSB Room 116
-* **Lecture 3**: Wednesday, August 15, 10 AM to 2 PM, SSB Room 116
-* **Hackathon**: Thursday, August 16, 2:30 PM to 5:30 PM, SSB Room 116
-* **Final Presentations**: Friday, August 17, 10 AM to 1 PM, SSB Room 114
+|    | Day/Time | Room |
+|:---|:---|---:|
+| **Lecture 1** | Monday, August 13, 10 AM to 2 PM | SSB 116 |
+| **Lecture 2** | Tuesday, August 14, 10 AM to 2 PM | SSB 116|
+| **Lecture 3** | Wednesday, August 15, 10 AM to 2 PM | SSB 116|
+| **Hackathon** (*after student orientation*) | Thursday, August 16, 2:30 PM to 5:30 PM | SSB 116|
+| **Final Presentations** | Friday, August 17, 10 AM to 1 PM | SSB 114|
 
 ## RSVP and More info
 
