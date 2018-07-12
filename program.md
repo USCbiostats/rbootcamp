@@ -1,4 +1,4 @@
-# R Bootcamp for Scientific Computing <img src="flyer/fig/trojan-rlogo.svg" width="150px" align="right">
+# R Bootcamp for Scientific Computing <img src="fig/trojan-rlogo.svg" width="150px" align="right">
 
 </div>
 
@@ -13,11 +13,15 @@ results at the end of the boot camp.
 
 The bootcamp will take place on the week of Monday August 13th, 2018:
 
-* Lecture 1: Monday 13, 10AM to 2PM -- room 116
-* Lecture 2: Tuesday 14, 10AM to 2PM -- room 116
-* Lecture 3: Wednesday 15, 10AM to 2PM -- room 116
-* Hackathon: Thursday 16, 2:30PM to 5:30PM -- room 166
-* Final Presentations: Friday 17, 10AM to 1PM -- room 114
+
+|    | Day/Time | Room |
+|:---|:---|---:|
+| **Lecture 1** | Monday, August 13, 10 AM to 2 PM | SSB 116 |
+| **Lecture 2** | Tuesday, August 14, 10 AM to 2 PM | SSB 116|
+| **Lecture 3** | Wednesday, August 15, 10 AM to 2 PM | SSB 116|
+| **Hackathon** (*after student orientation*) | Thursday, August 16, 2:30 PM to 5:30 PM | SSB 116|
+| **Final Presentations** | Friday, August 17, 10 AM to 1 PM | SSB 114|
+
 
 
 ## Schedule
@@ -107,6 +111,6 @@ Wickham, H. (2017) *Advanced R*. CRC Press. ([free online](https://adv-r.hadley.
 
 <div align="center">
 
-<img src="flyer/hex-stickers.png" width="600px">
+<img src="fig/hex-stickers.png" width="600px">
 
 </div>
