@@ -6,6 +6,7 @@
 *.pdf
 
 # Other
-
+flyer/
+simulations/*/*.html
 
 .Rproj.user
