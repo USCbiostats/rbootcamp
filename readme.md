@@ -1,4 +1,6 @@
-# R boot camp: Scientific Computing
+# R Bootcamp for Scientific Computing <img src="trojan-rlogo.svg" width="150px" align="right">
+
+</div>
 
 This boot camp has as main goal to give a general overview of scientific
 computing, and in particular, on the R programming language. It is
@@ -6,8 +8,6 @@ divided in 5 days. The first three days will be a mix of presentations
 and hands-on work, and the last two will be 100% hands-on where the
 attendees are expected to work on a short project and present their
 results at the end of the boot camp.
-
-The
 
 ## Dates
 
@@ -103,4 +103,10 @@ Wickham, H., and Grolemund, G. (2017) *R for Data Science: Visualize, Model, Tra
 
 Wickham, H. (2017) *Advanced R*. CRC Press. ([free online](https://adv-r.hadley.nz/))
 
+----
 
+<div align="center">
+
+<img src="flyer/hex-stickers.png" width="600px" align="center">
+
+</div>
