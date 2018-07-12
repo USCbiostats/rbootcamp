@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="trojan-rlogo.svg" width="200px">
-
 # R Bootcamp for Scientific Computing
+
+<img src="hex-stickers.png" width="600px">
 
 </div>
  
@@ -14,10 +14,10 @@ The Division of Biostatistics will be holding a **bootcamp for incoming Master a
 
 The bootcamp will be scheduled as follows:
 
-* **Lecture 1**: Monday 13, 10 AM to 2 PM, SSB Room 
-* **Lecture 2**: Tuesday 14, 10 AM to 2 PM, SSB Room 116
-* **Lecture 3**: Wednesday 15, 10 AM to 2 PM, SSB Room 116
-* **Hackathon**: Thursday 16, 2:30 PM to 5:30 PM, SSB Room 166
+* **Lecture 1**: Monday, August 13, 10 AM to 2 PM, SSB Room 
+* **Lecture 2**: Tuesday, August 14, 10 AM to 2 PM, SSB Room 116
+* **Lecture 3**: Wednesday, August 15, 10 AM to 2 PM, SSB Room 116
+* **Hackathon**: Thursday, August 16, 2:30 PM to 5:30 PM, SSB Room 116
 * **Final Presentations**: Friday 17, 10 AM to 1 PM, SSB Room 114
 
 ## RSVP and More info
@@ -26,11 +26,3 @@ While we are focusing on incoming M.S. and Ph.D. students, PM faculty and staff 
 
 For more details, including a detailed version of the program, please visit our website at https://github.com/USCbiostats/rbootcamp.
 
-----
-
-<div align="center">
-<img src="simulations/life/life2.gif" width="300px">
-<img src="network.png" width="300px">
-
-<img src="simulations/monopoly-game/monopoly.png" width="600px">
-</div>
