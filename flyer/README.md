@@ -2,7 +2,7 @@
 
 # R Bootcamp for Scientific Computing
 
-<img src="hex-stickers.png" width="600px">
+<img src="../fig/hex-stickers.png" width="600px">
 
 </div>
  
