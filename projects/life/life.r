@@ -75,7 +75,7 @@ for (i in 1:20) {
 }
 dev.off()
 animation <- magick::image_animate(fig, fps = 4)
-magick::image_write(animation, "simulations/life/life1.gif")
+magick::image_write(animation, "projects/life/life1.gif")
 
 
 # Example 2: Random ------------------------------------------------------------
@@ -92,5 +92,5 @@ for (i in 1:200) {
 }
 dev.off()
 animation <- magick::image_animate(fig, fps = 10)
-magick::image_write(animation, "simulations/life/life2.gif")
+magick::image_write(animation, "projects/life/life2.gif")
 
