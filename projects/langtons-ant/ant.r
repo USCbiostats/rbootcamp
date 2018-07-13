@@ -58,7 +58,7 @@ move_ant <- function(x) {
 }
 
 ant <- init_ant(c(51,51), n = 101)
-ant_raster <- magick::image_read("simulations/langtons-ant/ant-icon.png")
+ant_raster <- magick::image_read("projects/langtons-ant/ant-icon.png")
 
 graphics.off()
 fig <- magick::image_device(400, 400)
@@ -108,5 +108,5 @@ for (i in 1:11000) {
 dev.off()
 
 animation <- magick::image_animate(fig, fps = 10)
-magick::image_write(animation, "simulations/langtons-ant/ant.gif")
+magick::image_write(animation, "projects/langtons-ant/ant.gif")
 
