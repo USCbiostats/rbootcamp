@@ -9,3 +9,5 @@ flyer/
 simulations/*/*.html
 .Rproj.user
 .httr-oauth
+
+.Rhistory

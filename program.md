@@ -2,6 +2,8 @@
 
 </div>
 
+**Website**: https://github.com/USCbiostats/rbootcamp
+
 This boot camp has as main goal to give a general overview of scientific
 computing, and in particular, on the R programming language. It is
 divided in 5 days. The first three days will be a mix of presentations
@@ -23,52 +25,38 @@ The bootcamp will take place on the week of Monday August 13th, 2018:
 | **Final Presentations** | Friday, August 17, 10 AM to 1 PM | SSB 114|
 
 
+## Prerequisites
+
+We will be using R and RStudio
+
+1.  R: download [here](https://cran.r-project.org/).
+2.  RStudio: download [here](https://www.rstudio.com/products/rstudio/download/#download).
+
+We will also be using Git
+
+3.  Git: download [here](https://git-scm.com/downloads).
+4.  Github: Create a new account [here](https://github.com/join?source=header-home).
+
 
 ## Schedule
 
-1.  Day 1:
+1.  Day 1: 
 
-    a.  Reproducible research: An overview
+    a.  Data analysis with Tidyverse
 
-    b.  Intro to R
-
-        i.  What is R: A slide of history
-        ii. Why R?
-        iii. RStudio
-
-    c.  Version control: Intro to git w/ github
-
-    d.  **Assignment**: Create a new github repository to save your
+    b.  **Assignment**: Create a new github repository to save your
         > project. To do such, you'll need to create a Github account.
         > The repo should include the following: (1) A readme.md file
         > and A .gitgnore file.
 
 2.  Day 2:
 
-    a.  Data structures
+    a.  R and Reproducible research: R, RStudio and Git (a quick overview)
 
-        i.  Scalars, vectors and matrices
-        ii. Lists
-        iii. Attributes
+    b.  Scientific computing with R: An extended example on simulations with R
+        (data types, control flow structures, and pseudo random number generation)
 
-    b.  I/O data
-
-        i.  Raw data (plain text files)
-        ii. Binary format (just mention it!)
-        iii. R data: rda, rds
-
-    c.  Pseudo Random Number Generation
-
-        i.  Algorithms
-        ii. List functions
-
-    d.  Control flow structures (for, while, etc.)
-
-        i.  Bootstrap
-        ii. Hastings ratio
-        iii. MLE using Newton-Raphson
-
-    e.  **Assignments**: (1) Read in some dataset using the read.table
+    c.  **Assignments**: (1) Read in some dataset using the read.table
         > function, (2) Generate a subsample of 10% the data using the
         > runif function and compute the mean of it. (3) Repeat yourself
         > and draw a 1,000 samples of size 10% and, using the functions
@@ -77,17 +65,9 @@ The bootcamp will take place on the week of Monday August 13th, 2018:
 
 3.  Day 3
 
-    a.  Functional programming
+    a.  Communicating: Data viz with base R and ggplot2 (an overview)
 
-        i.  Repeat yourself: Why is it a good idea
-        ii. Function structures and scoping
-
-    b.  Plotting
-
-        i.  Base: The par
-        ii. ggplot2: An overview
-
-    c.  Presentation of projects (proposed):
+    b.  Presentation of projects (proposed):
 
         i.  Monopoly (US version)
         ii. Linear regression
