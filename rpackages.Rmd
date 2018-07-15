@@ -18,7 +18,7 @@ install.packages("devtools")
 
 # Common regression models
 - Linear Regression, no package needed: `lm()`
-- GLMs like logistic and poisson, no package needed: `glm()`
+- GLMs like logistic and Poisson, no package needed: `glm()`
 
 # Longitudinal Analysis
 - Mixed Models: `nlme`, `lme4`
@@ -33,7 +33,7 @@ install.packages("devtools")
 - Geocoding: the `geocode()` function in the `ggmap` package
 
 # Pyschometrics and Latent Variable Modeling
-- General pyschometric tools: `psycho`
+- General psychometric tools: `psycho`
 - Item Response Theory: `ltm`
 - Structural Equation Modeling: `lavaan`
 - Latent Class Analysis: `poLCA`
