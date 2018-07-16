@@ -38,14 +38,49 @@ We'll do all of this by runing some monte carlo simulations models...
 
 2.  Create a function that simulates a random return trejectory by sampling from the stocks market.
 
-3.  Create a function that generates a random unemployment trajectory (poisson process).
+3.  Mix all in a for-loop function that creates a random pension savings trajectory.
 
-4.  Mix all in a for-loop function that creates a random pension savings trajectory.
-
-5.  Wrap it around 1,000 simulation, and plot the output using the `boxplot` function in R.
+4.  Wrap it around 1,000 simulation, and plot the output using the `boxplot` function in R.
 
 
 # About the dataset
+
+*   Dow Jones Industrial Average (downloaded from https://quotes.wsj.com/index/DJIA/historical-prices)
+    
+    -   This dataset covers from 1990 to 2018
+    -   It provides the prices at the daily
+    
+    ```{r}
+    # Loading the R package
+    library(readr)
+    
+    # Reading the data
+    dow <- read_csv(
+      "HistoricalPrices.csv",
+      # We can tell the function how the data is stored
+      col_types = cols(Date = col_date(format = "%m/%d/%y"))
+      )
+    
+    # Let's print it out 
+    dow
+    
+    # Taking a look at it
+    plot(x = dow$Date, y = dow$Close, type="l")
+    ```
+    
+# Keeping the monthly data only
+
+```{r}
+library(magrittr)
+library(dplyr)
+dow_monthly <- dow %>%
+  filter(months(Date) != months(lag(Date))) %>%
+  arrange(Date) %>%
+  mutate(
+    r = Close/lag(Close) - 1
+  ) %$%
+  r[-1]
+```
 
 # About the model
 
@@ -54,3 +89,101 @@ S_t = S_{t-1}\times(1 + r_t) + I_t\times c_t
 $$
 
 Where $S_t$ is your savings balance in time $t$, $r_t\sim R$ is the return rate in time $t$, $I_t$ is your income in time $t$, and $c_t$ is your contribution rate in time $t$.
+
+# Functional Programming
+
+```{r dow-function}
+sample_dow <- function(n=100) {
+  sample(dow_monthly, n, replace = TRUE)
+}
+```
+
+Creating the core function
+
+
+```{r savings-sim} 
+#' @param n_nomths Integer, number of months to simulate.
+#' @param S0 Initial balance of savings.
+#' @param I0 Income.
+#' @param c_rate Monthly contribution rate
+sim_savings <- function(
+  n_months = 200,
+  S0       = 0,
+  I0       = 40/12,
+  c_rate   = .05
+) {
+  
+  # Generating returns
+  R <- sample_dow(n_months)
+  S <- vector("numeric", n_months)
+  
+  # First value
+  S[1] <- S0
+  
+  for (i in 2:n_months) 
+    S[i] <- S[i - 1]*(1 + R[i - 1]) + I0*c_rate
+  
+  return(S)
+  
+}
+
+plot(sim_savings(200), type="l")
+```
+
+# Simulations
+
+Running multiple simulations using the `replicate` function.
+
+```{r multiple-simulations}
+set.seed(1)
+nsim    <- 1e4
+nmonths <- 12*30
+
+ans02 <- replicate(nsim, sim_savings(nmonths, c_rate = 0.025))
+ans05 <- replicate(nsim, sim_savings(nmonths, c_rate = 0.05))
+ans10 <- replicate(nsim, sim_savings(nmonths, c_rate = 0.10))
+ans15 <- replicate(nsim, sim_savings(nmonths, c_rate = 0.15))
+
+```
+
+# Analyzing the results
+
+Stacking the last row (period) of each set of simulations using `cbind` 
+
+```{r stacking-the-results}
+ans <- cbind(
+  "2.5%" = ans02[nmonths,],
+  "5%"   = ans05[nmonths,],
+  "10%"  = ans10[nmonths,],
+  "15%"  = ans15[nmonths,]
+  )
+
+# We can look at a few observations with the `head` function
+head(ans)
+```
+
+
+# Visualizing the output
+
+```{r plotting-the-outcome}
+# Changing the palette
+palette(
+  adjustcolor(RColorBrewer::brewer.pal(8, "Set1"), alpha=.7)
+  )
+
+# Using a nice-looking boxplot
+boxplot(
+  ans,
+  main = "Distribution of Retirement Savings Balance",
+  xlab = "Monthly Savings as a Proportion of Income",
+  ylab = "Savings (thousands of USD, log-scale)",
+  log = "y",
+  las = 2,
+  col = 1:4,
+  lwd = 1.5,
+  border = 1:4
+)
+```
+
+    
+
