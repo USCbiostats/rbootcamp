@@ -2,6 +2,9 @@
 title: "R Packages for Analysis"
 date: "7/14/2018"
 output: pdf_document
+header-includes:
+  - \usepackage{hyperref}
+  - \hypersetup{colorlinks=true, allcolors=blue}
 ---
 
 ```{r setup, include=FALSE}
@@ -24,9 +27,9 @@ install.packages("devtools")
 
 # Longitudinal Analysis
 
-- Mixed Models: `nlme`, `lme4`
-- GEE: `gee`, `geepack`
-- Survey Analysis: `survey`
+- Mixed Models: [`nlme`](https://cran.r-project.org/package=nlme), [`lme4`](https://cran.r-project.org/package=lme4)
+- GEE: [`gee`](https://cran.r-project.org/package=gee), [`geepack`](https://cran.r-project.org/package=geepack)
+- Survey Analysis: [`survey`](https://cran.r-project.org/package=survey)
 
 
 # Survival Analysis
@@ -36,28 +39,28 @@ install.packages("devtools")
 
 # Spatial Analysis
 
-- cshapes: The CShapes Dataset and Utilities
-- spdep: Spatial Dependence: Weighting Schemes, Statistics and Models
-- Simple features that work well with `tidyverse` packages: `sf`
-- Geocoding: the `geocode()` function in the `ggmap` package
-- sphet: Estimation of Spatial Autoregressive Models with and without Heteroscedasticity
-- spatialprobit: Spatial Probit Models
+- [`cshapes`](https://cran.r-project.org/package=cshapes): The CShapes Dataset and Utilities
+- [`spdep`](https://cran.r-project.org/package=spdep): Spatial Dependence: Weighting Schemes, Statistics and Models
+- Simple features that work well with [`tidyverse`](https://cran.r-project.org/package=tidyverse) packages: [`sf`](https://cran.r-project.org/package=sf)
+- Geocoding: the `geocode()` function in the [`ggmap`](https://cran.r-project.org/package=ggmap) package
+- [`sphet`](https://cran.r-project.org/package=sphet): Estimation of Spatial Autoregressive Models with and without Heteroscedasticity
+- [`spatialprobit`](https://cran.r-project.org/package=spatialprobit): Spatial Probit Models
 
 
 # Pyschometrics and Latent Variable Modeling
 
-- General psychometric tools: `psycho`
-- Item Response Theory: `ltm`
-- Structural Equation Modeling: `lavaan`
-- Latent Class Analysis: `poLCA`
+- General psychometric tools: [`psycho`](https://cran.r-project.org/package=psycho)
+- Item Response Theory: [`ltm`](https://cran.r-project.org/package=ltm)
+- Structural Equation Modeling: [`lavaan`](https://cran.r-project.org/package=lavaan)
+- Latent Class Analysis: [`poLCA`](https://cran.r-project.org/package=poLCA)
 
 
 # Bayesian Analysis
 
-- Pre-compiled Bayesian models that look and act like other R functions: `rstanarm`
-- Flexible Bayesian modeling: `brms`
-- Visualization: `bayesplot`
-- coda: Output Analysis and Diagnostics for MCMC ([website](https://cran.r-project.org/package=coda))
+- Pre-compiled Bayesian models that look and act like other R functions: [`rstanarm`](https://cran.r-project.org/package=rstanarm)
+- Flexible Bayesian modeling: [`brms`](https://cran.r-project.org/package=brms)
+- Visualization: [`bayesplot`](https://cran.r-project.org/package=bayesplot)
+- [`coda`](https://cran.r-project.org/package=coda): Output Analysis and Diagnostics for MCMC
 
 
 # Genomic Analysis
@@ -65,30 +68,30 @@ install.packages("devtools")
 
 # Econometrics
 
-- AER: Applied Econometris with R ([website](https://cran.r-project.org/package=AER))
-- sandwich: Robust Covariance Matrix Estimators ([website](https://cran.r-project.org/package=sandwich))
-- MatchIt: Nonparametric Preprocessing for Parametric Causal Inference
-- Amelia: A Program for Missing Data
-- Matching: Multivariate and Propensity Score Matching with Balance Optimization
+- [`AER`](https://cran.r-project.org/package=AER): Applied Econometris with R
+- [`sandwich`](https://cran.r-project.org/package=sandwich): Robust Covariance Matrix Estimators ([website](https://cran.r-project.org/package=sandwich))
+- [`MatchIt`](https://cran.r-project.org/package=MatchIt): Nonparametric Preprocessing for Parametric Causal Inference
+- [`Amelia`](https://cran.r-project.org/package=Amelia): A Program for Missing Data
+- [`Matching`](https://cran.r-project.org/package=Matching): Multivariate and Propensity Score Matching with Balance Optimization
 
 
 # Social Networks
 
-- igraph: Network Analysis and Visualization
-- statnet: Software Tools for the Statistical Analysis of Network Data
-- RSiena: Siena - Simulation Investigation for Empirical Network Analysis
+- [`igraph`](https://cran.r-project.org/package=igraph): Network Analysis and Visualization
+- [`statnet`](https://cran.r-project.org/package=statnet): Software Tools for the Statistical Analysis of Network Data
+- [`RSiena`](https://cran.r-project.org/package=RSiena): Siena - Simulation Investigation for Empirical Network Analysis
 
 
 # High Performance Computing (and alike)
 
-- Rcpp: Seamless R and C++ Integration
-- RcppArmadillo: 'Rcpp' Integration for the 'Armadillo' Templated Linear Algebra Library
-- RcppParallel: Parallel Programming Tools for 'Rcpp'
-- biglm: bounded memory linear and generalized linear models
+- [`Rcpp`](https://cran.r-project.org/package=Rcpp): Seamless R and C++ Integration
+- [`RcppArmadillo`](https://cran.r-project.org/package=RcppArmadillo): 'Rcpp' Integration for the 'Armadillo' Templated Linear Algebra Library
+- [`RcppParallel`](https://cran.r-project.org/package=RcppParallel): Parallel Programming Tools for 'Rcpp'
+- [`biglm`](https://cran.r-project.org/package=biglm): bounded memory linear and generalized linear models
 
 
 # Color Palettes 
-- Colorblind friendly palettes and tools to test palettes for color-blind friendliness: `colorblindr`, `viridis`
+- Colorblind friendly palettes and tools to test palettes for color-blind friendliness: [`colorblindr`](https://cran.r-project.org/package=colorblindr), [`viridis`](https://cran.r-project.org/package=viridis)
 
 ```{r eval=FALSE}
 # requires development versions of cowplot and colorspace
@@ -100,7 +103,7 @@ devtools::install_github("clauswilke/colorblindr")
 ```
 
 
-- Palettes for reliable, scientific visualizations: `vidris` (and, in `ggplot2` 3.0.0, `scale_*_vidris_c()` and `scale_*_vidris_d()`), `scico`
+- Palettes for reliable, scientific visualizations: [`vidris`](https://cran.r-project.org/package=vidris) (and, in [`ggplot2`](https://cran.r-project.org/package=ggplot2) 3.0.0, `scale_*_vidris_c()` and `scale_*_vidris_d()`), [`scico`](https://cran.r-project.org/package=scico)
 
 ```{r eval=FALSE}
 devtools::install_github("thomasp85/scico")
