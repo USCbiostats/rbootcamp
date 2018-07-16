@@ -1,0 +1,56 @@
+---
+title: Day 2
+author: George G. Vega Yon
+---
+
+We will work on simulations!
+
+Today's goals are:
+
+1.  Learn more about base R, in particular
+1.  Use extarnal data: `read.table`,
+2.  Data structures: `vector`, `matrix`, `list`
+3.  Functional programming: Creating functions in R,
+2.  Control flow: `for` loops (we'll leave ),
+3.  Pseudo random numbers: `sample`, `runif`, `rnorm`
+4.  Summarizing: `boxplot`
+
+5.  Extra 1: Applying parallel computing
+6.  Extra 6: Animating our simulation with `magick`.
+
+
+We'll do all of this by runing some monte carlo simulations models...
+
+# Retirement Savings
+
+![Courtesy of [whatacatchjohnny-blog](http://whatacatchjohnny-blog.tumblr.com/post/7104244664/the-devils-advocate)](free-will.gif){.class width="600px"}
+
+*   The hyperbolic discount problem: In simple words, people overvalue the present (which yields regret in the future!)
+
+*   Online tools for projecting retirement savings are usually very optimistic (sorry!), like yielding a 5\% fix average return (no bond gives you that!)
+
+*   We will perform some simulation models using real data and, instead of obtaining a point estimate of our future savings, we will obtain confidence intervals (a range of possible outcomes).
+
+
+# Today's tasks
+
+1.  Read in the data from returns from the stocks market.
+
+2.  Create a function that simulates a random return trejectory by sampling from the stocks market.
+
+3.  Create a function that generates a random unemployment trajectory (poisson process).
+
+4.  Mix all in a for-loop function that creates a random pension savings trajectory.
+
+5.  Wrap it around 1,000 simulation, and plot the output using the `boxplot` function in R.
+
+
+# About the dataset
+
+# About the model
+
+$$
+S_t = S_{t-1}\times(1 + r_t) + I_t\times c_t
+$$
+
+Where $S_t$ is your savings balance in time $t$, $r_t\sim R$ is the return rate in time $t$, $I_t$ is your income in time $t$, and $c_t$ is your contribution rate in time $t$.
