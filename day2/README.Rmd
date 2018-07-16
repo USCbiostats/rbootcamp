@@ -187,3 +187,26 @@ boxplot(
 
     
 
+# Problems
+
+1.  In a lot of cases, more than encouraging people to increase their savings is
+to ask them to retire later. Using the code shown here, analyze what are the effects
+of postponing retirement 1, 3, and 5 years.
+
+2.  A big assumption we made was having no gaps, this is, always employed and
+contributing. To account for this, we can include a poisson process as follows:
+    a.  Simulate times at which you become unemployed assuming that on average,
+    you will spend half a month unemployed, i.e. a rate of (1/24).
+    b.  You can do this using the `rexp` function, e.g.:
+    ```{r poisson-process}
+    set.seed(1231)
+    when_unemployed <- rexp(5, 1/24) # Times at which become unemployed
+    when_unemployed <- cumsum(floor(when_unemployed))
+    when_unemployed 
+    ```
+    
+    Assume that you spend one month unemployed.
+
+3.  
+    
+    
