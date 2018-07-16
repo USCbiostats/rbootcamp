@@ -17,36 +17,78 @@ install.packages("devtools")
 ```
 
 # Common regression models
+
 - Linear Regression, no package needed: `lm()`
 - GLMs like logistic and Poisson, no package needed: `glm()`
 
+
 # Longitudinal Analysis
+
 - Mixed Models: `nlme`, `lme4`
 - GEE: `gee`, `geepack`
 - Survey Analysis: `survey`
 
+
 # Survival Analysis
+
 - `survival`
 
+
 # Spatial Analysis
+
+- cshapes: The CShapes Dataset and Utilities
+- spdep: Spatial Dependence: Weighting Schemes, Statistics and Models
 - Simple features that work well with `tidyverse` packages: `sf`
 - Geocoding: the `geocode()` function in the `ggmap` package
+- sphet: Estimation of Spatial Autoregressive Models with and without Heteroscedasticity
+- spatialprobit: Spatial Probit Models
+
 
 # Pyschometrics and Latent Variable Modeling
+
 - General psychometric tools: `psycho`
 - Item Response Theory: `ltm`
 - Structural Equation Modeling: `lavaan`
 - Latent Class Analysis: `poLCA`
 
+
 # Bayesian Analysis
+
 - Pre-compiled Bayesian models that look and act like other R functions: `rstanarm`
 - Flexible Bayesian modeling: `brms`
 - Visualization: `bayesplot`
+- coda: Output Analysis and Diagnostics for MCMC ([website](https://cran.r-project.org/package=coda))
+
 
 # Genomic Analysis
 
+
+# Econometrics
+
+- AER: Applied Econometris with R ([website](https://cran.r-project.org/package=AER))
+- sandwich: Robust Covariance Matrix Estimators ([website](https://cran.r-project.org/package=sandwich))
+- MatchIt: Nonparametric Preprocessing for Parametric Causal Inference
+- Amelia: A Program for Missing Data
+- Matching: Multivariate and Propensity Score Matching with Balance Optimization
+
+
+# Social Networks
+
+- igraph: Network Analysis and Visualization
+- statnet: Software Tools for the Statistical Analysis of Network Data
+- RSiena: Siena - Simulation Investigation for Empirical Network Analysis
+
+
+# High Performance Computing (and alike)
+
+- Rcpp: Seamless R and C++ Integration
+- RcppArmadillo: 'Rcpp' Integration for the 'Armadillo' Templated Linear Algebra Library
+- RcppParallel: Parallel Programming Tools for 'Rcpp'
+- biglm: bounded memory linear and generalized linear models
+
+
 # Color Palettes 
-- Colorblind friendly palettes and tools to test palettes for color-blind friendliness: `colorblindr`
+- Colorblind friendly palettes and tools to test palettes for color-blind friendliness: `colorblindr`, `viridis`
 
 ```{r eval=FALSE}
 # requires development versions of cowplot and colorspace
