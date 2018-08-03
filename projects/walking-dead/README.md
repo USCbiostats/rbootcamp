@@ -11,7 +11,11 @@ Simulate a contagion process with the following rules:
 5.  The direction towars which they move is a fixed point that corresponds to a
     weighted average, in particular, individual take the following point as a
     reference:
-    $(\sum_j d_{ij}^{-1}p_j) / \sum_j d_{ij}^{-1}$, where $d_{ij}$ is the distance between individuals $i$ and $j$.
-    Either they move towards or away from it.
+    ```
+    p_fixed <- D[i, ]^(-1) %*% p / sum(D[i, ]^(-1))
+    ```
+    where `D[i, ]` is the vector of distances from `i` to its neighbours, and
+    `p` is the matrix of coordinates `(x,y)` of `i`'s neighbours.
+    
     
 ![Fear the Walking Dead](walking-dead.gif)
