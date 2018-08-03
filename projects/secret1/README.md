@@ -36,7 +36,7 @@ bv awmnce gvlw bv vbfwxvnv,
 avcv nwcfucfe icvmodubv.
 ```
 
-Your missing, use your R-skills to manipulate the text and decode the message.
+Your mission: use your R-skills to manipulate the text and decode the message.
 To do so, you should use the following dictionary that our field agents have
 found.
 
