@@ -1,3 +1,9 @@
+---
+title: Monopoly
+keywords: [simulation, unimportant]
+difficulty: hard
+---
+
 # Monopoly
 
 ## Objectives

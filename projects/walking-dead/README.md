@@ -1,3 +1,9 @@
+---
+title: Fear the Walking Dead
+keywords: [particles, simulation, contagion]
+difficulty: hard
+---
+
 # Instructions
 
 Simulate a contagion process with the following rules:

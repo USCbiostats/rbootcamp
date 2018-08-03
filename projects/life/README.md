@@ -1,4 +1,8 @@
-# Conway's Game of Life
+---
+title: Conway's Game of Life
+keywords: [simulation, celular automaton]
+difficulty: hard
+---
 
 ## Description
 
