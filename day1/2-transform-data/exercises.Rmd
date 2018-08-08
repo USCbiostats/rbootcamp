@@ -12,36 +12,24 @@ library(nycflights13)
 
 # Toy datasets to use
 
-pollution <- tribble(
-       ~city,   ~size, ~amount, 
-  "New York", "large",      23,
-  "New York", "small",      14,
-    "London", "large",      22,
-    "London", "small",      16,
-   "Beijing", "large",      121,
-   "Beijing", "small",      56
-)
+superheroes <- tribble(
+       ~name, ~alignment,  ~gender,          ~publisher,
+   "Magneto",      "bad",   "male",            "Marvel",
+     "Storm",     "good", "female",            "Marvel",
+  "Mystique",      "bad", "female",            "Marvel",
+    "Batman",     "good",   "male",                "DC",
+     "Joker",      "bad",   "male",                "DC",
+  "Catwoman",      "bad", "female",                "DC",
+   "Hellboy",     "good",   "male", "Dark Horse Comics"
+  )
 
-band <- tribble(
-   ~name,     ~band,
-  "Mick",  "Stones",
-  "John", "Beatles",
-  "Paul", "Beatles"
-)
+publishers <- tribble(
+  ~publisher, ~yr_founded,
+        "DC",       1934L,
+    "Marvel",       1939L,
+     "Image",       1992L
+  )
 
-instrument <- tribble(
-    ~name,   ~plays,
-   "John", "guitar",
-   "Paul",   "bass",
-  "Keith", "guitar"
-)
-
-instrument2 <- tribble(
-    ~artist,   ~plays,
-   "John", "guitar",
-   "Paul",   "bass",
-  "Keith", "guitar"
-)
 ```
 
 ## gapminder
@@ -141,7 +129,7 @@ Use summarise() to compute three statistics about the data:
 
 1. The first (`min()`) year in the data
 2. The last (`max()`) year in the data  
-3. The total number of observations in the data
+3. The total number of observations (`n()`) and the total number of unique countries in the data (`n_distinct()`)
 
 ```{r}
 
@@ -160,7 +148,7 @@ Extract the rows where `continent == "Europe"`. Then use `group_by()` to group b
 
 ## Your Turn 9
 
-Use `group_by()`, `summarize()`, and `arrange()` to display the ten most popular names. Compute popularity as the total number of children of a single gender given a name.
+Use `group_by()`, `summarize()`, and `arrange()` to display the continents with the highest average life expectency.
 
 ```{r}
 
@@ -168,7 +156,7 @@ Use `group_by()`, `summarize()`, and `arrange()` to display the ten most popular
 
 ## Your Turn 10
 
-Use grouping to calculate the mean life expectancy for each year by continent. Call the mean life expectancy `mean_le`. Plot the life expectancy over time (no need to change the plot code).
+Use grouping to calculate the mean life expectancy for each year by continent. Call the mean life expectancy variable `mean_le`. Plot the life expectancy over time (no need to change the plot code).
 
 ```{r}
 gapminder %>% 
@@ -180,23 +168,6 @@ gapminder %>%
 ```
 
 ## Your Turn 11
-
-Use `min_rank()` and `mutate()` to rank each row in `babynames` from largest `n` to lowest `n`.
-
-```{r}
-
-```
-
-## Your Turn 12
-
-Compute each name's rank _within its year and sex_. 
-Then compute the median rank _for each combination of name and sex_, and arrange the results from highest median rank to lowest.
-
-```{r}
-
-```
-
-## Your Turn 13
 
 Which airlines had the largest arrival delays? Complete the code below.
 
@@ -212,7 +183,7 @@ flights %>%
   arrange(       ) 
 ```
 
-## Your Turn 14
+## Your Turn 12
 
 How many airports in `airports` are serviced by flights originating in New York (i.e. flights in our dataset?) Notice that the column to join on is named `faa` in the **airports** data set and `dest` in the **flights** data set.
 
@@ -230,8 +201,8 @@ __________ %>%
 # Take aways
 
 * Extract variables with `select()`  
-* Extract cases with `filter()`  
-* Arrange cases, with `arrange()`  
+* Extract rows with `filter()`  
+* Arrange rows, with `arrange()`  
 
 * Make tables of summaries with `summarise()`  
 * Make new variables, with `mutate()`  
