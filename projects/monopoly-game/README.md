@@ -2,6 +2,7 @@
 title: Monopoly
 keywords: [simulation, unimportant]
 difficulty: hard
+author: George G. Vega Yon
 ---
 
 # Monopoly

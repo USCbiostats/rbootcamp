@@ -2,6 +2,7 @@
 title: Conway's Game of Life
 keywords: [simulation, celular automaton]
 difficulty: hard
+author: George G. Vega Yon
 ---
 
 ## Description

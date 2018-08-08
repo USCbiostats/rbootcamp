@@ -6,7 +6,7 @@ output: github_document
 Here you'll find some examples of simulations/programming tasks that you could work on.
 
 
-|Title | difficulty | Keywords | Description |
+|Title | difficulty | Keywords | Author |
 |:--|:--|:---|:---|
 ```{r, results='asis', echo=FALSE}
 # Listing projects
@@ -18,9 +18,9 @@ ans <- lapply(projects, function(x) {
   # Reading the yaml header
   y <- rmarkdown::yaml_front_matter(x)
   
-  for (e in c("title", "description", "keywords", "difficulty"))
+  for (e in c("title", "description", "keywords", "difficulty", "author"))
     if (!length(y[[e]]))
-      y[[e]] <- "na"
+      y[[e]] <- "-"
   
   # Creating link
   l <- gsub("^[.]/", "", x)
@@ -34,7 +34,7 @@ ans <- lapply(projects, function(x) {
       l,
       y$difficulty,
       paste(y$keywords, collapse = ", "),
-      y$description),
+      y$author),
     sep="")
   })
 

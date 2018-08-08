@@ -2,6 +2,7 @@
 title: Fear the Walking Dead
 keywords: [particles, simulation, contagion]
 difficulty: hard
+author: George G. Vega Yon
 ---
 
 # Instructions

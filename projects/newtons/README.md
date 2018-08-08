@@ -2,6 +2,7 @@
 title: Newton\'s Method
 keywords: [optimization]
 difficulty: medium
+author: George G. Vega Yon
 ---
 
 Implement the Newton-Raphson method of optimization as a funciton that receives

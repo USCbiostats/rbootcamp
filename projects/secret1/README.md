@@ -2,6 +2,7 @@
 title: Breaking the code I
 keywords: [strings, programming, unuseful]
 difficulty: medium
+author: George G. Vega Yon
 ---
 
 The following message has been intercepted.
