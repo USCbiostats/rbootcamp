@@ -117,7 +117,13 @@ Use `%>%` to write a sequence of functions that:
 
 ## Exam
 
-1. Import data from...
+1. Import the diabetes data from the importing data. A copy of the CSV file is available in this folder.
+2. Add the variable `bmi` to the data set using height and weight using the formula: `(weight / height^2) * 703`
+3. `diabetes` contains two measurements of systolic and diastolic blood pressure for each participant, called `bp.1s`/`bp.2s` (systolic) and `bp.1d`/`bp.2d` (diastolic). Add new variables called `sbp` and `dbp` that are the average of the two observations for each type. Just add them up and divide by 2.
+4. Select just `id` and the new variables you created.
+4. Filter rows that have BMI > 35
+
+How many rows and columns are in your new data set?
 
 ```{r}
 
@@ -125,7 +131,7 @@ Use `%>%` to write a sequence of functions that:
 
 ## Your Turn 7
 
-Use summarise() to compute three statistics about the data:
+Use summarise() to compute three statistics about the gapminder data set:
 
 1. The first (`min()`) year in the data
 2. The last (`max()`) year in the data  

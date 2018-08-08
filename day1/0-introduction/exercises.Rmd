@@ -8,7 +8,7 @@ This is an R Markdown Notebook. When you execute code within the notebook, the r
 Press the green button to install the packages we'll be using.
 
 ```{r}
-install.packages(c("rmarkdown", "tidyverse", "sf", "datasauRus", "gapminder", "devtools"))
+install.packages(c("rmarkdown", "tidyverse", "sf", "datasauRus", "gapminder", "nycflights13", "devtools"))
 devtools::install_github('thomasp85/gganimate') # this package lives on GitHub, not CRAN!
 ```
 
