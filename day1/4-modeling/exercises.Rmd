@@ -1,0 +1,109 @@
+---
+title: "Modeling"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+```{r setup, message=FALSE}
+library(tidyverse)
+library(broom)
+library(ggfortify)
+```
+
+Modeling in R is a rich subject, including base R functions for common statistical analyses and many packages for almost any type of analysis you can think of. The tidyverse offers tools for understanding and presenting the results of your modeling. 
+
+## Your Turn 1
+
+Import the diabetes data set (included in this folder). Create a new variable, `waist_hip` that is the waist to hip ratio. Save the dataset.
+
+Model the relationship between hemoglobin A1c (`glyhb`) and `waist_hip`. Control for gender. Save the model as `model1`. Then, tidy the results.
+
+```{r}
+diabetes <- _______
+
+diabetes <- diabetes %>% 
+  mutate(mean_sbp = (bp.1s + bp.2s) / 2,
+         mean_dbp = (bp.1d + bp.2d) / 2,
+         bmi = (height / weight^2) * 703,
+         _______ = _______)
+
+model1 <- diabetes %>% 
+  _______
+
+model1 %>% 
+  _______
+```
+
+## Your Turn 2
+
+Use broom and dplyr functions to extract:
+
+1. The **coefficient estimates** and their related statistics 
+2. The **adj.r.squared** and **AIC** for the overall model
+
+```{r}
+
+```
+
+## Your Turn 3
+
+Model the effect of `waist_hip` on `glyhb`, adjusting for `gender` and `age`. Do the coefficients change?
+
+```{r}
+
+```
+
+## Your Turn 4
+
+Use a broom function and ggplot2 to make a scatter plot of `glyhb` vs `.fitted` for the model of waist/hip ratio, `mod_wh`.
+
+Try it with `.resid` vs `.fitted`. How does it look?
+
+_Bonus_: Add a regresssion line with geom_smooth(method = "lm"). Notice that with ggplot2, you add functions with `+` and not `%>%`
+
+```{r}
+# notice that here, `data = diabetes`, not `.`. 
+# some people don't like to use pipes for a single command
+mod_wh <- lm(glyhb ~ waist_hip + gender + age, data = diabetes)
+
+mod_h %>% 
+  ________(data = wages) %>% 
+  ggplot(aes(x = ______, y = _______)) +
+    geom_point()
+```
+
+## Your Turn 6
+
+The `ggfortify` makes it easy to plot model diagnostics. `ggfortify` is not a part of the tidyverse but meant to work well within it. 
+
+Load the package and use `autoplot()` on `mod_hw` to plot model diagnostics.
+
+```{r}
+
+
+```
+
+## Your Turn 7
+
+Diabetes is frequently defined as an A1c value of 7.0 or greater. Create a binary variable (0, 1) called `diabetic` indicating diabetes. Use the `ifelse` function. Use ?ifelse if you're not sure about this function.
+
+Fit a logistic regression model with `glm`. Use `diabetic` as the outcome, `waist_hip` as the exposure, and controlling for age and gender. Set the `family` argument equal to `binomial()`.
+
+Tidy the results. What do you see? Try mutating `estimate` into odds ratios using `exp()`
+
+```{r warning = FALSE, message = FALSE}
+diabetes %>% 
+  mutate(diabetic = ifelse(glyhb >= 7.0, ___, ___)) %>% 
+  _______ %>% 
+  _______
+```
+
+***
+
+# Take Aways
+
+* Use `lm` for linear regression and `glm` for generalized linear regression.
+* Use `glance()`, `tidy()`, and `augment()` from the **broom** package to return model values in a data frame.
+* Base R includes many functions for working with models, the most useful of which are `summary()` and `predict()`
