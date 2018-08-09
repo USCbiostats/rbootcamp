@@ -1,6 +1,10 @@
 ---
 title: Day 2
 author: George G. Vega Yon
+output:
+  slidy_presentation:
+    footer: IMAGE
+    highlight: pygments
 ---
 
 We will work on simulations!
@@ -20,6 +24,79 @@ Today's goals are:
 
 
 We'll do all of this by runing some monte carlo simulations models...
+
+# Statistical Functions
+
+*   R has a very nice set of families of distributions. In general, distribution functions have the following name structure:
+    
+    a.  **Random Number Generation**: `r[name-of-the-distribution]`, e.g. `rnorm` for normal, `runif` for uniform.
+    
+    b.  **Density function**: `d[name-of-the-distribution]`, e.g. `dnorm` for normal, `dunif` for uniform.
+    
+    c.  **Cumulative Distribution Function (CDF)**: `p[name-of-the-distribution]`, e.g. `pnorm` for normal, `punif` for uniform.
+    
+    d.  **Inverse of the CDF (quantile)**: `q[name-of-the-distribution]`, e.g. `qnorm` for the normal, `qunif` for the uniform.
+    
+*   In the case of [**pseudo random numbers**](https://en.wikipedia.org/wiki/Pseudorandom_number_generator){target="_blank"} (the `r` prefix), it is important to **always** set the seed to ensure **reproducibility**
+
+    ```{r setseed, collapse=TRUE}
+    # First run
+    set.seed(12)
+    rnorm(4)
+    
+    # Second run
+    set.seed(12)
+    rnorm(4)
+    ```
+    
+    More distributions available at `??Distributions`.
+
+---
+
+*   Take a look at the normal distribution
+
+```{r}
+set.seed(12)
+op <- par(mfrow = c(2,2))
+hist(rnorm(1e5))
+curve(qnorm)
+curve(pnorm, xlim=c(-3, 3))
+curve(dnorm, xlim=c(-3, 3))
+par(op)
+```
+
+---
+
+*   Take a look at the exponential
+
+```{r}
+set.seed(12)
+op <- par(mfrow = c(2,2))
+hist(rexp(1e5))
+curve(qexp)
+curve(pexp, xlim=c(0, 6))
+curve(dexp, xlim=c(0, 6))
+par(op)
+```
+
+# Questions
+
+1.  Draw 1e5 samples from a chi2 with 2 degrees of freedom (hint: check `?Distributions`).
+
+```{r, echo=FALSE, eval=FALSE}
+set.seed(778)
+Z <- rchisq(1e5, 2)
+hist(Z, breaks=100)
+```
+    
+
+2.  Draw 1e5 samples from a chi2 with 2 degrees of freedom using `rnorm` (hint: Recall that if $X\sim N(0,1)$, then $X^2\sim\chi^2_1$, and if $X, Y\sim N(0,1)$, then $X^2 + Y^2\sim\chi^2_2$).
+
+```{r, echo=FALSE, eval=FALSE}
+set.seed(778)
+Z <- rnorm(1e5)^2 + rnorm(1e5)^2
+hist(Z, breaks=100)
+```
 
 # Retirement Savings
 
@@ -74,12 +151,12 @@ We'll do all of this by runing some monte carlo simulations models...
 library(magrittr)
 library(dplyr)
 dow_monthly <- dow %>%
-  filter(months(Date) != months(lag(Date))) %>%
-  arrange(Date) %>%
+  filter(months(Date) != months(lag(Date))) %>% # Keeping the last day of the month
+  arrange(Date) %>%                             # Sorting by date
   mutate(
-    r = Close/lag(Close) - 1
+    r = Close/lag(Close) - 1                    # Computing the monthly return
   ) %$%
-  r[-1]
+  r[-1]                                         # Keeping all, but the last month   
 ```
 
 # About the model
@@ -165,6 +242,50 @@ head(ans)
 
 # Visualizing the output
 
+```{r}
+plot_CI <- function(x, conf_interval=.95, col="steelblue")  {
+  
+  # Computing cureves
+  lvl <- (1-conf_interval)/2
+  lvl <- c(lvl, .5, 1-lvl)
+  dat <- t(apply(x, 2, quantile, lvl))
+  
+  # Emptyplot
+  plot(NA,xlim = c(1,nrow(dat)), ylim=c(0, max(dat)))
+  
+  # Drawing the confidence region
+  polygon(
+    c(1:nrow(dat), nrow(dat):1),
+    c(dat[,1], rev(dat[,3])),
+    col    = adjustcolor(col, alpha.f = .5),
+    border = "transparent"
+  )
+  
+  # Drawing the 50%
+  lines(dat[,2], lwd=2, lty=2, col=col)
+  
+  # Legend
+  legend(
+    "topleft",
+    col  = c(col, col),
+    lty  = c(NA, 2),
+    fill = c(col, NA),
+    legend = c(
+      paste0("%", conf_interval*100, " confidence"),
+      "Median"
+      )
+  )
+}
+
+op <- par(mfrow=c(2,2))
+plot_CI(t(ans02))
+plot_CI(t(ans05))
+plot_CI(t(ans10))
+plot_CI(t(ans15))
+par(op)
+```
+
+
 ```{r plotting-the-outcome}
 # Changing the palette
 palette(
@@ -177,10 +298,10 @@ boxplot(
   main = "Distribution of Retirement Savings Balance",
   xlab = "Monthly Savings as a Proportion of Income",
   ylab = "Savings (thousands of USD, log-scale)",
-  log = "y",
-  las = 2,
-  col = 1:4,
-  lwd = 1.5,
+  log  = "y",
+  las  = 2,
+  col  = 1:4,
+  lwd  = 1.5,
   border = 1:4
 )
 ```
