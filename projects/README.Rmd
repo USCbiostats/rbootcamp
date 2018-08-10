@@ -6,11 +6,9 @@ output: github_document
 Here you'll find some examples of simulations/programming tasks that you could work on.
 
 
-|Title | difficulty | Keywords | Author |
-|:--|:--|:---|:---|
 ```{r, results='asis', echo=FALSE}
 # Listing projects
-projects <- list.files(no..=TRUE, pattern = "README\\.R?md", full.names = TRUE, recursive = TRUE)
+projects <- list.files(no..=TRUE, pattern = "README\\.md", full.names = TRUE, recursive = TRUE)
 projects <- projects[grepl("^[.]/[a-zA-Z0-9_-]+/README[.]R?md$", projects)]
 
 ans <- lapply(projects, function(x) {
@@ -24,19 +22,23 @@ ans <- lapply(projects, function(x) {
   
   # Creating link
   l <- gsub("^[.]/", "", x)
-  l <- gsub("README[.]R?md", "", l)
+  l <- gsub("README[.]md", "", l)
     
   # Printing for the table
-  cat(
+  c(
+    as.integer(stringr::str_extract(l, "^[0-9]+")),
     sprintf(
-      "[%s](%s) | %s | %s | %s \n",
+      "[%s](%s)",
       y$title,
-      l,
-      y$difficulty,
-      paste(y$keywords, collapse = ", "),
-      y$author),
-    sep="")
+      l),
+    y$difficulty,
+    paste(y$keywords, collapse = ", "),
+    y$author)
   })
 
+ans <- do.call(rbind, ans)
+colnames(ans) <- c("Proj. \\#","Title", "Difficulty", "Keywords", "Author")
+ans <- as.data.frame(ans)
+knitr::kable(ans)
 ```
 
