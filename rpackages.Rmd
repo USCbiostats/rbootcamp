@@ -34,7 +34,7 @@ install.packages("devtools")
 
 # Survival Analysis
 
-- `survival`
+- [`survival`](https://cran.r-project.org/web/packages/survival/index.html) (installed by default)
 
 
 # Spatial Analysis
@@ -49,8 +49,8 @@ install.packages("devtools")
 
 # Pyschometrics and Latent Variable Modeling
 
-- General psychometric tools: [`psycho`](https://cran.r-project.org/package=psycho)
-- Item Response Theory: [`ltm`](https://cran.r-project.org/package=ltm)
+- General psychometric tools: [`psych`](https://cran.r-project.org/package=psych)
+- Item Response Theory: [`ltm`](https://cran.r-project.org/package=ltm), [`mirt`](https://cran.r-project.org/web/packages/mirt/index.html)
 - Structural Equation Modeling: [`lavaan`](https://cran.r-project.org/package=lavaan)
 - Latent Class Analysis: [`poLCA`](https://cran.r-project.org/package=poLCA)
 
@@ -68,12 +68,18 @@ install.packages("devtools")
 
 # Econometrics
 
-- [`AER`](https://cran.r-project.org/package=AER): Applied Econometris with R
+- [`AER`](https://cran.r-project.org/package=AER): Applied Econometrics with R
+
+# Causal Inference
 - [`sandwich`](https://cran.r-project.org/package=sandwich): Robust Covariance Matrix Estimators ([website](https://cran.r-project.org/package=sandwich))
 - [`MatchIt`](https://cran.r-project.org/package=MatchIt): Nonparametric Preprocessing for Parametric Causal Inference
-- [`Amelia`](https://cran.r-project.org/package=Amelia): A Program for Missing Data
 - [`Matching`](https://cran.r-project.org/package=Matching): Multivariate and Propensity Score Matching with Balance Optimization
+- [`ipw`](https://cran.r-project.org/web/packages/ipw/ipw.pdf): Estimate Inverse Probability Weights
 
+# Missing Data
+- [`Amelia`](https://cran.r-project.org/package=Amelia): A Program for Missing Data
+- [`mice`](https://cran.r-project.org/web/packages/mice/): Multivariate Imputation by Chained Equations
+- [`naniar`](https://cran.r-project.org/web/packages/naniar/): Data Structures, Summaries, and Visualisations for Missing Data
 
 # Social Networks
 

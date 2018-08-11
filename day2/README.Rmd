@@ -13,6 +13,7 @@ Suggested lecture Functional Programming http://adv-r.had.co.nz/Functional-progr
 
 # Data types 
 
+
 *   The most basic data (object) type in R are vectors.
     
     ```{r}

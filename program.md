@@ -93,6 +93,9 @@ Wickham, H. (2017) *Advanced R*. CRC Press. ([free online](https://adv-r.hadley.
 
 Peng, R. (2016) *R Programming for Data Science* ([free online](https://bookdown.org/rdpeng/rprogdatascience))
 
+[Rstudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+
+
 ----
 
 <div align="center">

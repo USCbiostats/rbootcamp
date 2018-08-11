@@ -1,0 +1,85 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an R Markdown Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Press the green button to install the packages we'll be using this week.
+
+```{r}
+install.packages(c("rmarkdown", "tidyverse", "sf", "ggfortify", "visdat", 
+                   "plotly", "GGally", "janitor", "datasauRus", "gapminder", 
+                   "nycflights13", "HistData", "devtools"))
+
+# these packages lives on GitHub, not CRAN! Usually this just means they are in 
+# development and will eventually be submitted to CRAN
+devtools::install_github('thomasp85/gganimate') 
+devtools::install_github('thomasp85/patchwork') 
+```
+
+The results of a code chunk will appear below. You can remove them by hitting the x button on the right. Since this is just installation stuff, go ahead.
+
+Let's try code that produces something.
+
+```{r}
+plot(cars)
+```
+
+
+You can open a new R Notebook by going to **File > New File > R Notebook**. An R Notebook is a kind of R Markdown document. The only difference from a regular R Markdown file is the Preview button above. This will render an HTML document showing whatever was created by running the chunks most recently.
+
+# Adding chunks
+
+To add a new chunk, press *Cmd+Option+I* (*Ctrl+Alt+I* on Windows), or click the *Insert* button at the top of this document, then select *R*. 
+
+Try making a code chunk below:
+
+
+
+Nice! We'll use R Markdown for now, so you should put all your code in chunks.
+
+# HTML version
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it. This makes a nice, polished report of your work to share.
+
+Click the *Preview* button at the top of this document or press *Cmd+Shift+K* (*Ctrl+Shift+K* on Windows) to preview the HTML file. Note this will only work _after_ you save exercises.Rmd (because the act of saving generates/updates the file to preview. Try saving and clicking *Preview* now.
+
+# Packages
+
+You can immediately run any function from base R within a notebook, But if you'd like to run a function that comes in an R package, you will need to first load the package in the notebook.
+
+Do you remember how to run the core tidyverse packages? Load them in the chunk below:
+
+```{r}
+# run the tidyverse package
+
+
+```
+
+In R, you need to reload your packages every time you start a new session. It's a good habit to start new sessions every time so that you know your code is working without bugs!
+
+# R Basics
+
+in R, you can save the results of just about any function. R let's you use `=` or `<-` for assignment to a variable name. Our preference is for `<-`, but it's more important to be consistent than which you use. 
+
+You can use *Option+-* (*Alt+-* on Windows) to insert the assignment arrow, `<-`.
+
+```{r}
+cars2 = cars
+cars3 <- cars
+identical(cars2, cars3) # are these two identical? TRUE or FALSE
+```
+
+Use `?` in front of a function name to see the documentation. You can also highlight the function name and press F1.
+
+```{r}
+?plot
+```
+
+Function arguments use `=`. You don't have to specify a name if the arguments are in order, but it's better to do so after the second or third argument you have in your function.
+
+```{r}
+mean(cars3$speed, na.rm = TRUE)
+```
+
