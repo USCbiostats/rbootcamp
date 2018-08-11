@@ -14,9 +14,8 @@ related variables, e.g. Ozone, PM2.5, etc.
 
 # What you will need:
 
-1.  Unzip the file [CA_Counties_0.zip](https://cdn.rawgit.com/USCbiostats/rbootcamp/master/projects/12-california-env/CA_Counties_0.zip)
-2.  Read the plain text file [CalEnviroScreen_2.0_2014.csv](https://github.com/USCbiostats/rbootcamp/master/projects/12-california-env/CalEnviroScreen_2.0_2014.csv)
-3.  (optional) Using maps: Download the shape files from https://data.ca.gov/dataset/ca-geographic-boundaries and read them using the `read_sf` function in the R package [sf](https://cran.r-project.org/package=sf).
+1.  Read the plain text file [CalEnviroScreen_2.0_2014.csv](https://raw.githubusercontent.com/USCbiostats/rbootcamp/master/projects/12-california-env/CalEnviroScreen_2.0_2014.csv)
+2.  (optional) Using maps: Download the shape files from https://data.ca.gov/dataset/ca-geographic-boundaries and read them using the `read_sf` function in the R package [sf](https://cran.r-project.org/package=sf).
 
 
 
