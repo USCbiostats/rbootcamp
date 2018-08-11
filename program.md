@@ -78,14 +78,7 @@ We will also be using Git
 
     b.  Communicating: Data viz with base R and ggplot2 (an overview)
 
-    b.  Presentation of projects (proposed):
-
-        i.  Monopoly (US version)
-        ii. Linear regression
-        iii. Conway's Game of Life
-        iv. Mandelbrot and friends
-        v.  Simulate PI
-        vi. Langton's Ant
+    b.  Presentation of (proposed) projects (complete list [here](projects/))
 
 4.  Day 4: Hackathon.
 5.  Day 5: Present the results.
