@@ -40,19 +40,24 @@ We will also be using Git
 
 1.  Day 1: 
 
+    a.  Introduction: What, Why, and How with R
+
     a.  Data analysis with Tidyverse
 
     b.  **Assignment**: Create a new github repository to save your
         > project. To do such, you'll need to create a Github account.
         > The repo should include the following: (1) A readme.md file
         > and A .gitgnore file.
+        
+    Readings:
+    
+    a.  Chapter 4 of "R programming for Data Science" (by Roger D. Peng) (download [here](https://bookdown.org/rdpeng/rprogdatascience/r-nuts-and-bolts.html))
 
 2.  Day 2:
 
-    a.  R and Reproducible research: R, RStudio and Git (a quick overview)
+    a.  R Language fundamentals and Statistical Computing.
 
-    b.  Scientific computing with R: An extended example on simulations with R
-        (data types, control flow structures, and pseudo random number generation)
+    b.  Extended example of statistical computing with R (simulations).
 
     c.  **Assignments**: (1) Read in some dataset using the read.table
         > function, (2) Generate a subsample of 10% the data using the
@@ -60,10 +65,18 @@ We will also be using Git
         > and draw a 1,000 samples of size 10% and, using the functions
         > hist and abline, plot a histogram of the mean and draw a
         > vertical line at the place where the total mean lives.
+        
+    Readings:
+    
+    a.  Chapter 20 of "R programming for Data Science" (by Roger D. Peng) (download [here](https://bookdown.org/rdpeng/rprogdatascience/r-nuts-and-bolts.html))
+    
+    b. (optional) Chapter on Functional Programming of "Advanced R"" (by Hadley Wickham) (download [here](http://adv-r.had.co.nz/Functional-programming.html))
 
 3.  Day 3
 
-    a.  Communicating: Data viz with base R and ggplot2 (an overview)
+    a.  R and Reproducible research: git, rmarkdown, and friends.
+
+    b.  Communicating: Data viz with base R and ggplot2 (an overview)
 
     b.  Presentation of projects (proposed):
 
@@ -84,6 +97,8 @@ Matloff, N. (2013) *The Art of R programming: A tour of Statistical Software Des
 Wickham, H., and Grolemund, G. (2017) *R for Data Science: Visualize, Model, Transfor, Tidy, and Import Data*. O'Reilly Media. ([free online](http://r4ds.had.co.nz/))
 
 Wickham, H. (2017) *Advanced R*. CRC Press. ([free online](https://adv-r.hadley.nz/))
+
+Peng, R. (2016) *R Programming for Data Science* ([free online](https://bookdown.org/rdpeng/rprogdatascience))
 
 ----
 
