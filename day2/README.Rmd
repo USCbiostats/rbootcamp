@@ -1,25 +1,274 @@
 ---
-title: Day 2
+title: "R Bootcamp Day 2:<br>Simulations and Language Fundamentals"
 author: George G. Vega Yon
+output:
+  slidy_presentation:
+    footer: IMAGE
+    highlight: pygments
 ---
 
-We will work on simulations!
+Required lecture Simulations https://bookdown.org/rdpeng/rprogdatascience/simulation.html
 
-Today's goals are:
+Suggested lecture Functional Programming http://adv-r.had.co.nz/Functional-programming.html
 
-1.  Learn more about base R, in particular
-1.  Use external data: `read.table`,
-2.  Data structures: `vector`, `matrix`, `list`
-3.  Functional programming: Creating functions in R,
-2.  Control flow: `for` loops (we'll leave ),
-3.  Pseudo random numbers: `sample`, `runif`, `rnorm`
-4.  Summarizing: `boxplot`
-
-5.  Extra 1: Applying parallel computing
-6.  Extra 6: Animating our simulation with `magick`.
+# Data types 
 
 
-We'll do all of this by runing some monte carlo simulations models...
+*   The most basic data (object) type in R are vectors.
+    
+    ```{r}
+    myvec1 <- vector("logical", 3)  # This is a logical vector of length 3
+    myvec2 <- c(FALSE, TRUE, FALSE) # This is ALSO a logical vector of length 3
+    myvec2
+    length(myvec2)
+    ```
+      
+
+*   Vectors can be of different modes: `logical`, `integer`, `numeric` (double), `complex`, `character`, and `raw`.
+    (so one mode per vector!).
+    
+*   Vectors can also be lists, which is a VERY special type of object in R (most of its objects are lists!)
+    ```{r}
+    mylist1 <- vector("list", 2) # This is a list with 2 empty slots
+    mylist2 <- list(NULL, NULL)  # This is ALSO a list with 2 empty slots
+    mylist1
+    ```
+
+----
+
+*   Moreover, lists elements can have names
+    
+    ```{r}
+    mylist2 <- list(first = NULL, second = 1, third = c("a", "b", "c"))
+    mylist2
+    ```
+    
+    And we can access them as follows
+    
+    ```r
+    # Getting the 3rd element of the list
+    mylist2$third      # By name using the dollar sign
+    mylist2[[3]]       # By position
+    mylist2[["third"]] # By name using a string
+    ```
+    
+    ```{r, echo=FALSE}
+    mylist2[["third"]]
+    ```
+
+
+# Attributes and Structure
+
+*   Objects in R have attributes (metadata)
+
+    ```{r}
+    # Here are the attributes of the iris dataset
+    attributes(iris)    
+    ```
+
+    ```{r}
+    head(iris)
+    ```
+    
+
+----
+
+*   You can take a general look at the structure of an R object with the `str()` function
+    ```{r}
+    # Let's take a look at the iris dataset, again
+    str(iris)
+    ```
+
+# Missing values {.small}
+
+R has different types of Missing values:
+
+-   `NA`: no information, has length 1,
+-   `NULL`: which has length 0,
+-   `Inf`: Infinite, and
+-   `NaN`: Not a Number
+        
+```{r missings, collapse=TRUE}
+str(c(NA, 1L))        # Integers can have NAs
+str(c(NaN, 1L, Inf))  # But not NaN or Inf (automatic coercion)
+str(c(-Inf, 1, NULL, +Inf)) # And Nulls are... of length 0!
+```
+
+*   In the second line, we have an example of *automatic coercion*
+
+*   These have companion functions `is.na()`, `is.null`, `is.infinite` (or `is.finite()`, which covers NA, Inf, and NaN), and `is.nan`.
+
+# Questions
+
+1.  What is the mode of the following vector `myvector <- c(NA, NaN, Inf)`? (try not to use the `mode()` function in R)
+
+2.  The `c()` function can be used with other vectors, for example
+
+    ```{r}
+    my_integer_vector <- c(1L, 2L, 3L)    
+    my_string_vector  <- c("hello", "world")
+    ```
+    
+    What is the mode of the vector `c(my_integer_vector, my_string_vector)`?
+    
+3.  What do each one of these functions return on the vector `myvector`?
+
+    ```{r testing-is, eval=FALSE, echo=FALSE}
+    is.na(myvector)
+    is.infinite(myvector)
+    is.finite(myvector)
+    is.nan(myvector)
+    ```
+
+4.    What are the attributes of the following object `mymat <- matrix(runif(12), ncol=4)`?
+
+# Linear Algebra
+
+*   **Matrix**: A special class of array, are vectors with a `dim` attribute of length 2 (number of rows and number of columns).
+    
+    ```{r}
+    mymat <- matrix(1:9, ncol=3) # A matrix with numbers 1 through 9 with 3 columns
+    mymat
+    str(mymat)
+    ```
+    
+    R stores elements in column major-order. We can access matrices elements in the following way.
+    
+    ```{r, collapse=TRUE}
+    mymat[1, 2] # The element in the (1, 2) location of the matrix
+    mymat[4]    # The fourth element in the vector... which is (1, 2)
+    ```
+    
+    Matrices can have row and column names too.
+  
+----
+
+*   Some matrix fundamental operators, for matrices `A`, and `B` (both square) with the same dimensions (just for the examples):
+
+    *   Element wise product, addition, substraction, and quotient: `A * B`, `A + B`, `A - B`, `A/B`
+    *   Transpose `t(A)`
+    *   Inverse `solve(A)`
+    *   Column and row bind, `cbind(A, B)`, `rbind(A, B)`
+    
+    See the `help("%*%")`, `help("cbind")`
+
+# Questions
+
+*   Given the following matrices `A`, `B`, and C
+    
+    ```{r, R.options=list(digits=2)}
+    set.seed(122)
+    A <- matrix(rnorm(12), ncol=3)
+    B <- matrix(rnorm(12), nrow=3)
+    C <- A %*% cbind(1:3) + rnorm(4) # Adding a vector of length 4!
+    ```
+    
+    Compute
+    
+    1.  Matrix multiplication
+    2.  Transpose of A
+    3.  Element-wise product of A and B'
+    4.  The inverse of the cross product of A
+    5.  $(A^\mbox{t} A)^{-1} A^\mbox{t} C$
+  
+
+    ```{r, eval=FALSE, echo=FALSE}
+    # Matrix multiplication:
+    A %*% B
+
+    # Transpose
+    t(A)
+    
+    # Element-wise product
+    A*t(B)
+
+    # Inverse
+    solve(t(A) %*% A)
+    
+    # OLS
+    solve(t(A) %*% A) %*% t(A) %*% C
+    ```
+
+# Statistical Functions
+
+*   R has a very nice set of families of distributions. In general, distribution functions have the following name structure:
+    
+    a.  **Random Number Generation**: `r[name-of-the-distribution]`, e.g. `rnorm` for normal, `runif` for uniform.
+    
+    b.  **Density function**: `d[name-of-the-distribution]`, e.g. `dnorm` for normal, `dunif` for uniform.
+    
+    c.  **Cumulative Distribution Function (CDF)**: `p[name-of-the-distribution]`, e.g. `pnorm` for normal, `punif` for uniform.
+    
+    d.  **Inverse of the CDF (quantile)**: `q[name-of-the-distribution]`, e.g. `qnorm` for the normal, `qunif` for the uniform.
+    
+*   In the case of [**pseudo random numbers**](https://en.wikipedia.org/wiki/Pseudorandom_number_generator){target="_blank"} (the `r` prefix), it is important to **always** set the seed to ensure **reproducibility**
+
+    ```{r setseed, collapse=TRUE}
+    # First run
+    set.seed(12)
+    rnorm(4)
+    
+    # Second run
+    set.seed(12)
+    rnorm(4)
+    ```
+    
+    More distributions available at `??Distributions`.
+
+---
+
+*   Take a look at the normal distribution
+
+```{r}
+set.seed(12)
+op <- par(mfrow = c(2,2))
+hist(rnorm(1e5))
+curve(qnorm)
+curve(pnorm, xlim=c(-3, 3))
+curve(dnorm, xlim=c(-3, 3))
+par(op)
+```
+
+---
+
+*   Take a look at the exponential
+
+```{r}
+set.seed(12)
+op <- par(mfrow = c(2,2))
+hist(rexp(1e5))
+curve(qexp)
+curve(pexp, xlim=c(0, 6))
+curve(dexp, xlim=c(0, 6))
+par(op)
+```
+
+# Questions
+
+1.  Draw 1e5 samples from a chi2 with 2 degrees of freedom (hint: check `?Distributions`).
+
+```{r, echo=FALSE, eval=FALSE}
+set.seed(778)
+Z1 <- rchisq(1e5, 2)
+hist(Z1, breaks=100)
+```
+    
+
+2.  Draw 1e5 samples from a chi2 with 2 degrees of freedom using `rnorm`, to do this, execute the following steps:
+    
+    1.  Draw 2 standard normal vectors of length 1e5,
+    2.  Compute the squared version of each vector, now each will be distributed chi2 with 1 degree of freedom,
+    3.  Sum the 2 vectors, that will be a chi2 with 2 degrees of freedom.
+
+```{r, echo=FALSE, eval=FALSE}
+set.seed(778)
+Z2 <- rnorm(1e5)^2 + rnorm(1e5)^2
+hist(Z2, breaks=100)
+```
+
+    
+3.  To make sure you are getting the (approximately) same solution in both, compute the probability of obtaining values less than 2 using the CDF (cumulative distribution function, a.k.a, probability function) of the chi2 distribution, and compare that value with the following approximation $\sum_i \mathbf{1}(X < 2)$ on the results you obtained in parts 1 and 2.
+
 
 # Retirement Savings
 
@@ -74,12 +323,12 @@ We'll do all of this by runing some monte carlo simulations models...
 library(magrittr)
 library(dplyr)
 dow_monthly <- dow %>%
-  filter(months(Date) != months(lag(Date))) %>%
-  arrange(Date) %>%
+  filter(months(Date) != months(lag(Date))) %>% # Keeping the last day of the month
+  arrange(Date) %>%                             # Sorting by date
   mutate(
-    r = Close/lag(Close) - 1
+    r = Close/lag(Close) - 1                    # Computing the monthly return
   ) %$%
-  r[-1]
+  r[-1]                                         # Keeping all, but the last month   
 ```
 
 # About the model
@@ -165,6 +414,50 @@ head(ans)
 
 # Visualizing the output
 
+```{r}
+plot_CI <- function(x, conf_interval=.95, col="steelblue")  {
+  
+  # Computing cureves
+  lvl <- (1-conf_interval)/2
+  lvl <- c(lvl, .5, 1-lvl)
+  dat <- t(apply(x, 2, quantile, lvl))
+  
+  # Emptyplot
+  plot(NA,xlim = c(1,nrow(dat)), ylim=c(0, max(dat)))
+  
+  # Drawing the confidence region
+  polygon(
+    c(1:nrow(dat), nrow(dat):1),
+    c(dat[,1], rev(dat[,3])),
+    col    = adjustcolor(col, alpha.f = .5),
+    border = "transparent"
+  )
+  
+  # Drawing the 50%
+  lines(dat[,2], lwd=2, lty=2, col=col)
+  
+  # Legend
+  legend(
+    "topleft",
+    col  = c(col, col),
+    lty  = c(NA, 2),
+    fill = c(col, NA),
+    legend = c(
+      paste0("%", conf_interval*100, " confidence"),
+      "Median"
+      )
+  )
+}
+
+op <- par(mfrow=c(2,2))
+plot_CI(t(ans02))
+plot_CI(t(ans05))
+plot_CI(t(ans10))
+plot_CI(t(ans15))
+par(op)
+```
+
+
 ```{r plotting-the-outcome}
 # Changing the palette
 palette(
@@ -177,10 +470,10 @@ boxplot(
   main = "Distribution of Retirement Savings Balance",
   xlab = "Monthly Savings as a Proportion of Income",
   ylab = "Savings (thousands of USD, log-scale)",
-  log = "y",
-  las = 2,
-  col = 1:4,
-  lwd = 1.5,
+  log  = "y",
+  las  = 2,
+  col  = 1:4,
+  lwd  = 1.5,
   border = 1:4
 )
 ```

@@ -5,12 +5,15 @@ Here you’ll find some examples of simulations/programming tasks that you
 could work
 on.
 
-| Title                                  | difficulty | Keywords                            | Description |
-| :------------------------------------- | :--------- | :---------------------------------- | :---------- |
-| [Writing Functions I](functions1/)     | easy       | programming, functions              | na          |
-| [Langton’s Ant](langtons-ant/)         | hard       | simulation, celular autonamton, ABM | na          |
-| [Conway’s Game of Life](life/)         | hard       | simulation, celular automaton       | na          |
-| [Monopoly](monopoly-game/)             | hard       | simulation, unimportant             | na          |
-| [Newton's Method](newtons/)            | medium     | optimization                        | na          |
-| [Breaking the code I](secret1/)        | medium     | strings, programming, unuseful      | na          |
-| [Fear the Walking Dead](walking-dead/) | hard       | particles, simulation, contagion    | na          |
+| Proj. \# | Title                                                                     | Difficulty | Keywords                            | Author             |
+| :------- | :------------------------------------------------------------------------ | :--------- | :---------------------------------- | :----------------- |
+| 1        | [Writing Functions I](01-functions1/)                                     | easy       | programming, functions              | George G. Vega Yon |
+| 2        | [Langton’s Ant](02-langtons-ant/)                                         | hard       | simulation, celular autonamton, ABM | George G. Vega Yon |
+| 3        | [Conway’s Game of Life](03-life/)                                         | hard       | simulation, celular automaton       | George G. Vega Yon |
+| 4        | [Monopoly](04-monopoly-game/)                                             | hard       | simulation, unimportant             | George G. Vega Yon |
+| 5        | [Newton's Method](05-newtons/)                                            | medium     | optimization                        | George G. Vega Yon |
+| 6        | [The party game](06-party/)                                               | medium     | simulation, probability             | George G. Vega Yon |
+| 7        | [Rejection Sampling](07-rejection/)                                       | medium     | simulation, probability             | George G. Vega Yon |
+| 8        | [Breaking the code I](08-secret1/)                                        | medium     | strings, programming, unuseful      | George G. Vega Yon |
+| 10       | [Fear the Walking Dead](10-walking-dead/)                                 | hard       | particles, simulation, contagion    | George G. Vega Yon |
+| 12       | [California Enviromental Screen (Data viz challenge)](12-california-env/) | medium     | gis, viz                            | George G. Vega Yon |
