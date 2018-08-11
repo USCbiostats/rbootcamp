@@ -1,15 +1,14 @@
 ---
-title: "R Bootcamp Day 2:<br>Simulations and Language Fundamentals"
-author: George G. Vega Yon
+title: 'R Bootcamp <br>: Simulation and Language Fundamentals<br><img src="../fig/trojan-rlogo.svg" style="width:250px;">'
+author: <a href="https://ggvy.cl"><b>George G. Vega Yon</b></a><br>vegayon@usc.edu<br><br>University of Southern California<br>Department of Preventive Medicine
+date: July 7th, 2018
 output:
   slidy_presentation:
-    footer: IMAGE
+    footer: R Bootcamp (day1)
     highlight: pygments
+    font_adjustment: -1
+bibliography: 00-welcome.bib
 ---
-
-Required lecture Simulations https://bookdown.org/rdpeng/rprogdatascience/simulation.html
-
-Suggested lecture Functional Programming http://adv-r.had.co.nz/Functional-programming.html
 
 # Data types 
 
