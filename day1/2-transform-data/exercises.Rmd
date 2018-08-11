@@ -1,0 +1,208 @@
+---
+title: "Transform Data"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup}
+library(tidyverse)
+library(gapminder)
+library(nycflights13)
+
+# Toy datasets to use
+
+superheroes <- tribble(
+       ~name, ~alignment,  ~gender,          ~publisher,
+   "Magneto",      "bad",   "male",            "Marvel",
+     "Storm",     "good", "female",            "Marvel",
+  "Mystique",      "bad", "female",            "Marvel",
+    "Batman",     "good",   "male",                "DC",
+     "Joker",      "bad",   "male",                "DC",
+  "Catwoman",      "bad", "female",                "DC",
+   "Hellboy",     "good",   "male", "Dark Horse Comics"
+  )
+
+publishers <- tribble(
+  ~publisher, ~yr_founded,
+        "DC",       1934L,
+    "Marvel",       1939L,
+     "Image",       1992L
+  )
+
+```
+
+## gapminder
+
+```{r}
+gapminder
+```
+
+
+## Your Turn 1
+
+Alter the code to select just the `pop` column:
+
+```{r}
+select(gapminder, year, lifeExp)
+```
+
+## Quiz
+
+Which of these is NOT a way to select the `name` and `n` columns together?
+
+```{r}
+select(gapminder, -c(year, lifeExp, pop, gdpPercap))
+select(gapminder, country:continent)
+select(gapminder, starts_with("c"))
+select(gapminder, ends_with("t"))
+```
+
+## Your Turn 2
+
+Show:
+
+* All of the rows where `pop` is greater than or equal to 100000  
+* All of the rows for El Salvador  
+* All of the rows that have a missing value for `year`  (no need to edit this code)
+
+```{r}
+
+
+filter(gapminder, is.na(year))
+```
+
+## Your Turn 3
+
+Use Boolean operators to alter the code below to return only the rows that contain:
+
+* El Salvador  
+* Countries that had populations over 100000 in 1960 or earlier
+
+```{r}
+filter(gapminder, country == "El Salvador" | country == "Oman")
+
+```
+
+## Your Turn 4
+
+Arrange gapminder by `year`. Add `lifeExp` as a second (tie breaking) variable to arrange on. Which country had the lowest life expectency in 1952?
+
+```{r}
+
+```
+
+## Your Turn 5
+
+Use `desc()` to find the country with the highest `gdpPercap`.
+
+```{r}
+
+```
+
+## Your Turn 6
+
+Use `%>%` to write a sequence of functions that: 
+
+1. Filter only countries thate are in the continent of Oceania.
+2. Select the `country`, `year` and `lifeExp` columns  
+3. Arrange the results so that the highest life expetency is at the top.
+
+```{r}
+
+```
+
+## Exam
+
+1. Import the diabetes data from the importing data. A copy of the CSV file is available in this folder.
+2. Add the variable `bmi` to the data set using height and weight using the formula: `(weight / height^2) * 703`
+3. Select just `id`, `glyhb`, and the new variable you created.
+4. Filter rows that have BMI > 35
+
+How many rows and columns are in your new data set?
+
+```{r}
+
+```
+
+## Your Turn 7
+
+Use summarise() to compute three statistics about the gapminder data set:
+
+1. The first (`min()`) year in the data
+2. The last (`max()`) year in the data  
+3. The total number of observations (`n()`) and the total number of unique countries in the data (`n_distinct()`)
+
+```{r}
+
+```
+
+## Your Turn 8
+
+Extract the rows where `continent == "Europe"`. Then use `group_by()` to group by country. Finally, use `summarize()` to compute:
+
+1. The total number of observations for each country in Europe
+2. The lowest observed life expectency for each country 
+
+```{r}
+
+```
+
+## Your Turn 9
+
+Use grouping to calculate the mean life expectancy for each year by continent. Call the mean life expectancy variable `mean_le`. Plot the life expectancy over time (no need to change the plot code).
+
+```{r}
+gapminder %>% 
+  __________ %>% 
+  __________ %>% 
+  ggplot(aes(x = year, y = mean_le, col = continent)) +
+    geom_line() + 
+    scale_color_manual(values = continent_colors)
+```
+
+## Your Turn 10
+
+Which airlines had the largest arrival delays? Complete the code below.
+
+1. Join `airlines` to `flights`
+2. Compute and order the average arrival delays by airline. Display full names, no codes.
+
+```{r}
+flights %>%
+  drop_na(arr_delay) %>%
+                      %>%
+  group_by(         ) %>%
+                      %>%
+  arrange(       ) 
+```
+
+## Your Turn 11
+
+How many airports in `airports` are serviced by flights originating in New York (i.e. flights in our dataset?) Notice that the column to join on is named `faa` in the **airports** data set and `dest` in the **flights** data set.
+
+
+```{r}
+__________ %>%
+ _________(_________, by = ___________) %>%
+  distinct(faa)
+```
+
+***
+
+# Take aways
+
+* Extract variables with `select()`  
+* Extract rows with `filter()`  
+* Arrange rows, with `arrange()`  
+
+* Make tables of summaries with `summarise()`  
+* Make new variables, with `mutate()`  
+* Do groupwise operations with `group_by()`
+
+* Connect operations with `%>%`  
+
+* Use `left_join()`, `right_join()`, `full_join()`, or `inner_join()` to join datasets
+* Use `semi_join()` or `anti_join()` to filter datasets against each other
+
+

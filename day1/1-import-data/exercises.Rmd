@@ -1,0 +1,171 @@
+---
+title: "Import Data"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup}
+library(tidyverse)
+library(haven)
+```
+
+In this section, we will learn about importing and exporting files from common file formats, including CSV and formats from other statistical software using the readr and haven packages.
+
+## readr
+
+readr supplies several related functions, each designed to read in a specific flat file format. 
+
+Function       | Reads
+-------------- | --------------------------
+`read_csv()`   | Comma separated values
+`read_csv2()`  | Semi-colon separate values
+`read_delim()` | General delimited files
+`read_fwf()`   | Fixed width files
+`read_log()`   | Apache log files
+`read_table()` | Space separated files
+`read_tsv()`   | Tab delimited values
+
+We'll use `read_csv()` but, because `readr` is consistent, most read functions work the same way.
+
+readr is a core member of the tidyverse. It is loaded everytime you call `library(tidyverse)`.
+
+## Sample data
+
+There are two datasets stored alongside this notebook: `diabetes` and `nhgh`. Both are datasets related to diabetes. 
+
+## Importing Data
+
+To import `diabetes.csv`, use the readr functions that reads `.csv` files, `read_csv()`. Set the first argument of `read_csv()` to a character string: the filepath from your _working directory_ to the `nimbus.csv` file.
+
+So, if `file_name.csv` is saved in your working directory, you can read it in with the command.
+
+```{r eval = FALSE}
+#  there's no file called file_name.csv, so this won't work
+dataset <- read_csv("file_name.csv")
+```
+
+Note: you can determine the location of your working directory by running `getwd()`. You can change the location of your working directory by going to **Session > Set Working Directory** in the RStudio IDE menu bar or using `setwd()`.
+
+Notice that you need to save the results of `read_csv()` to an object using `<-` or `=`. If you don't do this, the contents of the file will print to your screen, but the object itself won't be saved, so you can't work with it.
+
+## Your Turn 1
+
+Find diabetes.csv on your server or computer. Then read it into an object. Then view the results.
+
+```{r}
+
+```
+
+## Tibbles
+
+`read_csv()` reads the data into a **tibble**, which is a modern version of the data frame. In fact, a tibble is a data frame, so you don't need to do anything differently. The main benefit is that it prints more nicely to the screen.
+
+tibble is a core member of the tidyverse. It is loaded everytime you call `library(tidyverse)`. The tibble package also includes the functions `tibble()` and `tribble()` for making tibbles from scratch, as well as `as_tibble()` for converting data frames to tibbles. If you want to convert a tibble to a regular data frame, just use `as.data.frame()`
+
+## Missing values
+
+It's very common to demarcate missing values with some code, like "-99" or "8888". The `na` option will replace such values with `NA`, the R object type for missing values.
+
+```{r eval = FALSE}
+read_csv(
+  "a,b,c,d
+  1,-99,3,4
+  5,6,-99,8", 
+  na = "-99")
+```
+
+You can set `na` to a single character string or a vector of character strings. `read_csv()` will transform every value listed in the `na` argument to an `NA` when it reads in the data.
+
+## Parsing data types
+
+The read functions in readr try to guess each data type, but sometimes it's wrong. For instance, if you have a variable called `ID` that is a number representing a patient, you usually want to treat it as a character, not a number. readr will show you what function it used to classify each variable. You can use the same functions to 
+
+To do this, add the argument `col_types` to `read_csv()` and set it equal to a list. readr has several functions that start with `col` that represent data types. We'll go over data and object types, including lists, later in the week.
+
+```{r eval = FALSE}
+diabetes <- read_csv("diabetes.csv", col_types = list(id = col_character()))
+```
+
+Alternatively, you can use a compact string representation where each character represents one column: c = character, i = integer, n = number, d = double, l = logical, D = date, T = date time, t = time, ? = guess, or _/- to skip the column. For example, if we have a data set with three variables, two characters and an integer, we can say `col_type = "cci"`.
+
+# Your Turn 2
+
+Set the 4 column types to be: double, integer, character, and unknown (guess)
+
+```{r}
+read_csv(
+  "a,b,c,d
+  1,2,3,4
+  5,6,7,8", 
+  col_types = ""
+)
+```
+
+## haven: read and write SAS, SPSS, and Stata files
+
+Often we need to read or write files in the formats used by other statistical software. The haven package supports files from SAS, SPSS, and Stata. Like readr, functions to read in data start with `read_`.
+
+haven is *not* a core member of the tidyverse. That means you need to load it with `library(haven)`.
+
+## Your Turn 3
+
+This folder has several versions of the diabetes file besides CSV: "diabetes.sas7bdat", "diabetes.sav", and "diabetes.dta". Pick a file format you or your collegues use and import them using the corresponding function from haven.
+
+```{r}
+
+```
+
+## Writing data
+
+readr and haven also contain functions for saving data. These functions start with `write_` and parallel the read functions. Each save a data frame or tibble in a specific file format.
+
+Function            | Writes
+------------------- | ----------------------------------------
+`write_csv()`       | Comma separated values
+`write_excel_csv()` | CSV that you plan to open in Excel
+`write_delim()`     | General delimited files
+`write_file()`      | A single string, written as is
+`write_lines()`     | A vector of strings, one string per line
+`write_tsv()`       | Tab delimited values
+`write_rds()`       | A data type used by R to save objects
+`write_sas()`       | SAS .sas7bdat files
+`write_xpt()`       | SAS transport format, .xpt
+`write_sav()`       | SPSS .sav files
+`write_stata()`     | Stata .dta files
+
+To use a write function, first give it the name of the data frame to save, then give it a filepath to the location where you would like to save the file. *This filepath should end in the name of the new file*
+
+For example, if we want to save a file after cleaning the data in the `diabetes` data set, we can use `write_csv()`. Note 
+
+```{r eval = FALSE}
+write_csv(diabetes, path = "diabetes-clean.csv")
+```
+
+# Your Turn 4
+
+R has a few data file types, such as RDS amd .Rdata. Save `diabetes` as "diabetes.Rds".
+
+```{r}
+
+```
+
+***
+
+# Take Aways
+
+The readr package provides efficient functions for reading and saving common flat file data formats. haven does the same for SAS, SPSS, and Stata files.
+
+Consider these packages for other types of data:
+
+Package  | Reads
+-------- | -----
+readr    | flat files (CSV, TSV, etc.)
+haven    | SPSS, Stata, and SAS files
+readxl   | Excel files (.xls, .xlsx)
+jsonlite | json
+xml2     | xml
+httr     | web APIs
+rvest    | web pages (web scraping)
+DBI      | databases
+sparklyr | data loaded into Spark

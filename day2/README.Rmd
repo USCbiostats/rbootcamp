@@ -12,6 +12,7 @@ bibliography: 00-welcome.bib
 
 # Data types 
 
+
 *   The most basic data (object) type in R are vectors.
     
     ```{r}
