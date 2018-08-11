@@ -64,7 +64,7 @@ Show:
 
 * All of the rows where `pop` is greater than or equal to 100000  
 * All of the rows for El Salvador  
-* All of the rows that have a missing value for `year`  
+* All of the rows that have a missing value for `year`  (no need to edit this code)
 
 ```{r}
 
@@ -78,11 +78,9 @@ Use Boolean operators to alter the code below to return only the rows that conta
 
 * El Salvador  
 * Countries that had populations over 100000 in 1960 or earlier
-* Countries that are one of El Salvador, Oman, or Croatia
 
 ```{r}
 filter(gapminder, country == "El Salvador" | country == "Oman")
-
 
 ```
 
@@ -97,7 +95,6 @@ Arrange gapminder by `year`. Add `lifeExp` as a second (tie breaking) variable t
 ## Your Turn 5
 
 Use `desc()` to find the country with the highest `gdpPercap`.
-Then, use `desc()` to the country with the highest `lifeExp`
 
 ```{r}
 
@@ -119,8 +116,7 @@ Use `%>%` to write a sequence of functions that:
 
 1. Import the diabetes data from the importing data. A copy of the CSV file is available in this folder.
 2. Add the variable `bmi` to the data set using height and weight using the formula: `(weight / height^2) * 703`
-3. `diabetes` contains two measurements of systolic and diastolic blood pressure for each participant, called `bp.1s`/`bp.2s` (systolic) and `bp.1d`/`bp.2d` (diastolic). Add new variables called `sbp` and `dbp` that are the average of the two observations for each type. Just add them up and divide by 2.
-4. Select just `id` and the new variables you created.
+3. Select just `id`, `glyhb`, and the new variable you created.
 4. Filter rows that have BMI > 35
 
 How many rows and columns are in your new data set?
@@ -154,14 +150,6 @@ Extract the rows where `continent == "Europe"`. Then use `group_by()` to group b
 
 ## Your Turn 9
 
-Use `group_by()`, `summarize()`, and `arrange()` to display the continents with the highest average life expectency.
-
-```{r}
-
-```
-
-## Your Turn 10
-
 Use grouping to calculate the mean life expectancy for each year by continent. Call the mean life expectancy variable `mean_le`. Plot the life expectancy over time (no need to change the plot code).
 
 ```{r}
@@ -173,7 +161,7 @@ gapminder %>%
     scale_color_manual(values = continent_colors)
 ```
 
-## Your Turn 11
+## Your Turn 10
 
 Which airlines had the largest arrival delays? Complete the code below.
 
@@ -189,7 +177,7 @@ flights %>%
   arrange(       ) 
 ```
 
-## Your Turn 12
+## Your Turn 11
 
 How many airports in `airports` are serviced by flights originating in New York (i.e. flights in our dataset?) Notice that the column to join on is named `faa` in the **airports** data set and `dest` in the **flights** data set.
 
@@ -199,8 +187,6 @@ __________ %>%
  _________(_________, by = ___________) %>%
   distinct(faa)
 ```
-
-
 
 ***
 
