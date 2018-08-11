@@ -87,6 +87,8 @@ Wickham, H., and Grolemund, G. (2017) *R for Data Science: Visualize, Model, Tra
 
 Wickham, H. (2017) *Advanced R*. CRC Press. ([free online](https://adv-r.hadley.nz/))
 
+[Rstudio cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+
 ----
 
 <div align="center">
