@@ -1704,15 +1704,58 @@ $(document).ready(function () {
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5gYGAifQ== -->
 <pre class="r"><code>library(tidyverse)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXHUwMDFiWzM3beKUgOKUgCBcdTAwMWJbMW1BdHRhY2hpbmcgcGFja2FnZXNcdTAwMWJbMjJtIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2UgMS4yLjEg4pSA4pSAXHUwMDFiWzM5bVxuXHUwMDFiWzM3bVx1MDAxYlszMm3inJRcdTAwMWJbMzdtIFx1MDAxYlszNG1nZ3Bsb3QyXHUwMDFiWzM3bSAzLjAuMCAgICAgXHUwMDFiWzMybeKclFx1MDAxYlszN20gXHUwMDFiWzM0bXB1cnJyICBcdTAwMWJbMzdtIDAuMi41XG5cdTAwMWJbMzJt4pyUXHUwMDFiWzM3bSBcdTAwMWJbMzRtdGliYmxlIFx1MDAxYlszN20gMS40LjIgICAgIFx1MDAxYlszMm3inJRcdTAwMWJbMzdtIFx1MDAxYlszNG1kcGx5ciAgXHUwMDFiWzM3bSAwLjcuNlxuXHUwMDFiWzMybeKclFx1MDAxYlszN20gXHUwMDFiWzM0bXRpZHlyICBcdTAwMWJbMzdtIDAuOC4xICAgICBcdTAwMWJbMzJt4pyUXHUwMDFiWzM3bSBcdTAwMWJbMzRtc3RyaW5nclx1MDAxYlszN20gMS4zLjFcblx1MDAxYlszMm3inJRcdTAwMWJbMzdtIFx1MDAxYlszNG1yZWFkciAgXHUwMDFiWzM3bSAxLjEuMSAgICAgXHUwMDFiWzMybeKclFx1MDAxYlszN20gXHUwMDFiWzM0bWZvcmNhdHNcdTAwMWJbMzdtIDAuMy4wXHUwMDFiWzM5bVxucGFja2FnZSDigJhkcGx5cuKAmSB3YXMgYnVpbHQgdW5kZXIgUiB2ZXJzaW9uIDMuNS4xXHUwMDFiWzM3beKUgOKUgCBcdTAwMWJbMW1Db25mbGljdHNcdTAwMWJbMjJtIOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgCB0aWR5dmVyc2VfY29uZmxpY3RzKCkg4pSA4pSAXG5cdTAwMWJbMzFt4pyWXHUwMDFiWzM3bSBcdTAwMWJbMzRtZHBseXJcdTAwMWJbMzdtOjpcdTAwMWJbMzJtZmlsdGVyKClcdTAwMWJbMzdtIG1hc2tzIFx1MDAxYlszNG1zdGF0c1x1MDAxYlszN206OmZpbHRlcigpXG5cdTAwMWJbMzFt4pyWXHUwMDFiWzM3bSBcdTAwMWJbMzRtZHBseXJcdTAwMWJbMzdtOjpcdTAwMWJbMzJtbGFnKClcdTAwMWJbMzdtICAgIG1hc2tzIFx1MDAxYlszNG1zdGF0c1x1MDAxYlszN206OmxhZygpXHUwMDFiWzM5bVxuIn0= -->
+<pre><code>[37m── [1mAttaching packages[22m ───────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──[39m
+[37m[32m✔[37m [34mggplot2[37m 3.0.0     [32m✔[37m [34mpurrr  [37m 0.2.5
+[32m✔[37m [34mtibble [37m 1.4.2     [32m✔[37m [34mdplyr  [37m 0.7.6
+[32m✔[37m [34mtidyr  [37m 0.8.1     [32m✔[37m [34mstringr[37m 1.3.1
+[32m✔[37m [34mreadr  [37m 1.1.1     [32m✔[37m [34mforcats[37m 0.3.0[39m
+package ‘dplyr’ was built under R version 3.5.1[37m── [1mConflicts[22m ──────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[37m [34mdplyr[37m::[32mfilter()[37m masks [34mstats[37m::filter()
+[31m✖[37m [34mdplyr[37m::[32mlag()[37m    masks [34mstats[37m::lag()[39m</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXBnXG5gYGAifQ== -->
-<pre class="r"><code>mpg</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubXRjYXJzXG5gYGAifQ== -->
+<pre class="r"><code>mtcars</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<div id="a-quick-introduction-to-base-r-graphics" class="section level2">
+<h2>A quick introduction to Base R graphics</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGlzdChtdGNhcnMkbXBnLCBicmVha3MgPSAyMClcbmBgYCJ9 -->
+<pre class="r"><code>hist(mtcars$mpg, breaks = 20)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW9kZWwgPC0gbG0obXBnIH4gaHAsIGRhdGEgPSBtdGNhcnMpXG4gIFxucGxvdChtdGNhcnMkaHAsIG10Y2FycyRtcGcpXG5hYmxpbmUobW9kZWwsIGx0eSA9IFwiZGFzaGVkXCIpXG5gYGAifQ== -->
+<pre class="r"><code>model &lt;- lm(mpg ~ hp, data = mtcars)
+  
+plot(mtcars$hp, mtcars$mpg)
+abline(model, lty = &quot;dashed&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGFyKG1mcm93ID0gYygxLCAyKSkgICAgIFxuXG5wbG90KG10Y2FycyRtcGcsIG10Y2FycyRod3ksICAgXG4gICAgIGNvbCA9IG10Y2FycyRjYXJiKSAgXG5cbnBsb3QobXRjYXJzJG1wZywgbXRjYXJzJGh3eSwgICAgICBcbiAgICAgY29sID0gbXRjYXJzJGN5bCkgICAgXG5gYGAifQ== -->
+<pre class="r"><code>par(mfrow = c(1, 2))     
+
+plot(mtcars$mpg, mtcars$hwy,   
+     col = mtcars$carb)  
+
+plot(mtcars$mpg, mtcars$hwy,      
+     col = mtcars$cyl)    </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
 <div id="your-turn-1" class="section level2">
 <h2>Your Turn 1</h2>
 <p>Run the code on the slide to make a graph. Pay strict attention to spelling, capitalization, and parentheses!</p>
@@ -1726,20 +1769,29 @@ $(document).ready(function () {
 <p>Add <code>color</code>, <code>size</code>, <code>alpha</code>, and <code>shape</code> aesthetics to your graph. Experiment.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2dwbG90KGRhdGEgPSBtcGcpICtcbiAgZ2VvbV9wb2ludChtYXBwaW5nID0gYWVzKHggPSBkaXNwbCwgeSA9IGh3eSkpXG5gYGAifQ== -->
-<pre class="r"><code>ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2dwbG90KGRhdGEgPSBtcGcsIG1hcHBpbmcgPSBhZXMoeCA9IGRpc3BsLCB5ID0gaHd5KSkgK1xuICBnZW9tX3BvaW50KClcbmBgYCJ9 -->
+<pre class="r"><code>ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Try moving the mapping argument to <code>geom_point()</code>.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2dwbG90KGRhdGEgPSBtcGcsIG1hcHBpbmcgPSBhZXMoeCA9IGRpc3BsLCB5ID0gaHd5KSkgK1xuICBnZW9tX3BvaW50KClcbmBgYCJ9 -->
+<pre class="r"><code>ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point()</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
 <div id="your-turn-3" class="section level2">
 <h2>Your Turn 3</h2>
-<p>Replace this scatterplot with one that draws boxplots. Use the cheatsheet. Try your best guess.</p>
+<p>Replace this scatterplot with one that draws boxplots. Try typing “geom_” and hitting the tab button to see the functions that start with “geom_”. Try to guess which one to use. If you need help, there’s a copy of the cheatsheet in this folder.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2dwbG90KG1wZykgKyBnZW9tX3BvaW50KGFlcyhjbGFzcywgaHd5KSlcbmBgYCJ9 -->
-<pre class="r"><code>ggplot(mpg) + geom_point(aes(class, hwy))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2dwbG90KG1wZywgYWVzKGNsYXNzLCBod3kpKSArIGdlb21fcG9pbnQoKVxuYGBgIn0= -->
+<pre class="r"><code>ggplot(mpg, aes(class, hwy)) + geom_point()</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -1747,6 +1799,11 @@ $(document).ready(function () {
 <div id="your-turn-4" class="section level2">
 <h2>Your Turn 4</h2>
 <p>Make a histogram of the <code>hwy</code> variable from <code>mpg</code>.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Redo the <code>hwy</code> plot as a density plot.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-chunk-end -->
@@ -1802,7 +1859,7 @@ $(document).ready(function () {
 <!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiVmlzdWFsaXplIERhdGEiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCmBgYHtyIHNldHVwfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKYGBgCgpgYGB7cn0KbXBnCmBgYAoKCiMjIFlvdXIgVHVybiAxCgpSdW4gdGhlIGNvZGUgb24gdGhlIHNsaWRlIHRvIG1ha2UgYSBncmFwaC4gUGF5IHN0cmljdCBhdHRlbnRpb24gdG8gc3BlbGxpbmcsIGNhcGl0YWxpemF0aW9uLCBhbmQgcGFyZW50aGVzZXMhCgpgYGB7cn0KCmBgYAoKIyMgWW91ciBUdXJuIDIKCkFkZCBgY29sb3JgLCBgc2l6ZWAsIGBhbHBoYWAsIGFuZCBgc2hhcGVgIGFlc3RoZXRpY3MgdG8geW91ciBncmFwaC4gRXhwZXJpbWVudC4gIAoKYGBge3J9CmdncGxvdChkYXRhID0gbXBnKSArCiAgZ2VvbV9wb2ludChtYXBwaW5nID0gYWVzKHggPSBkaXNwbCwgeSA9IGh3eSkpCmBgYAoKIyMgWW91ciBUdXJuIDMKClJlcGxhY2UgdGhpcyBzY2F0dGVycGxvdCB3aXRoIG9uZSB0aGF0IGRyYXdzIGJveHBsb3RzLiBVc2UgdGhlIGNoZWF0c2hlZXQuIFRyeSB5b3VyIGJlc3QgZ3Vlc3MuCgpgYGB7cn0KZ2dwbG90KG1wZykgKyBnZW9tX3BvaW50KGFlcyhjbGFzcywgaHd5KSkKYGBgCgojIyBZb3VyIFR1cm4gNAoKTWFrZSBhIGhpc3RvZ3JhbSBvZiB0aGUgYGh3eWAgdmFyaWFibGUgZnJvbSBgbXBnYC4KCmBgYHtyfQoKYGBgCgojIyBZb3VyIFR1cm4gNQoKTWFrZSBhIGJhciBjaGFydCBgaHd5YCBjb2xvcmVkIGJ5IGBjbGFzc2AuCgpgYGB7cn0KCmBgYAoKIyMgWW91ciBUdXJuIDYKClByZWRpY3Qgd2hhdCB0aGlzIGNvZGUgd2lsbCBkby4gVGhlbiBydW4gaXQuCgpgYGB7cn0KZ2dwbG90KG1wZykgKyAKICBnZW9tX3BvaW50KGFlcyhkaXNwbCwgaHd5KSkgKwogIGdlb21fc21vb3RoKGFlcyhkaXNwbCwgaHd5KSkKYGBgCgojIyBZb3VyIFR1cm4gNwoKV2hhdCBkb2VzIGBnZXR3ZCgpYCByZXR1cm4/CgpgYGB7cn0KCmBgYAoKIyMgWW91ciBUdXJuIDgKClNhdmUgdGhlIGxhc3QgcGxvdCBhbmQgdGhlbiBsb2NhdGUgaXQgaW4gdGhlIGZpbGVzIHBhbmUuCgpgYGB7cn0KCmBgYAoKKioqCgojIFRha2UgYXdheXMKCllvdSBjYW4gdXNlIHRoaXMgY29kZSB0ZW1wbGF0ZSB0byBtYWtlIHRob3VzYW5kcyBvZiBncmFwaHMgd2l0aCAqKmdncGxvdDIqKi4KCmBgYHtyIGV2YWwgPSBGQUxTRX0KZ2dwbG90KGRhdGEgPSA8REFUQT4pICsKICA8R0VPTV9GVU5DVElPTj4obWFwcGluZyA9IGFlcyg8TUFQUElOR1M+KSkKYGBg</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVmlzdWFsaXplIERhdGEiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCmBgYHtyIHNldHVwfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKYGBgCgpgYGB7cn0KbXRjYXJzCmBgYAoKIyMgIEEgcXVpY2sgaW50cm9kdWN0aW9uIHRvIEJhc2UgUiBncmFwaGljcwoKYGBge3J9Cmhpc3QobXRjYXJzJG1wZywgYnJlYWtzID0gMjApCmBgYAoKYGBge3J9Cm1vZGVsIDwtIGxtKG1wZyB+IGhwLCBkYXRhID0gbXRjYXJzKQogIApwbG90KG10Y2FycyRocCwgbXRjYXJzJG1wZykKYWJsaW5lKG1vZGVsLCBsdHkgPSAiZGFzaGVkIikKYGBgCgoKYGBge3J9CnBhcihtZnJvdyA9IGMoMSwgMikpICAgICAKCnBsb3QobXRjYXJzJG1wZywgbXRjYXJzJGh3eSwgICAKICAgICBjb2wgPSBtdGNhcnMkY2FyYikgIAoKcGxvdChtdGNhcnMkbXBnLCBtdGNhcnMkaHd5LCAgICAgIAogICAgIGNvbCA9IG10Y2FycyRjeWwpICAgIApgYGAKCgojIyBZb3VyIFR1cm4gMQoKUnVuIHRoZSBjb2RlIG9uIHRoZSBzbGlkZSB0byBtYWtlIGEgZ3JhcGguIFBheSBzdHJpY3QgYXR0ZW50aW9uIHRvIHNwZWxsaW5nLCBjYXBpdGFsaXphdGlvbiwgYW5kIHBhcmVudGhlc2VzIQoKYGBge3J9CgpgYGAKCiMjIFlvdXIgVHVybiAyCgpBZGQgYGNvbG9yYCwgYHNpemVgLCBgYWxwaGFgLCBhbmQgYHNoYXBlYCBhZXN0aGV0aWNzIHRvIHlvdXIgZ3JhcGguIEV4cGVyaW1lbnQuICAKCmBgYHtyfQpnZ3Bsb3QoZGF0YSA9IG1wZywgbWFwcGluZyA9IGFlcyh4ID0gZGlzcGwsIHkgPSBod3kpKSArCiAgZ2VvbV9wb2ludCgpCmBgYAoKVHJ5IG1vdmluZyB0aGUgbWFwcGluZyBhcmd1bWVudCB0byBgZ2VvbV9wb2ludCgpYC4gCgpgYGB7cn0KZ2dwbG90KGRhdGEgPSBtcGcsIG1hcHBpbmcgPSBhZXMoeCA9IGRpc3BsLCB5ID0gaHd5KSkgKwogIGdlb21fcG9pbnQoKQpgYGAKCiMjIFlvdXIgVHVybiAzCgpSZXBsYWNlIHRoaXMgc2NhdHRlcnBsb3Qgd2l0aCBvbmUgdGhhdCBkcmF3cyBib3hwbG90cy4gVHJ5IHR5cGluZyAiZ2VvbV8iIGFuZCBoaXR0aW5nIHRoZSB0YWIgYnV0dG9uIHRvIHNlZSB0aGUgZnVuY3Rpb25zIHRoYXQgc3RhcnQgd2l0aCAiZ2VvbV8iLiBUcnkgdG8gZ3Vlc3Mgd2hpY2ggb25lIHRvIHVzZS4gSWYgeW91IG5lZWQgaGVscCwgdGhlcmUncyBhIGNvcHkgb2YgdGhlIGNoZWF0c2hlZXQgaW4gdGhpcyBmb2xkZXIuCgpgYGB7cn0KZ2dwbG90KG1wZywgYWVzKGNsYXNzLCBod3kpKSArIGdlb21fcG9pbnQoKQpgYGAKCiMjIFlvdXIgVHVybiA0CgpNYWtlIGEgaGlzdG9ncmFtIG9mIHRoZSBgaHd5YCB2YXJpYWJsZSBmcm9tIGBtcGdgLgoKYGBge3J9CgpgYGAKClJlZG8gdGhlIGBod3lgIHBsb3QgYXMgYSBkZW5zaXR5IHBsb3QuCgpgYGB7cn0KCmBgYAoKIyMgWW91ciBUdXJuIDUKCk1ha2UgYSBiYXIgY2hhcnQgYGh3eWAgY29sb3JlZCBieSBgY2xhc3NgLgoKYGBge3J9CgpgYGAKCiMjIFlvdXIgVHVybiA2CgpQcmVkaWN0IHdoYXQgdGhpcyBjb2RlIHdpbGwgZG8uIFRoZW4gcnVuIGl0LgoKYGBge3J9CmdncGxvdChtcGcpICsgCiAgZ2VvbV9wb2ludChhZXMoZGlzcGwsIGh3eSkpICsKICBnZW9tX3Ntb290aChhZXMoZGlzcGwsIGh3eSkpCmBgYAoKIyMgWW91ciBUdXJuIDcKCldoYXQgZG9lcyBgZ2V0d2QoKWAgcmV0dXJuPwoKYGBge3J9CgpgYGAKCiMjIFlvdXIgVHVybiA4CgpTYXZlIHRoZSBsYXN0IHBsb3QgYW5kIHRoZW4gbG9jYXRlIGl0IGluIHRoZSBmaWxlcyBwYW5lLgoKYGBge3J9CgpgYGAKCioqKgoKIyBUYWtlIGF3YXlzCgpZb3UgY2FuIHVzZSB0aGlzIGNvZGUgdGVtcGxhdGUgdG8gbWFrZSB0aG91c2FuZHMgb2YgZ3JhcGhzIHdpdGggKipnZ3Bsb3QyKiouCgpgYGB7ciBldmFsID0gRkFMU0V9CmdncGxvdChkYXRhID0gPERBVEE+KSArCiAgPEdFT01fRlVOQ1RJT04+KG1hcHBpbmcgPSBhZXMoPE1BUFBJTkdTPikpCmBgYA==</div>
 
 
 

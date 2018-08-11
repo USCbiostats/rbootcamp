@@ -8,7 +8,7 @@ We will work on simulations!
 Today's goals are:
 
 1.  Learn more about base R, in particular
-1.  Use extarnal data: `read.table`,
+1.  Use external data: `read.table`,
 2.  Data structures: `vector`, `matrix`, `list`
 3.  Functional programming: Creating functions in R,
 2.  Control flow: `for` loops (we'll leave ),

@@ -5,13 +5,17 @@ output: html_notebook
 
 This is an R Markdown Notebook. When you execute code within the notebook, the results appear beneath the code. 
 
-Press the green button to install the packages we'll be using.
+Press the green button to install the packages we'll be using this week.
 
 ```{r}
 install.packages(c("rmarkdown", "tidyverse", "sf", "ggfortify", "visdat", 
-                   "GGally", "janitor", "datasauRus", "gapminder", 
-                   "nycflights13", "devtools"))
-devtools::install_github('thomasp85/gganimate') # this package lives on GitHub, not CRAN!
+                   "plotly", "GGally", "janitor", "datasauRus", "gapminder", 
+                   "nycflights13", "HistData", "devtools"))
+
+# these packages lives on GitHub, not CRAN! Usually this just means they are in 
+# development and will eventually be submitted to CRAN
+devtools::install_github('thomasp85/gganimate') 
+devtools::install_github('thomasp85/patchwork') 
 ```
 
 The results of a code chunk will appear below. You can remove them by hitting the x button on the right. Since this is just installation stuff, go ahead.
