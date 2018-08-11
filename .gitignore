@@ -3,7 +3,6 @@
 *.xlsx
 *.ppt
 *.pptx
-*.pdf
 # Other
 flyer/
 simulations/*/*.html
