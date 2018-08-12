@@ -1,15 +1,14 @@
 ---
-title: "R Bootcamp Day 2:<br>Simulations and Language Fundamentals"
-author: George G. Vega Yon
+title: 'R Bootcamp day 2<br>Simulation and Language Fundamentals<br><img src="../fig/trojan-rlogo.svg" style="width:250px;">'
+author: <a href="https://ggvy.cl"><b>George G. Vega Yon</b></a><br>vegayon@usc.edu<br><br>University of Southern California<br>Department of Preventive Medicine
+date: July 7th, 2018
 output:
   slidy_presentation:
-    footer: IMAGE
+    footer: R Bootcamp (day1)
     highlight: pygments
+    font_adjustment: -1
+# bibliography: 00-welcome.bib
 ---
-
-Required lecture Simulations https://bookdown.org/rdpeng/rprogdatascience/simulation.html
-
-Suggested lecture Functional Programming http://adv-r.had.co.nz/Functional-programming.html
 
 # Data types 
 
@@ -146,11 +145,11 @@ str(c(-Inf, 1, NULL, +Inf)) # And Nulls are... of length 0!
 *   Some matrix fundamental operators, for matrices `A`, and `B` (both square) with the same dimensions (just for the examples):
 
     *   Element wise product, addition, substraction, and quotient: `A * B`, `A + B`, `A - B`, `A/B`
-    *   Transpose `t(A)`
-    *   Inverse `solve(A)`
-    *   Column and row bind, `cbind(A, B)`, `rbind(A, B)`
+    *   Transpose `t(A)`.
+    *   Inverse `solve(A)`.
+    *   Column and row bind, `cbind(A, B)`, `rbind(A, B)`.
+    *   Matrix product between both `A %\*% B`.
     
-    See the `help("%*%")`, `help("cbind")`
 
 # Questions
 
@@ -165,11 +164,12 @@ str(c(-Inf, 1, NULL, +Inf)) # And Nulls are... of length 0!
     
     Compute
     
-    1.  Matrix multiplication
-    2.  Transpose of A
-    3.  Element-wise product of A and B'
-    4.  The inverse of the cross product of A
-    5.  $(A^\mbox{t} A)^{-1} A^\mbox{t} C$
+    1.  Compute the matrix product between `A` and `B`
+    2.  Generate the transpose of `A`
+    3.  Merge `A` and `B` by row and by column. 
+    3.  Calculate the element-wise product of `A` and the transpose of `B`.
+    4.  Calculate The inverse of the cross product of `A`, this is $(A^\mbox{t}\times A)^{-1}$
+    5.  Compute $(A^\mbox{t} A)^{-1} A^\mbox{t} C$. How could you do this with a single command in R?
   
 
     ```{r, eval=FALSE, echo=FALSE}
@@ -247,10 +247,10 @@ par(op)
 
 1.  Draw 1e5 samples from a chi2 with 2 degrees of freedom (hint: check `?Distributions`).
 
-```{r, echo=FALSE, eval=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 set.seed(778)
 Z1 <- rchisq(1e5, 2)
-hist(Z1, breaks=100)
+# hist(Z1, breaks=100)
 ```
     
 
@@ -260,19 +260,29 @@ hist(Z1, breaks=100)
     2.  Compute the squared version of each vector, now each will be distributed chi2 with 1 degree of freedom,
     3.  Sum the 2 vectors, that will be a chi2 with 2 degrees of freedom.
 
-```{r, echo=FALSE, eval=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 set.seed(778)
 Z2 <- rnorm(1e5)^2 + rnorm(1e5)^2
-hist(Z2, breaks=100)
+# hist(Z2, breaks=100)
 ```
 
     
-3.  To make sure you are getting the (approximately) same solution in both, compute the probability of obtaining values less than 2 using the CDF (cumulative distribution function, a.k.a, probability function) of the chi2 distribution, and compare that value with the following approximation $\sum_i \mathbf{1}(X < 2)$ on the results you obtained in parts 1 and 2.
+3.  To make sure you are getting the (approximately) same solution in both, compute the probability of obtaining values less than 2 using the CDF (cumulative distribution function, a.k.a, probability function) of the chi2 distribution, and compare that value with the following approximation $\frac{1}{n}\sum_i \mathbf{1}(X < 2)$ on the results you obtained in parts 1 and 2.
+
+```{r echo=FALSE, eval=FALSE}
+pchisq(2, 2)
+mean(Z1 < 2)
+mean(Z2 < 2)
+```
+
 
 
 # Retirement Savings
 
-![Courtesy of [whatacatchjohnny-blog](http://whatacatchjohnny-blog.tumblr.com/post/7104244664/the-devils-advocate)](free-will.gif){.class width="600px"}
+<div align="center">
+<img src="../fig/free-will.gif" style="width:600px;" alt="Free will, is a bitch.">
+<p>Al Pacino in "The Devil's Advocate" (1997), image courtesy of <a href="http://whatacatchjohnny-blog.tumblr.com/post/7104244664/the-devils-advocate" target="_blank">whatacatchjohnny-blog</a></p>
+</div>
 
 *   The hyperbolic discount problem: In simple words, people overvalue the present (which yields regret in the future!)
 
@@ -281,9 +291,9 @@ hist(Z2, breaks=100)
 *   We will perform some simulation models using real data and, instead of obtaining a point estimate of our future savings, we will obtain confidence intervals (a range of possible outcomes).
 
 
-# Today's tasks
+# Steps to follow
 
-1.  Read in the data from returns from the stocks market.
+1.  Read in the data set [HistoricalPrices.csv](HistoricalPrices.csv){target="_blank"}from returns from the stocks market.
 
 2.  Create a function that simulates a random return trejectory by sampling from the stocks market.
 
@@ -309,13 +319,25 @@ hist(Z2, breaks=100)
       # We can tell the function how the data is stored
       col_types = cols(Date = col_date(format = "%m/%d/%y"))
       )
-    
-    # Let's print it out 
-    dow
-    
-    # Taking a look at it
-    plot(x = dow$Date, y = dow$Close, type="l")
     ```
+    
+---
+
+Let's print it out 
+
+```{r dow-print}
+dow
+```
+
+---
+
+Taking a look at it
+
+```{r dow-plot}
+plot(x = dow$Date, y = dow$Close, type="l")
+```
+
+---
     
 # Keeping the monthly data only
 
@@ -414,7 +436,7 @@ head(ans)
 
 # Visualizing the output
 
-```{r}
+```{r plot-ci-def}
 plot_CI <- function(x, conf_interval=.95, col="steelblue")  {
   
   # Computing cureves
@@ -448,7 +470,11 @@ plot_CI <- function(x, conf_interval=.95, col="steelblue")  {
       )
   )
 }
+```
 
+---
+
+```{r plot-ci-call}
 op <- par(mfrow=c(2,2))
 plot_CI(t(ans02))
 plot_CI(t(ans05))
@@ -458,7 +484,30 @@ par(op)
 ```
 
 
-```{r plotting-the-outcome}
+---
+
+```r
+# Changing the palette
+palette(
+  adjustcolor(RColorBrewer::brewer.pal(8, "Set1"), alpha=.7)
+  )
+
+# Using a nice-looking boxplot
+boxplot(
+  ans,
+  main = "Distribution of Retirement Savings Balance",
+  xlab = "Monthly Savings as a Proportion of Income",
+  ylab = "Savings (thousands of USD, log-scale)",
+  log  = "y",
+  las  = 2,
+  col  = 1:4,
+  lwd  = 1.5,
+  border = 1:4
+)
+```
+---
+
+```{r plotting-the-outcome, echo=FALSE}
 # Changing the palette
 palette(
   adjustcolor(RColorBrewer::brewer.pal(8, "Set1"), alpha=.7)
@@ -478,7 +527,6 @@ boxplot(
 )
 ```
 
-    
 
 # Problems
 
