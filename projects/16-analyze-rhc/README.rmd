@@ -1,5 +1,5 @@
 ---
-title: "Analyze the Effect of Right Heart Catherization on Survival"
+title: "Analyze the Effect of Right Heart Catheterization on Survival"
 output: html_document
 keywords: [analysis]
 difficulty: medium
@@ -12,9 +12,9 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
-## Does Right Heart Catherization Improve Survival?
+## Does Right Heart Catheterization Improve Survival?
 
-Included in this folder is a data set, `rhc`, which contains data related to survival after receiving a treatment called right heart catherization (RHC).
+Included in this folder is a data set, `rhc`, which contains data related to survival after receiving a treatment called right heart catheterization (RHC).
 
 You can find a data dictionary on the [Vanderbilt website](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/Crhc.html)
 
