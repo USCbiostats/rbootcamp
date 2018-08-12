@@ -1,0 +1,38 @@
+---
+title: "Analyze the Effect of Right Heart Catheterization on Survival"
+output: html_document
+keywords: [analysis]
+difficulty: medium
+author: Malcolm Barrett
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# load any packages you need
+library(tidyverse)
+```
+
+## Does Right Heart Catheterization Improve Survival?
+
+Included in this folder is a data set, `rhc`, which contains data related to survival after receiving a treatment called right heart catheterization (RHC).
+
+You can find a data dictionary on the [Vanderbilt website](http://biostat.mc.vanderbilt.edu/wiki/pub/Main/DataSets/Crhc.html)
+
+From the data description: 
+
+> "This dataset was used in Connors et al. (1996): The effectiveness of RHC in the initial care of critically ill patients. The dataset pertains to day 1 of hospitalization, i.e., the 'treatment' variable `swang1` is whether or not a patient received a RHC (also called the Swan-Ganz catheter) on the first day in which the patient qualified for the SUPPORT study."
+
+You can consider this a survival analysis (using Cox regression) or a simple binary outcome (using logistic regression). For a simple logistic regression, use the outcome variable `survived`. If you choose to do a Cox regression, use the survival package. The model will look like:
+
+```{r, eval = FALSE}
+coxph(Surv(t3d30, dth30) ~ swang1 + <COVARIATES>, data = rhc)
+```
+
+Otherwise, just use `glm()`.
+
+## Analysis
+
+1. Import the data.
+2. Explore the data.
+3. Fit a model for the effect of `swang1` (RHC) on survival. Include covariates you think might be important. It's ok if you don't know much about cardiology; just use your instinct for what's important.
+4. Present the results of the model in a table or plot.

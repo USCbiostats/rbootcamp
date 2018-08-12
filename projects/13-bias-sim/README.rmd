@@ -1,0 +1,71 @@
+---
+title: "Simulating confounding and selection bias"
+output: html_document
+keywords: [simulation, confounding, bias]
+difficulty: medium
+author: Malcolm Barrett
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+# install.packages("devtools")
+# install ggdag:
+# devtools::install_github("malcolmbarrett/ggdag")
+library(ggdag)
+```
+
+## Understanding bias through causal models
+
+In an observational study, if we want to estimate an unbiased effect between some variables `x` and `y`, we need to make sure we're controlling for the right variables. Leaving variables along a confounding pathway out will bias your result, but so can controlling for too much. Causal models give us information about how to do this. (To learn more about them, you can find information and resources under the articles on the [ggdag](https://ggdag.netlify.com/) website, but that isn't strictly necessary for this project.)
+
+When the relationship between `x` and `y` is confounded, we need to control for something along the confounding pathway. If we take this simple example, we only need to control for `z`:
+
+```{r}
+confounder_triangle(x_y_associated = TRUE) %>% 
+  ggdag()
+```
+
+1. Simulate the above relationship. You can choose what type of data you'd like for this to look like, but a simple way is for all variables to be continuous using `rnorm()`. Z would just be a function of `rnorm()`, while `x` would depend on both z (times some coefficient) and `rnorm()`, and likewise with `y`, which depends on all three. You can either simulate a large data set or iterate many times.
+
+2. In your simulations, show that in fitting a model for the effect of `x` on `y` controlling for z is correct by fitting a model with and without it. Show the two results compared to the true relationship (the coefficient you put in your simulation for `x` on `y`) in a table or plot.
+
+```{r}
+
+```
+
+When a variable is a descendant of the exposure and outcome (the arrows go from `x`/`y` to `m`), controlling for it will bias the results. This is selection bias, sometimes called collider bias (because the arrows "collide" at `m`). 
+
+```{r}
+collider_triangle(x_y_associated = TRUE) %>% 
+  ggdag()
+```
+
+3. Simulate the above situation.
+4. Show that controlling for `m` biases your result. Compare it to a model that doesn't control for it. Present the results in a table or plot.
+
+```{r}
+
+```
+
+It's not just descendants of `x` and `y` that are a problem; controlling for any variable that has more than one arrow going into it will induce bias between its parents (the variables it comes from). If the parents are 
+
+```{r}
+m_dag <- m_bias(x_y_associated = TRUE) %>% 
+  control_for("m")
+
+m_dag %>% 
+  ggdag()
+```
+
+5. Simulate the above situation. 
+6. Include `m` in all of your models. This will bias your result. If you're not sure how to fix it, pass `m_dag` to `ggdag_adjustment_set()` to see what else you need to control for. 
+
+```{r}
+
+```
+
+
+# Bonus
+
+7. Look at the relationships when you plot `butterfly_bias(x_y_associated = TRUE)` with `ggdag()`. Use `ggdag_adjustment_set()` to figure out what you need to control for. Simulate the relationships and present the results.

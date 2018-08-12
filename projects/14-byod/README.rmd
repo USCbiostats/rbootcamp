@@ -1,0 +1,17 @@
+---
+title: "BYOD: Bring your own data"
+output: html_document
+keywords: [analysis]
+difficulty: medium
+author: Malcolm Barrett
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# load any packages you need
+```
+
+## Analyze your own data
+
+Do you want to dive right in with your own work? Please, give it a try! Present as much or as little as you would like. Let us know if you need help pin pointing a type of package for the analysis you want to do.
+
