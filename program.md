@@ -68,7 +68,7 @@ We will also be using Git
         
     Readings:
     
-    a.  Chapter 20 of "R programming for Data Science" (by Roger D. Peng) (download [here](https://bookdown.org/rdpeng/rprogdatascience/r-nuts-and-bolts.html))
+    a.  Chapter 20 of "R programming for Data Science" (by Roger D. Peng) (download [here](https://bookdown.org/rdpeng/rprogdatascience/simulation.html))
     
     b. (optional) Chapter on Functional Programming of "Advanced R"" (by Hadley Wickham) (download [here](http://adv-r.had.co.nz/Functional-programming.html))
 
@@ -78,8 +78,15 @@ We will also be using Git
 
     b.  Communicating: Data viz with base R and ggplot2 (an overview)
 
-    b.  Presentation of (proposed) projects (complete list [here](projects/))
-
+    c.  Presentation of (proposed) projects (complete list [here](projects/))
+    
+    Readings:
+    
+    a.  Chapter 3 of "R for Data Science": Data Visualisation (by Hadley Wickham and Garrett Grolemund) (download [here](http://r4ds.had.co.nz/data-visualisation.html))
+    
+    b. (optional) Chapter 27 of "R for Data Science": R Markdown (by Hadley Wickham and Garrett Grolemund) (download [here](http://r4ds.had.co.nz/data-visualisation.html))
+    
+    c. (optional) A Layered Grammar of Graphics (by Hadley Wickham) (download [here](http://vita.had.co.nz/papers/layered-grammar.html))
 4.  Day 4: Hackathon.
 5.  Day 5: Present the results.
 
