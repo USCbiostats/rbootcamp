@@ -1,0 +1,24 @@
+---
+title: "Find and Present on a Package"
+output: html_document
+keywords: [packages]
+difficulty: easy
+author: Malcolm Barrett
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# load any packages you need
+```
+
+## Learn the basics of a package, then teach us!
+
+There are 13,000 R packages on CRAN, and many more that live on GitHub or other services. Find a package that looks interesting, learn about it, and present the basics to us. 
+
+What to look for: Find a package that has lots of examples or, preferably, vignettes. These will help you get a feel for it. Alternatively, search for blogs that show how to use the package. There may even be a bookdown site with a book about how to use the package!
+
+Suggestions:
+* Find a [tidyverse or Rstudio package](https://www.rstudio.com/products/rpackages/) we didn't cover
+* Check our package recommendations in the the main folder
+
+If you have an area in mind but aren't sure where to look, just ask us, and we might be able to offer some suggestions.
