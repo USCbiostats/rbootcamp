@@ -7,7 +7,7 @@ This boot camp has as main goal to give a general overview of scientific
 computing, and in particular, on the R programming language. It is
 divided in 5 days. The first three days will be a mix of presentations
 and hands-on work, and the last two will be 100% hands-on where the
-attendees are expected to work on a short project and present their
+attendees are expected to work on [**a short project**](projects/) and present their
 results at the end of the boot camp.
 
 ## Dates
@@ -38,22 +38,17 @@ We will also be using Git
 
 ## Schedule
 
-1.  Day 1: 
+1.  **DAY 1**: 
 
     a.  Introduction: What, Why, and How with R
 
     a.  Data analysis with Tidyverse
-
-    b.  **Assignment**: Create a new github repository to save your
-        > project. To do such, you'll need to create a Github account.
-        > The repo should include the following: (1) A readme.md file
-        > and A .gitgnore file.
         
-    Readings:
+    **Readings**:
     
     a.  Chapter 4 of "R programming for Data Science" (by Roger D. Peng) (download [here](https://bookdown.org/rdpeng/rprogdatascience/r-nuts-and-bolts.html))
 
-2.  Day 2:
+2.  **DAY 2**:
 
     a.  R Language fundamentals and Statistical Computing.
 
@@ -66,13 +61,13 @@ We will also be using Git
         > hist and abline, plot a histogram of the mean and draw a
         > vertical line at the place where the total mean lives.
         
-    Readings:
+    **Readings**:
     
     a.  Chapter 20 of "R programming for Data Science" (by Roger D. Peng) (download [here](https://bookdown.org/rdpeng/rprogdatascience/simulation.html))
     
     b. (optional) Chapter on Functional Programming of "Advanced R"" (by Hadley Wickham) (download [here](http://adv-r.had.co.nz/Functional-programming.html))
 
-3.  Day 3
+3.  **DAY 3**
 
     a.  R and Reproducible research: git, rmarkdown, and friends.
 
@@ -80,7 +75,7 @@ We will also be using Git
 
     c.  Presentation of (proposed) projects (complete list [here](projects/))
     
-    Readings:
+    **Readings**:
     
     a.  Chapter 3 of "R for Data Science": Data Visualisation (by Hadley Wickham and Garrett Grolemund) (download [here](http://r4ds.had.co.nz/data-visualisation.html))
     
