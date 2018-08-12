@@ -1,5 +1,5 @@
 ---
-title: 'R Bootcamp<br>Introduction (day 1): What, Why, and How with R<br><img src="../fig/trojan-rlogo.svg" style="width:250px;">'
+title: 'R Bootcamp day 1<br>Introduction: What, Why, and How with R<br><img src="../fig/trojan-rlogo.svg" style="width:250px;">'
 author: <a href="https://ggvy.cl"><b>George G. Vega Yon</b></a><br>vegayon@usc.edu<br><br>University of Southern California<br>Department of Preventive Medicine
 date: July 7th, 2018
 output:
