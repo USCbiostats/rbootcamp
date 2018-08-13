@@ -21,3 +21,4 @@ on.
 | 14       | [BYOD: Bring your own data](14-byod/README.rmd)                                            | medium     | analysis                            | Malcolm Barrett    |
 | 15       | [Find and Present on a Package](15-present-package/README.rmd)                             | easy       | packages                            | Malcolm Barrett    |
 | 16       | [Analyze the Effect of Right Heart Catheterization on Survival](16-analyze-rhc/README.rmd) | medium     | analysis                            | Malcolm Barrett    |
+| 17       | [miniGWAS](17-gwas1/)                                                                      | medium     | genetic association, GWAS           | Miguel Pereira     |
