@@ -62,10 +62,6 @@ install.packages("devtools")
 - Visualization: [`bayesplot`](https://cran.r-project.org/package=bayesplot)
 - [`coda`](https://cran.r-project.org/package=coda): Output Analysis and Diagnostics for MCMC
 
-
-# Genomic Analysis
-
-
 # Econometrics
 
 - [`AER`](https://cran.r-project.org/package=AER): Applied Econometrics with R
