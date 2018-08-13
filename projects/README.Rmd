@@ -8,8 +8,8 @@ Here you'll find some examples of simulations/programming tasks that you could w
 
 ```{r, results='asis', echo=FALSE}
 # Listing projects
-projects <- list.files(no..=TRUE, pattern = "README\\.md", full.names = TRUE, recursive = TRUE)
-projects <- projects[grepl("^[.]/[a-zA-Z0-9_-]+/README[.]R?md$", projects)]
+projects <- list.files(no..=TRUE, pattern = "README[.]R?r?md$", full.names = TRUE, recursive = TRUE)
+projects <- projects[grepl("^[.]/[a-zA-Z0-9_-]+/README[.]R?r?md$", projects)]
 
 ans <- lapply(projects, function(x) {
   
@@ -40,5 +40,6 @@ ans <- do.call(rbind, ans)
 colnames(ans) <- c("Proj. \\#","Title", "Difficulty", "Keywords", "Author")
 ans <- as.data.frame(ans)
 knitr::kable(ans)
+
 ```
 
