@@ -36,13 +36,14 @@ There are two datasets stored alongside this notebook: `diabetes` and `nhgh`. Bo
 
 ## Importing Data
 
-To import `diabetes.csv`, use the readr functions that reads `.csv` files, `read_csv()`. Set the first argument of `read_csv()` to a character string: the filepath from your _working directory_ to the `nimbus.csv` file.
+To import `diabetes.csv`, use the readr functions that reads `.csv` files, `read_csv()`. Set the first argument of `read_csv()` to a character string: the filepath from your _working directory_ to the `diabetes.csv` file.
 
 So, if `file_name.csv` is saved in your working directory, you can read it in with the command.
 
 ```{r eval = FALSE}
 #  there's no file called file_name.csv, so this won't work
 dataset <- read_csv("file_name.csv")
+dataset
 ```
 
 Note: you can determine the location of your working directory by running `getwd()`. You can change the location of your working directory by going to **Session > Set Working Directory** in the RStudio IDE menu bar or using `setwd()`.
@@ -51,7 +52,7 @@ Notice that you need to save the results of `read_csv()` to an object using `<-`
 
 ## Your Turn 1
 
-Find diabetes.csv on your server or computer. Then read it into an object. Then view the results.
+Find diabetes.csv on your computer. Then read it into an object. Then view the results.
 
 ```{r}
 
@@ -144,7 +145,7 @@ write_csv(diabetes, path = "diabetes-clean.csv")
 
 # Your Turn 4
 
-R has a few data file types, such as RDS amd .Rdata. Save `diabetes` as "diabetes.Rds".
+R has a few data file types, such as RDS and .Rdata. Save `diabetes` as "diabetes.Rds".
 
 ```{r}
 

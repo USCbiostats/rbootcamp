@@ -150,7 +150,7 @@ Extract the rows where `continent == "Europe"`. Then use `group_by()` to group b
 
 ## Your Turn 9
 
-Use grouping to calculate the mean life expectancy for each year by continent. Call the mean life expectancy variable `mean_le`. Plot the life expectancy over time (no need to change the plot code).
+Use grouping to calculate the mean life expectancy for each continent and year. Call the mean life expectancy variable `mean_le`. Plot the life expectancy over time (no need to change the plot code).
 
 ```{r}
 gapminder %>% 
@@ -159,33 +159,6 @@ gapminder %>%
   ggplot(aes(x = year, y = mean_le, col = continent)) +
     geom_line() + 
     scale_color_manual(values = continent_colors)
-```
-
-## Your Turn 10
-
-Which airlines had the largest arrival delays? Complete the code below.
-
-1. Join `airlines` to `flights`
-2. Compute and order the average arrival delays by airline. Display full names, no codes.
-
-```{r}
-flights %>%
-  drop_na(arr_delay) %>%
-                      %>%
-  group_by(         ) %>%
-                      %>%
-  arrange(       ) 
-```
-
-## Your Turn 11
-
-How many airports in `airports` are serviced by flights originating in New York (i.e. flights in our dataset?) Notice that the column to join on is named `faa` in the **airports** data set and `dest` in the **flights** data set.
-
-
-```{r}
-__________ %>%
- _________(_________, by = ___________) %>%
-  distinct(faa)
 ```
 
 ***

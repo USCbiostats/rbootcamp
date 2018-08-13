@@ -29,7 +29,6 @@ lotr <- tribble(
 
 ## Your Turn 1
 
-
 Use `gather()` to reorganize `table4a` into three columns: **country**, **year**, and **cases**.
 
 ```{r}
@@ -55,7 +54,7 @@ who
 
 ## Your Turn 4
 
-Use the `cases` data below. Separate the `sexage` column into **sex** and **age** columns.
+Use the `cases` data below. Separate the `sex_age` column into **sex** and **age** columns.
 
 ```{r}
 cases <- tribble(
@@ -64,8 +63,7 @@ cases <- tribble(
    "2",  "female_77",    
    "3",  "female_49"
 )
-
-
+separate(_______, _______, into = c("_______", "_______"))
 ```
 
 ## Exam
