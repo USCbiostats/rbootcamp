@@ -1,7 +1,7 @@
 ---
 title: 'R Bootcamp day 2<br>Simulations and Language Fundamentals<br><img src="../fig/trojan-rlogo.svg" style="width:250px;">'
 author: <a href="https://ggvy.cl"><b>George G. Vega Yon</b></a><br>vegayon@usc.edu<br><br>University of Southern California<br>Department of Preventive Medicine
-date: July 7th, 2018
+date: August 14th, 2018
 output: 
   slidy_presentation:
     footer: R Bootcamp (Day 2)
