@@ -2,7 +2,7 @@
 title: 'R Bootcamp day 2<br>Simulation and Language Fundamentals<br><img src="../fig/trojan-rlogo.svg" style="width:250px;">'
 author: <a href="https://ggvy.cl"><b>George G. Vega Yon</b></a><br>vegayon@usc.edu<br><br>University of Southern California<br>Department of Preventive Medicine
 date: July 7th, 2018
-output:
+output: 
   slidy_presentation:
     footer: R Bootcamp (day1)
     highlight: pygments
@@ -10,30 +10,159 @@ output:
 # bibliography: 00-welcome.bib
 ---
 
-# Data types 
+# A recap from Day 1
 
+1.  We learned about how to get `help()` in R, and about the different resources
+    out there: CRAN Task Views, Package Vigenttes, Stackoverflow, etc..
+    
+2.  We saw a bit on how to import data in various formats (CSV, SPSS, SAS, etc.)
+    into R with the R packages `readr` and `haven`.
+    
+2.  We got a glimpse of the functionalities that the R package `dplyr` gives us
+    for data management... the verbs: `filter`, `select`, `arrange`, `mutate`,
+    etc., and the auxiliary function `group_by`
+    
+# Today (Day 2)
+
+We will
+
+1.  Apply what we learned in day 1 to process some data (we need this for the end)
+
+2.  Learn more about the R language fundamentals
+
+3.  Do some simulations, in particular, a monte carlo experiment/bootstrap.
+
+
+---
+
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/abbAY"><a href="//imgur.com/abbAY">Futurama stock market gif</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+
+# The Dow Jones Industrial Average
+
+-   Downloaded from https://quotes.wsj.com/index/DJIA/historical-prices)
+
+-   This dataset covers from 1990 to 2018
+
+-   It provides the prices at the daily
+
+-   We would like to use it to calculate what are the monthly returns and use
+    that later for our simulations.
+    
+-   Here is the first 10 lines of the CSV
+    
+    ```{r first-lines-of-dow, echo=FALSE, highlight=FALSE, comment="", result="asis"}
+    cat(readLines("HistoricalPrices.csv", n = 10), sep="\n")
+    ```
+        
+    
+# Reading the DOW
+
+As from Day 1, we can use the `readr` package to read [this CSV file](HistoricalPrices.csv){target="_blank"}
+    
+```{r}
+# Loading the R package
+library(readr)
+
+# Reading the data
+dow <- read_csv(
+  "HistoricalPrices.csv",
+  # We can tell the function how the data is stored
+  col_types = cols(Date = col_date(format = "%m/%d/%y"))
+  )
+
+dow
+```
+
+---
+
+Taking a look at it
+
+```{r dow-plot}
+plot(
+  x = dow$Date,
+  y = dow$Close,
+  xlab = "Date",
+  ylab = "Price",
+  main = "Dow Jones Industrial Average",
+  type="l"
+  )
+```
+
+# Detour: ggplot2
+
+What would be the equivalent using `ggplot2`?
+
+```{r dow-plot-ggplot, message=FALSE, warning=FALSE}
+library(ggplot2)
+ggplot(dow, aes(x=Date, y=Close)) +
+  ggtitle(label = "Dow Jones Industrial Average") +
+  geom_line()
+```
+
+# Keeping the monthly data only
+
+*   Let's start by loading the R packages (that you already installed)
+    
+    ```{r loading-magrittr}
+    # Loading the R packages
+    library(magrittr)
+    library(dplyr)
+    ```
+
+# Keeping the monthly data only (cont'd)
+
+*   Now, we can use the `%>%` and the dplyr functions to get what we want: A dataset with the **monthly** returns of the DOW:
+
+    ```{r filtering-dow, R.options=list(max.print=50)}
+    # Filtering the data
+    dow_monthly <- dow %>%           # Passing the dataset
+      arrange(Date) %>%              # Sorting by date
+      mutate(
+        month     = months(Date),    # Extracting month
+        month_lag = lag(month)       # Creating a lag of month
+      ) %>%
+      filter(month != month_lag) %>% # Keeping the last day of the month
+      mutate(
+        r = Close/lag(Close) - 1     # Computing the monthly return
+      )
+    
+    dow_monthly
+    ```
+
+*   We will use this data later on for the simulations part of the presentation.
+
+# R Language Fundamentals: Data types 
 
 *   The most basic data (object) type in R are vectors.
+
+*   Two most common ways to create vectors is using the **combine** function, `c`, and the `vector` function:
     
-    ```{r}
-    myvec1 <- vector("logical", 3)  # This is a logical vector of length 3
-    myvec2 <- c(FALSE, TRUE, FALSE) # This is ALSO a logical vector of length 3
-    myvec2
-    length(myvec2)
     ```
-      
+    vector(< mode >, < length >)
+    c(< object 1>, < object 2 >, ..., < object n>)
+    ```
+    
+    For example:
+    
+    ```{r, collapse=TRUE}
+    vector("logical", 3)  # This is a logical vector of length 3
+    c(FALSE, TRUE, FALSE) # This is ALSO a logical vector of length 3
+    ```
+        
 
 *   Vectors can be of different modes: `logical`, `integer`, `numeric` (double), `complex`, `character`, and `raw`.
     (so one mode per vector!).
     
-*   Vectors can also be lists, which is a VERY special type of object in R (most of its objects are lists!)
-    ```{r}
-    mylist1 <- vector("list", 2) # This is a list with 2 empty slots
-    mylist2 <- list(NULL, NULL)  # This is ALSO a list with 2 empty slots
-    mylist1
+---
+    
+*   Vectors can also be lists, which is a **VERY** special type of object in R (most of its objects are lists!)
+    
+    ```{r, collapse=TRUE}
+    vector("list", 2) # This is a list with 2 empty slots
+    list(NULL, NULL)  # This is ALSO a list with 2 empty slots
     ```
 
-----
+---
 
 *   Moreover, lists elements can have names
     
@@ -56,29 +185,27 @@ output:
     ```
 
 
-# Attributes and Structure
+# R Language Fundamentals: Attributes and Structure
 
 *   Objects in R have attributes (metadata)
-
-    ```{r}
-    # Here are the attributes of the iris dataset
-    attributes(iris)    
-    ```
-
-    ```{r}
-    head(iris)
-    ```
     
+    ```{r attributes, R.options=list(max.print=20)}
+    # Loading the data `diamonds` from ggplot2
+    data(diamonds, package = "ggplot2")
+    
+    # Here are the attributes of the diamonds dataset
+    attributes(diamonds)    
+    ```
 
 ----
 
 *   You can take a general look at the structure of an R object with the `str()` function
     ```{r}
-    # Let's take a look at the iris dataset, again
-    str(iris)
+    # Let's take a look at the diamonds dataset, again
+    str(diamonds)
     ```
 
-# Missing values {.small}
+# R Language Fundamentals: Missing values
 
 R has different types of Missing values:
 
@@ -110,7 +237,7 @@ str(c(-Inf, 1, NULL, +Inf)) # And Nulls are... of length 0!
     
     What is the mode of the vector `c(my_integer_vector, my_string_vector)`?
     
-3.  What do each one of these functions return on the vector `myvector`?
+3.  What do each one of the functions `is.na`, `is.null`, `is.finite`, `is.infinite`, `is.nan` return on the vector `myvector`?
 
     ```{r testing-is, eval=FALSE, echo=FALSE}
     is.na(myvector)
@@ -189,7 +316,7 @@ str(c(-Inf, 1, NULL, +Inf)) # And Nulls are... of length 0!
     solve(t(A) %*% A) %*% t(A) %*% C
     ```
 
-# Statistical Functions
+# R Language Fundamentals: Statistical Functions
 
 *   R has a very nice set of families of distributions. In general, distribution functions have the following name structure:
     
@@ -245,7 +372,7 @@ par(op)
 
 # Questions
 
-1.  Draw 1e5 samples from a chi2 with 2 degrees of freedom (hint: check `?Distributions`).
+1.  Draw 100,000 samples from a chi2 with 2 degrees of freedom (hint: check `?Distributions`).
 
 ```{r, echo=FALSE, eval=TRUE}
 set.seed(778)
@@ -256,7 +383,7 @@ Z1 <- rchisq(1e5, 2)
 
 2.  Draw 1e5 samples from a chi2 with 2 degrees of freedom using `rnorm`, to do this, execute the following steps:
     
-    1.  Draw 2 standard normal vectors of length 1e5,
+    1.  Draw 2 standard normal vectors of length 100,000,
     2.  Compute the squared version of each vector, now each will be distributed chi2 with 1 degree of freedom,
     3.  Sum the 2 vectors, that will be a chi2 with 2 degrees of freedom.
 
@@ -275,9 +402,7 @@ mean(Z1 < 2)
 mean(Z2 < 2)
 ```
 
-
-
-# Retirement Savings
+# Simulations with R: Retirement Savings
 
 <div align="center">
 <img src="../fig/free-will.gif" style="width:600px;" alt="Free will, is a bitch.">
@@ -288,12 +413,45 @@ mean(Z2 < 2)
 
 *   Online tools for projecting retirement savings are usually very optimistic (sorry!), like yielding a 5\% fix average return (no bond gives you that!)
 
-*   We will perform some simulation models using real data and, instead of obtaining a point estimate of our future savings, we will obtain confidence intervals (a range of possible outcomes).
+*   We will perform some simulation models using real data and, instead of obtaining a point estimate of our future savings, we will obtain **a confidence interval**.
 
 
-# Steps to follow
+# The model
 
-1.  Read in the data set [HistoricalPrices.csv](HistoricalPrices.csv){target="_blank"}from returns from the stocks market.
+*   The value of your monthly savings at month $n$ is described by the following equation
+    
+    $$
+    S_n = S_{n-1}\times(1 + i_n) + W_n\times t_n\tag{1}
+    $$
+    
+    Where $S_n$ is your savings balance in time $n$, $i_n\sim I$ is the return rate in time $n$, $W_n$ is your income in time $n$, and $t_n$ is your contribution rate in time $n$.
+    
+*   For today, we will assume that $(W_n, t_n)$ is constant, i.e., neither your income nor your contribution rate change.
+
+*   And we won't think about inflation.
+
+*   So the only thing that changes in our model is $i_n$, the return rate of your account.
+    
+# The pseudo code
+
+For simulating a savings trajectory of length $N$ ($N$ months)
+
+1.  Draw a vector `i` of length `N` from the distribution of the returns, `I`,
+
+2.  Initialize `S` (should be numeric of length $N$), and set the first value to be zero,
+
+3.  For `n = 2 to N` do:
+    
+    a.  Set `S[n] = S[n-1]*i[n-1] + W_n * t_n`, as described in equation (1)
+    
+    b.  Next `n`
+    
+4.  Return `S`.
+
+
+# Sampling from R
+
+1.  Read in the data set [HistoricalPrices.csv](HistoricalPrices.csv){target="_blank"} from returns from the stocks market.
 
 2.  Create a function that simulates a random return trejectory by sampling from the stocks market.
 
@@ -302,77 +460,20 @@ mean(Z2 < 2)
 4.  Wrap it around 1,000 simulation, and plot the output using the `boxplot` function in R.
 
 
-# About the dataset
 
-*   Dow Jones Industrial Average (downloaded from https://quotes.wsj.com/index/DJIA/historical-prices)
-    
-    -   This dataset covers from 1990 to 2018
-    -   It provides the prices at the daily
-    
-    ```{r}
-    # Loading the R package
-    library(readr)
-    
-    # Reading the data
-    dow <- read_csv(
-      "HistoricalPrices.csv",
-      # We can tell the function how the data is stored
-      col_types = cols(Date = col_date(format = "%m/%d/%y"))
-      )
-    ```
-    
----
-
-Let's print it out 
-
-```{r dow-print}
-dow
-```
-
----
-
-Taking a look at it
-
-```{r dow-plot}
-plot(x = dow$Date, y = dow$Close, type="l")
-```
-
----
-    
-# Keeping the monthly data only
-
-```{r}
-library(magrittr)
-library(dplyr)
-dow_monthly <- dow %>%
-  filter(months(Date) != months(lag(Date))) %>% # Keeping the last day of the month
-  arrange(Date) %>%                             # Sorting by date
-  mutate(
-    r = Close/lag(Close) - 1                    # Computing the monthly return
-  ) %$%
-  r[-1]                                         # Keeping all, but the last month   
-```
-
-# About the model
-
-$$
-S_t = S_{t-1}\times(1 + r_t) + I_t\times c_t
-$$
-
-Where $S_t$ is your savings balance in time $t$, $r_t\sim R$ is the return rate in time $t$, $I_t$ is your income in time $t$, and $c_t$ is your contribution rate in time $t$.
 
 # Functional Programming
 
 ```{r dow-function}
 sample_dow <- function(n=100) {
-  sample(dow_monthly, n, replace = TRUE)
+  sample(dow_monthly$r[-1], n, replace = TRUE)
 }
 ```
 
 Creating the core function
 
 
-```{r savings-sim} 
+```{r savings-sim, cach} 
 #' @param n_nomths Integer, number of months to simulate.
 #' @param S0 Initial balance of savings.
 #' @param I0 Income.
@@ -405,7 +506,7 @@ plot(sim_savings(200), type="l")
 
 Running multiple simulations using the `replicate` function.
 
-```{r multiple-simulations}
+```{r multiple-simulations, cache=TRUE}
 set.seed(1)
 nsim    <- 1e4
 nmonths <- 12*30
@@ -421,7 +522,7 @@ ans15 <- replicate(nsim, sim_savings(nmonths, c_rate = 0.15))
 
 Stacking the last row (period) of each set of simulations using `cbind` 
 
-```{r stacking-the-results}
+```{r stacking-the-results, cache=TRUE}
 ans <- cbind(
   "2.5%" = ans02[nmonths,],
   "5%"   = ans05[nmonths,],
@@ -436,7 +537,7 @@ head(ans)
 
 # Visualizing the output
 
-```{r plot-ci-def}
+```{r plot-ci-def, cache=TRUE}
 plot_CI <- function(x, conf_interval=.95, col="steelblue")  {
   
   # Computing cureves
@@ -474,13 +575,8 @@ plot_CI <- function(x, conf_interval=.95, col="steelblue")  {
 
 ---
 
-```{r plot-ci-call}
-op <- par(mfrow=c(2,2))
+```{r plot-ci-call, cache=TRUE}
 plot_CI(t(ans02))
-plot_CI(t(ans05))
-plot_CI(t(ans10))
-plot_CI(t(ans15))
-par(op)
 ```
 
 
@@ -507,7 +603,7 @@ boxplot(
 ```
 ---
 
-```{r plotting-the-outcome, echo=FALSE}
+```{r plotting-the-outcome, echo=FALSE, cache=TRUE}
 # Changing the palette
 palette(
   adjustcolor(RColorBrewer::brewer.pal(8, "Set1"), alpha=.7)
@@ -539,7 +635,7 @@ contributing. To account for this, we can include a poisson process as follows:
     a.  Simulate times at which you become unemployed assuming that on average,
     you will spend half a month unemployed, i.e. a rate of (1/24).
     b.  You can do this using the `rexp` function, e.g.:
-    ```{r poisson-process}
+    ```{r poisson-process, cache=TRUE}
     set.seed(1231)
     when_unemployed <- rexp(5, 1/24) # Times at which become unemployed
     when_unemployed <- cumsum(floor(when_unemployed))
