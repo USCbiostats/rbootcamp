@@ -1,0 +1,1319 @@
+---
+title: "<span style='color:#E69F00'>Data Vizualization in R</span>"
+subtitle: "<span style='color:#56B4E9'>Base R and ggplot2</span> <br>"
+author: "Malcolm Barrett <br>"
+date: "08/15/2018"
+output:
+  xaringan::moon_reader:
+    css: ["default", "theme.css", "fonts.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.align = "center", dpi = 320)
+library(mbmisc)
+library(tidyverse)
+library(tidymeta)
+```
+
+class: inverse-ns, center
+
+# Getting started
+## `r font_col("Setup:", "#E69F00")` open the file `exercises.Rmd` in the `day3/data-viz` folder. 
+
+## Load the tidyverse package. "diabetes.csv" is also in this folder; get a feel for what the path to that file is. 
+
+---
+class: inverse-ns, center
+
+background-image: url(tidyhex.png)
+---
+
+class: inverse-ns, center
+
+# Working with data in R
+## the `r font_col("tidyverse", "#E69F00")` is a collection of `r font_col("friendly and consistent", "#56B4E9")` tools for data analysis and visualization. 
+
+---
+class: inverse-ns, center
+
+# Working with data in R
+## `r font_col("the tidyverse is a collection of friendly and consistent tools for data analysis and visualization. ", "#6C7B7F")`
+## They live as, `r font_col("R packages", "#E69F00")`, each of which does one thing well. 
+
+---
+class: inverse-ns, center
+
+# Game plan:
+## importing data: `readr`/`haven`
+## transforming data: `dplyr`
+## tidying data: `tidyr`
+## modeling data: Linear models/`broom`
+## whole game: data analysis
+---
+
+background-image: url(https://raw.githubusercontent.com/tidyverse/tidyverse/master/man/figures/logo.png)
+background-position: 90% 10%
+## `library(tidyverse)` will load  
+## the core tidyverse packages: 
+
+#### [ggplot2](http://ggplot2.tidyverse.org), for data visualisation.
+#### [dplyr](http://dplyr.tidyverse.org), for data manipulation.
+#### [tidyr](http://tidyr.tidyverse.org), for data tidying.
+#### [readr](http://readr.tidyverse.org), for data import.
+#### [purrr](http://purrr.tidyverse.org), for functional programming.
+#### [tibble](http://tibble.tidyverse.org), for tibbles, a modern re-imagining of data frames.
+#### [stringr](https://github.com/tidyverse/stringr), for strings.
+#### [forcats](https://github.com/hadley/forcats), for factors.
+
+---
+
+class: inverse-ns, center
+
+# Game plan:
+## `r font_col("importing data: <code>readr</code>/<code>haven</code>", "#E69F00")`
+## transforming data: `dplyr`
+## tidying data: `tidyr`
+## modeling data: Linear models/`broom`
+## whole game: data analysis
+
+---
+
+background-image: url(http://hexb.in/hexagons/readr.png)
+background-position: 93% 10%
+
+## `r font_col("readr", "#E69F00")`
+
+Function       | Reads
+-------------- | --------------------------
+`read_csv()`   | Comma separated values
+`read_csv2()`  | Semi-colon separate values
+`read_delim()` | General delimited files
+`read_fwf()`   | Fixed width files
+`read_log()`   | Apache log files
+`read_table()` | Space separated files
+`read_tsv()`   | Tab delimited values
+
+---
+## Importing Data
+
+```{r eval = FALSE}
+dataset <- read_csv("file_name.csv")
+dataset
+```
+
+---
+
+
+## Your Turn 1
+
+### Find diabetes.csv on your computer. Then read it into an object. Then view the results.
+
+---
+
+## Your Turn 1
+
+### Find diabetes.csv on your computer. Then read it into an object. Then view the results.
+
+```{r}
+diabetes <- read_csv("1-import-data/diabetes.csv")
+diabetes
+```
+---
+
+## Tibbles
+
+## `r font_col("<code>data.frames</code>", "#E69F00")` are the basic form of rectangular data in R (columns of variables, rows of observations)
+
+---
+
+## Tibbles
+
+## `r font_col("<code>data.frames</code> are the basic form of rectangular data in R (columns of variables, rows of observations", "#6C7B7F")`
+
+## `read_csv()` reads the data into a `r font_col("tibble", "#E69F00")`, a modern version of the data frame. 
+
+---
+
+## Tibbles
+
+## `r font_col("<code>data.frames</code> are the basic form of rectangular data in R (columns of variables, rows of observations", "#6C7B7F")`
+
+## `r font_col("<code>read_csv()</code> reads the data into a tibble a modern version of the data frame.", "#6C7B7F")`
+
+## a tibble `r font_col("is", "#E69F00")` a data frame
+---
+
+## Missing values
+
+## It's common to use codes for `r font_col("missing values", "#E69F00")` (-99, 8888)
+
+---
+
+## Missing values
+
+## `r font_col("It's common to use codes for missing values (-99, 8888)", "#6C7B7F")`
+
+## The `r font_col("<code>na</code>", "#E69F00")` option can change these values to `NA` 
+
+---
+
+## Missing values
+
+## `r font_col("It's common to use codes for missing values (-99, 8888)", "#6C7B7F")`
+
+## The `r font_col("<code>na</code>", "#E69F00")` option can change these values to `NA` 
+
+```{r}
+read_csv(
+  "a,b,c,d
+  1,-99,3,4
+  5,6,-99,8", 
+  na = "-99")
+```
+
+---
+
+## Parsing data types
+
+## The read functions in readr try to `r font_col("guess", "#E69F00")` each data type, but sometimes it's wrong. 
+
+---
+
+## Parsing data types
+
+## `r font_col("The read functions in readr try to guess each data type, but sometimes it's wrong. ", "#6C7B7F")`
+
+## To do this, add the argument `col_types` to `read_csv()`
+---
+
+## Parsing data types
+
+## `r font_col("The read functions in readr try to guess each data type, but sometimes it's wrong. ", "#6C7B7F")`
+
+## To do this, add the argument `col_types` to `read_csv()`
+
+```{r eval = FALSE}
+diabetes <- read_csv("diabetes.csv", col_types = list(id = col_character()))
+```
+
+---
+
+## Parsing data types
+
+## OR: Use a string for each variable type: `col_type = "cci"`.
+
+> c = character, i = integer, n = number, d = double, l = logical, D = date, T = date time, t = time, ? = guess, or _/- to skip the column.
+
+---
+
+# Your Turn 2
+
+## Set the 4 column types to be: double, integer, character, and unknown (guess)
+
+```{r, eval = FALSE}
+read_csv(
+  "a,b,c,d
+  1,2,3,4
+  5,6,7,8", 
+  col_types = ""
+)
+```
+
+---
+
+# Your Turn 2
+
+## Set the 4 column types to be: double, integer, character, and unknown (guess)
+
+```{r}
+read_csv(
+  "a,b,c,d
+  1,2,3,4
+  5,6,7,8", 
+  col_types = "dic?"
+)
+```
+
+---
+background-image: url(http://hexb.in/hexagons/haven.png)
+background-position: 90% 10%
+
+## `r font_col("haven", "#E69F00")`
+
+Function       | Software
+-------------- | --------------------------
+`read_sas()`   | SAS
+`read_xpt()`   | SAS
+`read_spss()`  | SPSS
+`read_sav()`   | SPSS
+`read_por()`   | SPSS
+`read_stata()` | Stata
+`read_dta()`   | Stata
+
+## haven is *not* a core member of the tidyverse. That means you need to load it with `library(haven)`.
+
+---
+
+## Your Turn 3
+
+### There are several versions of the diabetes file besides CSV. Pick a file format you or your collegues use and import them using the corresponding function from haven.
+
+---
+
+## Your Turn 3
+
+```{r}
+library(haven)
+diabetes <- read_sas("1-import-data/diabetes.sas7bdat")
+diabetes
+```
+
+---
+
+## Writing data
+
+Function            | Writes
+------------------- | ----------------------------------------
+`write_csv()`       | Comma separated values
+`write_excel_csv()` | CSV that you plan to open in Excel
+`write_delim()`     | General delimited files
+`write_file()`      | A single string, written as is
+`write_lines()`     | A vector of strings, one string per line
+`write_tsv()`       | Tab delimited values
+`write_rds()`       | A data type used by R to save objects
+`write_sas()`       | SAS .sas7bdat files
+`write_xpt()`       | SAS transport format, .xpt
+`write_sav()`       | SPSS .sav files
+`write_stata()`     | Stata .dta files
+
+```{r eval = FALSE}
+write_csv(diabetes, path = "diabetes-clean.csv")
+```
+
+---
+# Your Turn 4
+
+## R has a few data file types, such as RDS and .Rdata. Save `diabetes` as "diabetes.Rds".
+
+---
+# Your Turn 4
+
+## R has a few data file types, such as RDS and .Rdata. Save `diabetes` as "diabetes.Rds".
+
+```{r, eval=FALSE}
+write_rds(diabetes, "diabetes.Rds")
+```
+
+---
+
+class: inverse-ns, center
+
+# Game plan:
+## importing data: `readr`/`haven`
+## `r font_col("transforming data: <code>dplyr</code>", "#E69F00")`
+## tidying data: `tidyr`
+## modeling data: Linear models/`broom`
+## whole game: data analysis
+
+---
+background-image: url(http://hexb.in/hexagons/dplyr.png)
+background-position: 90% 10%
+
+```{r transform, include=FALSE}
+library(tidyverse)
+library(gapminder)
+library(nycflights13)
+
+# Toy datasets to use
+
+superheroes <- tribble(
+       ~name, ~alignment,  ~gender,          ~publisher,
+   "Magneto",      "bad",   "male",            "Marvel",
+     "Storm",     "good", "female",            "Marvel",
+  "Mystique",      "bad", "female",            "Marvel",
+    "Batman",     "good",   "male",                "DC",
+     "Joker",      "bad",   "male",                "DC",
+  "Catwoman",      "bad", "female",                "DC",
+   "Hellboy",     "good",   "male", "Dark Horse Comics"
+  )
+
+publishers <- tribble(
+  ~publisher, ~yr_founded,
+        "DC",       1934L,
+    "Marvel",       1939L,
+     "Image",       1992L
+  )
+
+```
+
+# The main verbs of `dplyr`
+
+## `select()`
+
+## `filter()`
+
+## `mutate()`
+
+## `arrange()`
+
+## `summarize()`
+
+## `group_by()`
+
+---
+
+# The main verbs of `dplyr`
+
+## `r font_col("<code>select()</code>", "#E69F00")` = `r font_col("Subset columns (variables)", "#56B4E9")`
+
+## `filter()`
+
+## `mutate()`
+
+## `arrange()`
+
+## `summarize()`
+
+## `group_by()`
+
+
+---
+
+## `select()`
+
+```{r, eval=FALSE}
+select(<DATA>, <VARIABLES>)
+```
+
+---
+
+## `select()`
+
+```{r, eval=FALSE}
+select(<DATA>, <VARIABLES>)
+```
+
+```{r} 
+diamonds
+```
+
+---
+
+## `select()`
+
+```{r} 
+select(diamonds, carat, cut, color, clarity)
+```
+
+---
+
+## `select()`
+
+```{r, eval=FALSE} 
+select(diamonds, carat, cut, color, clarity)
+
+select(diamonds, carat:clarity)
+
+select(diamonds, 1:4)
+
+select(diamonds, starts_with("c"))
+
+?select_helpers
+```
+
+---
+
+## gapminder
+
+```{r}
+gapminder
+```
+
+---
+
+## Your Turn 1
+
+## Alter the code to select just the `pop` column:
+
+```{r, eval=FALSE}
+select(gapminder, year, lifeExp)
+```
+
+---
+
+## Your Turn 1
+
+## Alter the code to select just the `pop` column:
+
+```{r}
+select(gapminder, pop)
+```
+
+---
+
+## Quiz
+
+Which of these is NOT a way to select the `name` and `n` columns together?
+
+```{r, eval=FALSE}
+select(gapminder, -c(year, lifeExp, pop, gdpPercap))
+
+select(gapminder, country:continent)
+
+select(gapminder, starts_with("c"))
+
+select(gapminder, ends_with("t"))
+```
+
+---
+
+## Quiz
+
+Which of these is NOT a way to select the `name` and `n` columns together?
+
+```{r}
+select(gapminder, ends_with("t"))
+```
+
+---
+
+# The main verbs of `dplyr`
+
+## `select()`
+
+## `r font_col("<code>filter()</code>", "#E69F00")` = `r font_col("Subset rows by value (observations)", "#56B4E9")`
+
+## `mutate()`
+
+## `arrange()`
+
+## `summarize()`
+
+## `group_by()`
+
+---
+
+## `filter()`
+
+```{r, eval=FALSE}
+filter(<DATA>, <PREDICATES>)
+```
+
+### Predicates: `TRUE/FALSE` statements
+
+--
+
+### Comparisons: `>`, `>=`, `<`, `<=`, `!=` (not equal), and `==` (equal). 
+
+--
+
+### Operators: `&` is "and", `|` is "or", and `!` is "not"
+
+--
+
+### `%in%`
+
+---
+
+## `filter()`
+
+```{r} 
+filter(diamonds, cut == "Ideal", carat > 3)
+```
+
+---
+
+## Your Turn 2
+
+### Show:
+
+### All of the rows where `pop` is greater than or equal to 100000  
+### All of the rows for El Salvador  
+### All of the rows that have a missing value for `year`  (no need to edit this code)
+
+```{r}
+
+
+filter(gapminder, is.na(year))
+```
+
+---
+## Your Turn 2
+
+### Show:
+
+### All of the rows where `pop` is greater than or equal to 100000  
+### All of the rows for El Salvador  
+### All of the rows that have a missing value for `year`  (no need to edit this code)
+
+```{r, eval=FALSE}
+filter(gapminder, pop > 100000)
+filter(gapminder, country == "El Salvador")
+filter(gapminder, is.na(year))
+```
+
+---
+
+## `filter()`
+
+```{r}
+filter(diamonds, cut == "Ideal" | cut == "Very Good", carat > 3)
+```
+
+---
+
+## Your Turn 3
+
+### Use Boolean operators to alter the code below to return only the rows that contain:
+
+### El Salvador  
+### Countries that had populations over 100000 in 1960 or earlier
+
+```{r, eval=FALSE}
+filter(gapminder, country == "El Salvador" | country == "Oman")
+
+```
+
+---
+
+## Your Turn 3
+
+### Use Boolean operators to alter the code below to return only the rows that contain:
+
+### El Salvador  
+### Countries that had populations over 100000 in 1960 or earlier
+
+```{r, eval=FALSE}
+filter(gapminder, country == "El Salvador")
+filter(gapminder, pop > 100000, year <= 1960)
+```
+
+---
+
+# The main verbs of `dplyr`
+
+## `select()`
+
+## `filter()`
+
+## `r font_col("<code>mutate()</code>", "#E69F00")` = `r font_col("Change or add a variable", "#56B4E9")`
+
+## `arrange()`
+
+## `summarize()`
+
+## `group_by()`
+---
+
+## `mutate()`
+
+```{r, eval=FALSE}
+mutate(<DATA>, <NAME> = <FUNCTION>)
+```
+
+---
+
+## `mutate()`
+
+```{r}
+mutate(diamonds, log_price = log(price), log_pricesq = log_price^2)
+```
+
+---
+
+# The main verbs of `dplyr`
+
+## `select()`
+
+## `filter()`
+
+## `mutate()`
+
+## `r font_col("<code>arrange()</code>", "#E69F00")` = `r font_col("Sort the data set", "#56B4E9")`
+
+## `summarize()`
+
+## `group_by()`
+---
+
+## `arrange()`
+
+```{r, eval=FALSE}
+arrange(<DATA>, <SORTING VARIABLE>)
+```
+
+---
+
+## `arrange()`
+
+```{r}
+arrange(diamonds, price)
+```
+
+---
+
+## `arrange()`
+
+```{r}
+arrange(diamonds, cut, price)
+```
+
+---
+
+## `desc()`
+
+```{r}
+arrange(diamonds, cut, desc(price))
+```
+
+---
+
+## Your Turn 4
+
+## Arrange gapminder by `year`. Add `lifeExp` as a second (tie breaking) variable to arrange on. 
+
+Which country had the lowest life expectency in 1952?
+
+---
+
+## Your Turn 4
+
+## Arrange gapminder by `year`. Add `lifeExp` as a second (tie breaking) variable to arrange on. 
+
+Which country had the lowest life expectency in 1952?
+
+```{r}
+arrange(gapminder, year, lifeExp)
+```
+
+---
+
+## Your Turn 5
+
+## Use `desc()` to find the country with the highest `gdpPercap`.
+
+---
+
+## Your Turn 5
+
+## Use `desc()` to find the country with the highest `gdpPercap`.
+
+```{r}
+arrange(gapminder, desc(gdpPercap))
+```
+
+---
+class: inverse-ns, center
+
+# Detour: The Pipe
+
+# `r font_col("<code>%>%</code>", "#E69F00")`
+## Passes the result on one function to another function
+
+---
+
+## Detour: The Pipe
+
+```{r, eval=FALSE}
+diamonds <- arrange(diamonds, price)
+diamonds <- filter(diamonds, price > 300)
+diamonds <- mutate(diamonds, log_price = log(price))
+
+diamonds
+```
+
+---
+
+## Detour: The Pipe
+
+```{r, eval=FALSE}
+diamonds <- diamonds %>% 
+  arrange(price) %>% 
+  filter(price > 300) %>% 
+  mutate(log_price = log(price))
+
+diamonds
+```
+
+--
+
+## Insert with `ctrl/cmd + shift + m`
+
+---
+
+## Your Turn 6
+
+### Use `%>%` to write a sequence of functions that: 
+
+### 1. Filter only countries thate are in the continent of Oceania.
+### 2. Select the `country`, `year` and `lifeExp` columns  
+### 3. Arrange the results so that the highest life expetency is at the top.
+
+---
+
+## Your Turn 6
+
+```{r}
+gapminder %>% 
+  filter(continent == "Oceania") %>% 
+  select(country, year, lifeExp) %>% 
+  arrange(desc(lifeExp))
+```
+
+---
+
+## Exam
+
+### 1. Import the diabetes data from the importing data. A copy of the CSV file is available in this folder.
+### 2. Add the variable `bmi` to the data set using height and weight using the formula: `(weight / height^2) * 703`
+### 3. Select just `id`, `glyhb`, and the new variable you created.
+### 4. Filter rows that have BMI > 35
+
+How many rows and columns are in your new data set?
+
+---
+
+# The main verbs of `dplyr`
+
+## `select()`
+
+## `filter()`
+
+## `mutate()`
+
+## `arrange()`
+
+## `r font_col("<code>summarize()</code>", "#E69F00")` = `r font_col("Summarize the data", "#56B4E9")`
+
+## `r font_col("<code>group_by()</code>", "#E69F00")` = `r font_col("Group the data", "#56B4E9")`
+---
+
+## `summarize()`
+
+```{r, eval=FALSE}
+summarize(<DATA>, <NAME> = <FUNCTION>)
+```
+
+---
+
+## `summarize()`
+
+```{r}
+summarize(diamonds, n = n(), mean_price = mean(price))
+```
+
+---
+
+## Your Turn 7
+
+## Use summarise() to compute three statistics about the gapminder data set:
+
+### 1. The first (`min()`) year in the data
+### 2. The last (`max()`) year in the data  
+### 3. The total number of observations (`n()`) and the total number of unique countries in the data (`n_distinct()`)
+
+---
+
+## Your Turn 7
+
+```{r}
+gapminder %>% 
+  summarize(first = min(year), last = max(year), n = n(), n_countries = n_distinct(country))
+```
+
+---
+
+## `group_by()`
+
+```{r, eval=FALSE}
+group_by(<DATA>, <VARIABLE>)
+```
+
+---
+
+## `group_by()`
+
+```{r}
+diamonds %>% 
+  group_by(cut)
+```
+
+---
+
+## `group_by()`
+
+```{r}
+diamonds %>% 
+  group_by(cut) %>% 
+  summarize(n = n(), mean_price = mean(price))
+```
+
+---
+
+## `group_by()`
+
+```{r}
+diamonds %>% 
+  group_by(cut) %>% 
+  mutate(n = n(), mean_price = mean(price))
+```
+
+---
+
+## Your Turn 8
+
+## Extract the rows where `continent == "Europe"`. Then use `group_by()` to group by country. Finally, use `summarize()` to compute:
+
+### 1. The total number of observations for each country in Europe
+### 2. The lowest observed life expectency for each country 
+
+---
+
+## Your Turn 8
+
+```{r}
+gapminder %>% 
+  filter(continent == "Europe") %>% 
+  group_by(country) %>% 
+  summarize(n = n(), min_le = min(lifeExp))
+```
+
+---
+
+## Your Turn 9
+
+### Use grouping to calculate the mean life expectancy for each year by continent. Call the mean life expectancy variable `mean_le`. Plot the life expectancy over time (no need to change the plot code).
+
+```{r, eval = FALSE}
+gapminder %>% 
+  __________ %>% 
+  __________ %>% 
+  ggplot(aes(x = year, y = mean_le, col = continent)) +
+    geom_line() + 
+    scale_color_manual(values = continent_colors)
+```
+
+---
+
+## Your Turn 9
+
+### Use grouping to calculate the mean life expectancy for each continent and year. Call the mean life expectancy variable `mean_le`. Plot the life expectancy over time (no need to change the plot code).
+
+```{r, eval = FALSE}
+gapminder %>% 
+  group_by(continent, year) %>% 
+  summarize(mean_le = mean(lifeExp)) %>% 
+  ggplot(aes(x = year, y = mean_le, col = continent)) +
+    geom_line() + 
+    scale_color_manual(values = continent_colors)
+```
+
+---
+
+## Joining data
+
+#### Use `left_join()`, `right_join()`, `full_join()`, or `inner_join()` to join datasets
+#### Use `semi_join()` or `anti_join()` to filter datasets against each other
+
+```{r}
+superheroes
+```
+
+```{r}
+publishers
+```
+
+---
+
+## Joining data
+
+```{r}
+superheroes %>% 
+  left_join(publishers, by = "publisher")
+```
+
+---
+
+## Joining data
+
+```{r}
+publishers %>% 
+  left_join(superheroes, by = "publisher")
+```
+
+---
+
+class: inverse-ns, center
+
+# Game plan:
+## importing data: `readr`/`haven`
+## transforming data: `dplyr`
+## `r font_col("tidying data: <code>tidyr</code>", "#E69F00")`
+## modeling data: Linear models/`broom`
+## whole game: data analysis
+
+```{r lotr, include=FALSE}
+lotr <- tribble(
+                         ~film,    ~race, ~female, ~male,
+  "The Fellowship Of The Ring",    "Elf",   1229L,  971L,
+  "The Fellowship Of The Ring", "Hobbit",     14L, 3644L,
+  "The Fellowship Of The Ring",    "Man",      0L, 1995L,
+              "The Two Towers",    "Elf",    331L,  513L,
+              "The Two Towers", "Hobbit",      0L, 2463L,
+              "The Two Towers",    "Man",    401L, 3589L,
+      "The Return Of The King",    "Elf",    183L,  510L,
+      "The Return Of The King", "Hobbit",      2L, 2673L,
+      "The Return Of The King",    "Man",    268L, 2459L
+  )
+```
+---
+
+background-image: url(http://hexb.in/hexagons/tidyr.png)
+background-position: 90% 10%
+
+## `r font_col("tidyr", "#E69F00")`
+
+## Functions for tidying data. 
+## What is tidy data?
+
+> “Tidy datasets are all alike, but every messy dataset is messy in its own way.” –– Hadley Wickham
+
+---
+
+# Tidy Data
+![](http://garrettgman.github.io/images/tidy-1.png)</div>
+
+---
+
+# Tidy Data 
+![](http://garrettgman.github.io/images/tidy-1.png)</div>
+### .medium[Each `r font_col("column", "#E69F00")` is a single `r font_col("variable", "#56B4E9")`]
+
+---
+
+# Tidy Data
+![](http://garrettgman.github.io/images/tidy-1.png)</div>
+### `r font_col(".medium[Each column is a single variable]", "#E5E5E5")`
+### .medium[Each `r font_col("row", "#E69F00")` is a single `r font_col("observation", "#56B4E9")`]
+
+---
+
+# Tidy Data 
+![](http://garrettgman.github.io/images/tidy-1.png)</div>
+### `r font_col(".medium[Each column is a single variable]", "#E5E5E5")`
+### `r font_col(".medium[Each row is a single observation]", "#E5E5E5")`
+### .medium[Each `r font_col("cell", "#E69F00")` is a `r font_col("value", "#56B4E9")`]
+
+---
+
+
+## `gather()`
+
+```{r, eval=FALSE}
+gather(<DATA>, "<KEY>", "<VALUE>", <VARIABLES>)
+```
+
+---
+
+## `gather()`
+
+```{r}
+lotr
+```
+
+---
+
+## `gather()`
+
+```{r}
+lotr %>% 
+  gather("sex", "words", female:male)
+```
+
+---
+
+## Your Turn 1
+
+
+### Use `gather()` to reorganize `table4a` into three columns: **country**, **year**, and **cases**.
+
+---
+
+## Your Turn 1
+
+
+### Use `gather()` to reorganize `table4a` into three columns: **country**, **year**, and **cases**.
+
+```{r}
+table4a %>% 
+  gather("year", "cases", -country)
+```
+
+---
+
+## `spread()`
+
+```{r, eval=FALSE}
+spread(<DATA>, <KEY>, <VALUE>)
+```
+
+---
+
+## `spread()`
+
+```{r}
+lotr %>% 
+  gather("sex", "words", female:male) %>% 
+  spread(race, words)
+```
+
+---
+
+## Your Turn 2
+
+### 1. Use `spread()` to reorganize `table2` into four columns: **country**, **year**, **cases**, and **population**. 
+### 2. Create a new variable called `prevalence` that divides `cases` by `population` multiplied by 100000.
+
+```{r, eval = FALSE}
+table2
+```
+
+---
+
+## Your Turn 2
+
+### 1. Use `spread()` to reorganize `table2` into four columns: **country**, **year**, **cases**, and **population**. 
+### 2. Create a new variable called `prevalence` that divides `cases` by `population` multiplied by 100000.
+
+```{r}
+table2 %>% 
+  spread(type, count) %>% 
+  mutate(prevalence = (cases/population) * 100000)
+```
+
+---
+
+## Your Turn 3
+
+### Gather the 5th through 60th columns of `who` into a key column: value column pair named **codes** and **n**. Then select just the `county`, `year`, `codes` and `n` variables.
+
+```{r, eval = FALSE}
+who
+```
+
+---
+
+## Your Turn 3
+
+### Gather the 5th through 60th columns of `who` into a key column: value column pair named **codes** and **n**. Then select just the `county`, `year`, `codes` and `n` variables.
+
+```{r}
+who %>% 
+  gather("codes", "n", 5:60) %>% 
+  select(country, year, codes, n)
+```
+
+---
+
+## `separate()`/`unite()`
+
+```{r, eval=FALSE}
+separate(<DATA>, <VARIABLE>, into = c("<VARIABLE1>", "<VARIABLE2>"))
+
+unite(<DATA>, <VARIABLES>)
+```
+
+---
+
+## Your Turn 4
+
+Use the `cases` data below. Separate the `sex_age` column into **sex** and **age** columns.
+
+```{r, eval = FALSE}
+cases <- tribble(
+   ~id,     ~sex_age,
+   "1",    "male_56",
+   "2",  "female_77",    
+   "3",  "female_49"
+)
+separate(_______, _______, into = c("_______", "_______"))
+```
+
+---
+
+## Your Turn 4
+
+Use the `cases` data below. Separate the `sex_age` column into **sex** and **age** columns.
+
+```{r, eval = FALSE}
+cases <- tribble(
+   ~id,     ~sex_age,
+   "1",    "male_56",
+   "2",  "female_77",    
+   "3",  "female_49"
+)
+separate(cases, sex_age, into = c("sex", "age"))
+```
+
+---
+
+## Exam
+
+#### There are two CSV files in this folder containing SEER data in breast cancer incidence in white and black women. For both sets of data:
+
+1. Import the data
+2. Gather the columns into 2 new columns called `year` and `incidence`
+3. Add a new variable called `race`. Remember that each data set corresponds to a single race.
+4. Bind the data sets together using `bind_rows()` from the dplyr package. Either save it as a new object or pipe the result directly into the ggplot2 code.
+5. Plot the data using the code below. Fill in the blanks to have `year` on the x-axis, `incidence` on the y-axis, and `race` as the color aesthetic. 
+
+```{r, eval = FALSE}
+
+
+______ %>% 
+  ggplot(aes(x = ______, y = ______, color = ______, group = race)) + 
+    geom_point() +
+    geom_line() + 
+    scale_x_discrete(breaks = seq(1975, 2011, by = 5)) # show years by fives
+```
+
+---
+
+class: inverse-ns, center
+
+# Game plan:
+## importing data: `readr`/`haven`
+## transforming data: `dplyr`
+## tidying data: `tidyr`
+## `r font_col("modeling data: Linear models/<code>broom</code>", "#E69F00")`
+## whole game: data analysis
+
+---
+
+## Formulas in R
+
+## `<OUTCOME> ~ <VARIABLE1> + <VARIABLE2>`
+
+```{r, eval=FALSE}
+y ~ x + z
+```
+
+---
+
+## Modeling in R
+
+## `r font_col("<code>lm()</code>", "#E69F00")` = `r font_col("Linear Regression (OLS)", "#56B4E9")`
+
+## `glm()`
+
+---
+
+## Modeling in R
+
+## `lm()`
+
+## `r font_col("<code>glm()</code>", "#E69F00")` = `r font_col("Generalized Linear Model (default family = Gaussian)", "#56B4E9")`
+
+---
+
+background-image: url(http://hexb.in/hexagons/broom.png)
+background-position: 90% 10%
+
+# The main verbs of `broom`
+
+## `tidy()`
+
+## `glance()`
+
+## `augment()`
+
+### **NOT** a core member of the tidyverse. Need to load with `library(broom)`
+---
+
+## Modeling in R
+
+```{r}
+lm(price ~ carat, data = diamonds)
+```
+
+---
+
+## Modeling in R
+
+```{r}
+lm(price ~ carat, data = diamonds) %>% 
+  summary()
+```
+---
+
+## Modeling in R
+
+```{r}
+library(broom)
+lm(price ~ carat, data = diamonds) %>% 
+  tidy()
+```
+
+---
+
+## Modeling in R
+
+```{r}
+lm(price ~ carat, data = diamonds) %>% 
+  glance()
+```
+
+---
+
+## Modeling in R
+
+```{r}
+lm(price ~ carat, data = diamonds) %>% 
+  augment()
+```
+
+---
+
+## Try it yourself
+
+## Work your way through the exercises. If anything in particular is giving you trouble, we'll work through it together.
+
+---
+
+class: inverse-ns, center
+
+# Game plan:
+## importing data: `readr`/`haven`
+## transforming data: `dplyr`
+## tidying data: `tidyr`
+## modeling data: Linear models/`broom`
+## `r font_col("whole game: data analysis", "#E69F00")`
+
+--
+
+### Try it yourself!
+
+---
+
+class: inverse, center
+
+# Resources
+## [R for Data Science](http://r4ds.had.co.nz/): A comprehensive but friendly introduction to the tidyverse. Free online.
+## [DataCamp](https://www.datacamp.com/): tidyverse and other R courses
+
+---
+
+class: inverse, center, middle
+
+![](https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif)
+
+### `r icon::fa("github")` [malcolmbarrett](https://github.com/malcolmbarrett/)
+### `r icon::fa("twitter")` [@malco_barrett](https://twitter.com/malco_barrett)
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
