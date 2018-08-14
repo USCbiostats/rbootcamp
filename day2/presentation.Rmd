@@ -1,13 +1,12 @@
 ---
-title: 'R Bootcamp day 2<br>Simulation and Language Fundamentals<br><img src="../fig/trojan-rlogo.svg" style="width:250px;">'
+title: 'R Bootcamp day 2<br>Simulations and Language Fundamentals<br><img src="../fig/trojan-rlogo.svg" style="width:250px;">'
 author: <a href="https://ggvy.cl"><b>George G. Vega Yon</b></a><br>vegayon@usc.edu<br><br>University of Southern California<br>Department of Preventive Medicine
 date: July 7th, 2018
 output: 
   slidy_presentation:
-    footer: R Bootcamp (day1)
+    footer: R Bootcamp (Day 2)
     highlight: pygments
     font_adjustment: -1
-# bibliography: 00-welcome.bib
 ---
 
 # A recap from Day 1
@@ -32,10 +31,6 @@ We will
 
 3.  Do some simulations, in particular, a monte carlo experiment/bootstrap.
 
-
----
-
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/abbAY"><a href="//imgur.com/abbAY">Futurama stock market gif</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 # The Dow Jones Industrial Average
 
@@ -224,7 +219,7 @@ str(c(-Inf, 1, NULL, +Inf)) # And Nulls are... of length 0!
 
 *   These have companion functions `is.na()`, `is.null`, `is.infinite` (or `is.finite()`, which covers NA, Inf, and NaN), and `is.nan`.
 
-# Questions
+# Questions 1
 
 1.  What is the mode of the following vector `myvector <- c(NA, NaN, Inf)`? (try not to use the `mode()` function in R)
 
@@ -275,10 +270,10 @@ str(c(-Inf, 1, NULL, +Inf)) # And Nulls are... of length 0!
     *   Transpose `t(A)`.
     *   Inverse `solve(A)`.
     *   Column and row bind, `cbind(A, B)`, `rbind(A, B)`.
-    *   Matrix product between both `A %\*% B`.
+    *   Matrix product between both `A %*% B`.
     
 
-# Questions
+# Questions 2
 
 *   Given the following matrices `A`, `B`, and C
     
@@ -370,7 +365,7 @@ curve(dexp, xlim=c(0, 6))
 par(op)
 ```
 
-# Questions
+# Questions 3
 
 1.  Draw 100,000 samples from a chi2 with 2 degrees of freedom (hint: check `?Distributions`).
 
@@ -381,7 +376,7 @@ Z1 <- rchisq(1e5, 2)
 ```
     
 
-2.  Draw 1e5 samples from a chi2 with 2 degrees of freedom using `rnorm`, to do this, execute the following steps:
+2.  Draw 100,000 samples from a chi2 with 2 degrees of freedom using `rnorm`, to do this, execute the following steps:
     
     1.  Draw 2 standard normal vectors of length 100,000,
     2.  Compute the squared version of each vector, now each will be distributed chi2 with 1 degree of freedom,
@@ -402,6 +397,110 @@ mean(Z1 < 2)
 mean(Z2 < 2)
 ```
 
+# Sampling from a vector: The `sample` function
+
+*   The `sample` function (part of the base package) provides a way to draw
+    samples and do permutations of vectors.
+    
+*   For example, if we want to sample 10 numbers (with replacement) from 1 to
+    5, we can write the following
+    
+    ```{r}
+    set.seed(921) # ALWAYS SET THE SEED
+    sample(1:5, 10, replace = TRUE)
+    ```
+    
+*   In the case of the `dow_montly` data (without replacement), if we need to sample from `r`, we
+    can write something like this
+    
+    ```{r}
+    sample(dow_monthly$r[-1], 10) # Excluding the first element, which is NA
+    ```
+    
+# Questions 4
+
+1.  The following code has an error
+
+    ```r
+    sample(c(0,1), 10)
+    ```
+    
+    What can you do to fix it?
+    
+
+2.  Run `sample(dow_monthly$r[-1])` twice (so without providing further arguments),
+    what do you get?
+    
+3.  Suppose that you want to toss 10,000 unfair coins (probability of getting heads is 0.7),
+    How can you use the `sample` function to run such experiment?
+
+# R Language Fundamentals: Functional Programming
+
+*   Functions can be a very good companion to your day to day work with R.
+
+*   In general terms, R functions are structured as follow:
+
+    ```r
+    < name of your function > <- function(
+        < argument 1>,
+        < argument 2> = < default value >,
+        ...,
+        < argument n>
+    ) {
+    
+      < some R code here >
+      
+      return(< some result >)
+    
+    }
+    ```
+
+---
+
+*   For example, if we want to create a function to run the "unfair coin experiment"
+    we could do it in the following way:
+        
+    ```{r simple-function}
+    # Function definition
+    unfair_coin <- function( # The function's name is unfair_coin
+      n,                     # It requires the argument `n`
+      p = 0.7                # It has a default value for `p`
+      ) {
+    
+      # Sampling from the coin dist
+      ans <- sample(c("H", "T"), n, replace = TRUE, prob = c(p, 1-p))
+      
+      # Returning
+      ans
+    
+    }
+    
+    # Testing it
+    set.seed(1)
+    unfair_coin(20)
+    ```
+
+# Questions 5
+
+1.  Create a function to simulate OLS (ordinary least squares) data with the following:
+    
+    *   An argument `n`: Number of observations to make
+    *   An argument `beta`: Coefficient with default value 0.3
+    *   An argument `alpha`: Coefficient with default value 4
+    *   `X` and the error are N(0, 1)
+    *   The function should return both `Y` and `X`
+    
+    To generate 100 OLS model observations, you can type in
+        
+    ```r
+    X <- rnorm(100)
+    Y <- 4 + X*0.3 + rnorm(100)
+    ```
+    
+2.  To make sure you are doing OK, try estimating your model using the `lm`
+    function with a large simulation of observations.
+        
+
 # Simulations with R: Retirement Savings
 
 <div align="center">
@@ -421,84 +520,74 @@ mean(Z2 < 2)
 *   The value of your monthly savings at month $n$ is described by the following equation
     
     $$
-    S_n = S_{n-1}\times(1 + i_n) + W_n\times t_n\tag{1}
+    S_n = S_{n-1}\times(1 + I_n) + W_n\times t_n\tag{1}
     $$
     
-    Where $S_n$ is your savings balance in time $n$, $i_n\sim I$ is the return rate in time $n$, $W_n$ is your income in time $n$, and $t_n$ is your contribution rate in time $n$.
+    Where $S_n$ is your savings balance in time $n$, $I_n\sim F_I$ is the return rate in time $n$, $W_n$ is your income in time $n$, and $t_n$ is your contribution rate in time $n$.
     
 *   For today, we will assume that $(W_n, t_n)$ is constant, i.e., neither your income nor your contribution rate change.
 
 *   And we won't think about inflation.
 
-*   So the only thing that changes in our model is $i_n$, the return rate of your account.
-    
+*   So the only thing that changes in our model is $I_n$, the return rate of your account.
+
+# Approximating a Distribution
+
+*   Since we (and nobody) knows the Data Generating Process of $I$, we need to approximate it
+
+*   Some use a normal distribution (which seems OK), but we can do better...
+
+*   We will use the `sample` function to draw samples from the observed data on
+    returns from the DOW.
+
+
+
 # The pseudo code
 
 For simulating a savings trajectory of length $N$ ($N$ months)
 
-1.  Draw a vector `i` of length `N` from the distribution of the returns, `I`,
+1.  Draw a vector `I` of length `N` from the distribution of the returns,
 
 2.  Initialize `S` (should be numeric of length $N$), and set the first value to be zero,
 
 3.  For `n = 2 to N` do:
     
-    a.  Set `S[n] = S[n-1]*i[n-1] + W_n * t_n`, as described in equation (1)
+    a.  Set `S[n] = S[n-1]*I[n-1] + W_n * t_n`, as described in equation (1)
     
     b.  Next `n`
     
 4.  Return `S`.
 
-
-# Sampling from R
-
-1.  Read in the data set [HistoricalPrices.csv](HistoricalPrices.csv){target="_blank"} from returns from the stocks market.
-
-2.  Create a function that simulates a random return trejectory by sampling from the stocks market.
-
-3.  Mix all in a for-loop function that creates a random pension savings trajectory.
-
-4.  Wrap it around 1,000 simulation, and plot the output using the `boxplot` function in R.
-
-
-
-
-# Functional Programming
-
-```{r dow-function}
-sample_dow <- function(n=100) {
-  sample(dow_monthly$r[-1], n, replace = TRUE)
-}
-```
-
-Creating the core function
+# Creating the core function
 
 
 ```{r savings-sim, cach} 
 #' @param n_nomths Integer, number of months to simulate.
 #' @param S0 Initial balance of savings.
-#' @param I0 Income.
+#' @param W Income.
 #' @param c_rate Monthly contribution rate
 sim_savings <- function(
   n_months = 200,
   S0       = 0,
-  I0       = 40/12,
-  c_rate   = .05
+  W_n      = 40/12,
+  t_n      = .05
 ) {
   
   # Generating returns
-  R <- sample_dow(n_months)
+  I <- sample(dow_monthly$r[-1], n_months, replace = TRUE)
   S <- vector("numeric", n_months)
   
   # First value
   S[1] <- S0
   
   for (i in 2:n_months) 
-    S[i] <- S[i - 1]*(1 + R[i - 1]) + I0*c_rate
+    S[i] <- S[i - 1]*(1 + I[i]) + W_n*t_n
   
   return(S)
   
 }
 
+set.seed(444)
 plot(sim_savings(200), type="l")
 ```
 
@@ -507,14 +596,17 @@ plot(sim_savings(200), type="l")
 Running multiple simulations using the `replicate` function.
 
 ```{r multiple-simulations, cache=TRUE}
+
+# Setting the seed and defining the parameters
 set.seed(1)
 nsim    <- 1e4
 nmonths <- 12*30
 
-ans02 <- replicate(nsim, sim_savings(nmonths, c_rate = 0.025))
-ans05 <- replicate(nsim, sim_savings(nmonths, c_rate = 0.05))
-ans10 <- replicate(nsim, sim_savings(nmonths, c_rate = 0.10))
-ans15 <- replicate(nsim, sim_savings(nmonths, c_rate = 0.15))
+# Different runs of the simulation
+ans02 <- replicate(nsim, sim_savings(nmonths, t_n = 0.025))
+ans05 <- replicate(nsim, sim_savings(nmonths, t_n = 0.05))
+ans10 <- replicate(nsim, sim_savings(nmonths, t_n = 0.10))
+ans15 <- replicate(nsim, sim_savings(nmonths, t_n = 0.15))
 
 ```
 
@@ -546,7 +638,8 @@ plot_CI <- function(x, conf_interval=.95, col="steelblue")  {
   dat <- t(apply(x, 2, quantile, lvl))
   
   # Emptyplot
-  plot(NA,xlim = c(1,nrow(dat)), ylim=c(0, max(dat)))
+  plot(NA,xlim = c(1,nrow(dat)), ylim=c(0, max(dat)),
+       xlab = "Month", ylab = "Savings")
   
   # Drawing the confidence region
   polygon(
@@ -558,18 +651,6 @@ plot_CI <- function(x, conf_interval=.95, col="steelblue")  {
   
   # Drawing the 50%
   lines(dat[,2], lwd=2, lty=2, col=col)
-  
-  # Legend
-  legend(
-    "topleft",
-    col  = c(col, col),
-    lty  = c(NA, 2),
-    fill = c(col, NA),
-    legend = c(
-      paste0("%", conf_interval*100, " confidence"),
-      "Median"
-      )
-  )
 }
 ```
 
@@ -578,7 +659,6 @@ plot_CI <- function(x, conf_interval=.95, col="steelblue")  {
 ```{r plot-ci-call, cache=TRUE}
 plot_CI(t(ans02))
 ```
-
 
 ---
 
@@ -601,6 +681,7 @@ boxplot(
   border = 1:4
 )
 ```
+
 ---
 
 ```{r plotting-the-outcome, echo=FALSE, cache=TRUE}
@@ -623,27 +704,23 @@ boxplot(
 )
 ```
 
+# Thank you!
 
-# Problems
+<div align="center">
+R Bootcamp day 2<br>Simulation and Language Fundamentals<br><img src="../fig/trojan-rlogo.svg" style="width:250px;"><br>
+</div>
 
-1.  In a lot of cases, more than encouraging people to increase their savings is
-to ask them to retire later. Using the code shown here, analyze what are the effects
-of postponing retirement 1, 3, and 5 years.
 
-2.  A big assumption we made was having no gaps, this is, always employed and
-contributing. To account for this, we can include a poisson process as follows:
-    a.  Simulate times at which you become unemployed assuming that on average,
-    you will spend half a month unemployed, i.e. a rate of (1/24).
-    b.  You can do this using the `rexp` function, e.g.:
-    ```{r poisson-process, cache=TRUE}
-    set.seed(1231)
-    when_unemployed <- rexp(5, 1/24) # Times at which become unemployed
-    when_unemployed <- cumsum(floor(when_unemployed))
-    when_unemployed 
-    ```
-    
-    Assume that you spend one month unemployed.
+<div align="center" style="font-size:40px;">
+**website**: [ggvy.cl](https://ggvy.cl)<br><br>
+**twitter**: [\@gvegayon](https://twitter.com/gvegayon)<br><br>
+**github**: [gvegayon](https://github.com/gvegayon)<br><br>
+</div>
 
-3.  
-    
-    
+
+# Session info
+
+```{r}
+devtools::session_info()
+```
+
