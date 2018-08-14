@@ -89,7 +89,7 @@ We will also be using Git
 
 Matloff, N. (2013) *The Art of R programming: A tour of Statistical Software Design*. San Francisco: No Starch Press. (you can get the [paid version](https://nostarch.com/artofr.htm), or the [free, but somewhat incomplete, version](http://heather.cs.ucdavis.edu/~matloff/132/NSPpart.pdf))
 
-Wickham, H., and Grolemund, G. (2017) *R for Data Science: Visualize, Model, Transfor, Tidy, and Import Data*. O'Reilly Media. ([free online](http://r4ds.had.co.nz/))
+Wickham, H., and Grolemund, G. (2017) *R for Data Science: Visualize, Model, Transform, Tidy, and Import Data*. O'Reilly Media. ([free online](http://r4ds.had.co.nz/))
 
 Wickham, H. (2017) *Advanced R*. CRC Press. ([free online](https://adv-r.hadley.nz/))
 
