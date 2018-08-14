@@ -44,7 +44,7 @@ gapminder
 Alter the code to select just the `pop` column:
 
 ```{r}
-select(gapminder, year, lifeExp)
+select(gapminder, pop)
 ```
 
 ## Quiz
@@ -55,7 +55,7 @@ Which of these is NOT a way to select the `country` and `continent` columns toge
 select(gapminder, -c(year, lifeExp, pop, gdpPercap))
 select(gapminder, country:continent)
 select(gapminder, starts_with("c"))
-select(gapminder, ends_with("t"))
+select(gapminder, ends_with("t")) # correct answer
 ```
 
 ## Your Turn 2
@@ -67,8 +67,8 @@ Show:
 * All of the rows that have a missing value for `year`  (no need to edit this code)
 
 ```{r}
-
-
+filter(gapminder, pop > 100000)
+filter(gapminder, country == "El Salvador")
 filter(gapminder, is.na(year))
 ```
 
@@ -80,8 +80,8 @@ Use Boolean operators to alter the code below to return only the rows that conta
 * Countries that had populations over 100000 in 1960 or earlier
 
 ```{r}
-filter(gapminder, country == "El Salvador" | country == "Oman")
-
+filter(gapminder, country == "El Salvador")
+filter(gapminder, pop > 100000, year <= 1960)
 ```
 
 ## Your Turn 4
@@ -89,7 +89,7 @@ filter(gapminder, country == "El Salvador" | country == "Oman")
 Arrange gapminder by `year`. Add `lifeExp` as a second (tie breaking) variable to arrange on. Which country had the lowest life expectency in 1952?
 
 ```{r}
-
+arrange(gapminder, year, lifeExp)
 ```
 
 ## Your Turn 5
@@ -97,7 +97,7 @@ Arrange gapminder by `year`. Add `lifeExp` as a second (tie breaking) variable t
 Use `desc()` to find the country with the highest `gdpPercap`.
 
 ```{r}
-
+arrange(gapminder, desc(gdpPercap))
 ```
 
 ## Your Turn 6
@@ -109,7 +109,10 @@ Use `%>%` to write a sequence of functions that:
 3. Arrange the results so that the highest life expetency is at the top.
 
 ```{r}
-
+gapminder %>% 
+  filter(continent == "Oceania") %>% 
+  select(country, year, lifeExp) %>% 
+  arrange(desc(lifeExp))
 ```
 
 ## Exam
@@ -122,7 +125,11 @@ Use `%>%` to write a sequence of functions that:
 How many rows and columns are in your new data set?
 
 ```{r}
-
+diabetes <- read_csv("diabetes.csv")
+diabetes %>% 
+  mutate(bmi = (weight / height^2) * 703) %>% 
+  select(id, glyhb, bmi) %>% 
+  filter(bmi > 35)
 ```
 
 ## Your Turn 7
@@ -134,7 +141,8 @@ Use summarise() to compute three statistics about the gapminder data set:
 3. The total number of observations (`n()`) and the total number of unique countries in the data (`n_distinct()`)
 
 ```{r}
-
+gapminder %>% 
+  summarize(first = min(year), last = max(year), n = n(), n_countries = n_distinct(country))
 ```
 
 ## Your Turn 8
@@ -145,7 +153,10 @@ Extract the rows where `continent == "Europe"`. Then use `group_by()` to group b
 2. The lowest observed life expectency for each country 
 
 ```{r}
-
+gapminder %>% 
+  filter(continent == "Europe") %>% 
+  group_by(country) %>% 
+  summarize(n = n(), min_le = min(lifeExp))
 ```
 
 ## Your Turn 9
@@ -154,8 +165,8 @@ Use grouping to calculate the mean life expectancy for each continent and year. 
 
 ```{r}
 gapminder %>% 
-  __________ %>% 
-  __________ %>% 
+  group_by(continent, year) %>% 
+  summarize(mean_le = mean(lifeExp)) %>% 
   ggplot(aes(x = year, y = mean_le, col = continent)) +
     geom_line() + 
     scale_color_manual(values = continent_colors)

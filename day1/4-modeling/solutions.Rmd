@@ -21,19 +21,20 @@ Import the diabetes data set (included in this folder). Create a new variable, `
 Model the relationship between hemoglobin A1c (`glyhb`) and `waist_hip`. Control for gender. Save the model as `model1`. Then, tidy the results.
 
 ```{r}
-diabetes <- _______
+diabetes <- read_csv("diabetes.csv")
 
 diabetes <- diabetes %>% 
   mutate(mean_sbp = (bp.1s + bp.2s) / 2,
          mean_dbp = (bp.1d + bp.2d) / 2,
          bmi = (height / weight^2) * 703,
-         _______ = _______)
+         waist_hip = waist / hip)
 
 model1 <- diabetes %>% 
-  _______
+  # you can use `.` to point the pipe to a specfic place
+  lm(glyhb ~ waist_hip, data = .) 
 
 model1 %>% 
-  _______
+  tidy()
 ```
 
 ## Your Turn 2
@@ -44,7 +45,9 @@ Use broom and dplyr functions to extract:
 2. The **adj.r.squared** and **AIC** for the overall model
 
 ```{r}
-
+model1 %>% 
+  glance() %>% 
+  select(adj.r.squared, AIC)
 ```
 
 ## Your Turn 3
@@ -52,7 +55,9 @@ Use broom and dplyr functions to extract:
 Model the effect of `waist_hip` on `glyhb`, adjusting for `gender` and `age`. Do the coefficients change?
 
 ```{r}
-
+diabetes %>% 
+  lm(glyhb ~ waist_hip + gender + age, data = .) %>% 
+  tidy()
 ```
 
 ## Your Turn 4
@@ -69,8 +74,8 @@ _Bonus_: Add a regresssion line with geom_smooth(method = "lm"). Notice that wit
 mod_wh <- lm(glyhb ~ waist_hip + gender + age, data = diabetes)
 
 mod_wh %>% 
-  ________(data = diabetes) %>% 
-  ggplot(aes(x = ______, y = _______)) +
+  augment(data = diabetes) %>% 
+  ggplot(aes(x = .fitted, y = .resid)) +
     geom_point()
 ```
 
@@ -81,8 +86,9 @@ The `ggfortify` makes it easy to plot model diagnostics. `ggfortify` is not a pa
 Load the package and use `autoplot()` on `mod_wh` to plot model diagnostics.
 
 ```{r}
-
-
+library(ggfortify)
+mod_wh %>% 
+  autoplot()
 ```
 
 ## Your Turn 7
@@ -95,9 +101,10 @@ Tidy the results. What do you see? Try mutating `estimate` into odds ratios usin
 
 ```{r warning = FALSE, message = FALSE}
 diabetes %>% 
-  mutate(diabetic = ifelse(glyhb >= 7.0, ___, ___)) %>% 
-  _______ %>% 
-  _______
+  mutate(diabetic = ifelse(glyhb >= 7.0, 1, 0)) %>% 
+  glm(diabetic ~ waist_hip + gender + age, family = binomial, data = .) %>% 
+  tidy() %>% 
+  mutate(estimate = exp(estimate))
 ```
 
 ***

@@ -1,0 +1,187 @@
+---
+title: "Modeling survival on the Titanic"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+```{r setup, message=FALSE}
+library(tidyverse)
+library(haven)
+library(janitor)
+library(stringr)
+library(visdat)
+library(GGally)
+library(mice)
+library(broom)
+```
+
+## Import and clean the data
+```{r}
+titanic <- read_dta("day1/5-whole-game/titanic3.dta")
+
+# or table
+titanic %>% 
+  group_by(survived) %>% 
+  summarise(n = n())
+
+titanic <- titanic %>% 
+  clean_names() %>% 
+  as_tibble() %>% 
+  #  take titles from name
+  mutate(title = str_replace_all(name, "(.*, )|(\\..*)", ""),
+         # match abbreviations and French titles to miss and mrs
+         title = case_when(title %in% c("Mlle", "Ms") ~ "Miss",
+                      title == "Mme" ~ "Mrs",
+                      TRUE ~ title),
+         # make title a factor
+         title = factor(title))
+
+#  or table
+titanic %>% 
+  group_by(title) %>% 
+  summarise(n = n())
+
+titanic <- titanic %>% 
+  mutate(title = fct_lump(title, 4))
+
+table(titanic$title)
+
+titanic <- titanic %>% 
+  mutate(survived = factor(survived, labels = c("Died", "Survived")),
+         pclass = factor(pclass))
+```
+
+## Missing data
+
+```{r}
+vis_miss(titanic)
+
+imputed_titanic <- titanic %>% 
+  select(age, pclass, sex, sibsp, parch, embarked, title) %>% 
+  mice(method = "norm.predict") %>% 
+  complete()
+
+titanic$mice_age <- imputed_titanic$age
+titanic$mice_embarked <- imputed_titanic$embarked
+
+glm(survived ~ age, data = titanic, family = binomial()) %>% 
+  tidy()
+glm(survived ~ mice_age, data = titanic, family = binomial()) %>% 
+  tidy()
+
+titanic %>% 
+  select(age, mice_age) %>% 
+  gather() %>% 
+  ggplot(aes(x = value, color = key, fill = key)) +
+    geom_density(alpha = .7)
+```
+
+## Exploratory analysis
+
+```{r}
+titanic %>% 
+  select(survived, mice_age, pclass, sex, title) %>% 
+  # ggpairs doesn't like that the variables are labelled.
+  # remove them with haven::zap_labels()
+  zap_labels() %>% 
+  #  color by survival status.
+  #  only show age, class, sex, and title.
+  ggpairs(mapping = aes(color = survived), columns = 2:5, legend = 1) + 
+    theme_minimal() +
+    #  put the legend at the bottom
+    #  make the column/row text bold
+    theme(legend.position = "bottom",
+          strip.text = element_text(face = "bold"))
+```
+
+## Modeling
+
+```{r}
+survived_model <- glm(survived ~ mice_age + pclass + sex + sibsp + parch + mice_embarked + title, data = titanic, family = binomial)
+
+survived_model %>% 
+  tidy() %>% 
+  mutate_if(is.numeric, round, 2)
+
+survived_model2 <- glm(survived ~ mice_age + pclass + sibsp + parch + mice_embarked + title, data = titanic, family = binomial)
+```
+
+## Summarizing the results
+
+```{r}
+survived_model2 %>% 
+  tidy() %>% 
+  mutate_if(is.numeric, round, 2)
+
+model_table <- survived_model2 %>% 
+  tidy(conf.int = TRUE) %>% 
+  filter(term != "(Intercept)") %>% 
+  select(term, estimate, starts_with("conf")) %>% 
+  mutate_if(is.numeric, exp) %>%
+  mutate_if(is.numeric, round, 2)
+
+model_table
+
+## Forest Plot
+model_table %>% 
+  arrange(estimate) %>% 
+  mutate(term = fct_inorder(term)) %>% 
+  ggplot(aes(x = estimate, y = term)) + 
+    geom_point(size = 2) +
+    geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0) +
+    geom_vline(xintercept = 1)
+
+## Variable importance (abs(statistic))
+survived_model2 %>% 
+  tidy() %>% 
+  arrange(abs(statistic)) %>% 
+  filter(term != "(Intercept)") %>% 
+  mutate(importance = abs(statistic),
+         term = fct_inorder(term)) %>% 
+  ggplot(aes(x = term, y = importance)) + 
+    geom_col() +
+    coord_flip()
+
+```
+
+## Bonus: Machine Learning
+
+```{r}
+# install.packages(c("caret", "rms", "randomForest", "gbm))
+library(caret)
+library(rms)
+
+fmla <- survived ~ mice_age + pclass + sibsp + parch + mice_embarked + title
+fmla_spline <- survived ~ rcs(mice_age) + pclass + sibsp + I(sibsp^2) + parch + I(parch^2) + mice_embarked + title
+
+
+#  function to avoid setting defaults repeatedly
+ml <- function(.fmla = fmla, method, ...) {
+  train(.fmla,
+        data = titanic,
+        method = method, 
+        ...,
+        na.action  = na.omit,   
+        metric = "ROC",
+        trControl = trainControl(method = "repeatedcv",
+           repeats = 5,	
+           summaryFunction = twoClassSummary,	
+           classProbs = TRUE))
+}
+
+logistic <- ml(method = "glm", family = binomial)
+
+logistic_spline <- ml(fmla_spline, method = "glm", family = binomial)
+
+random_forest <- ml(fmla_spline, method = "rf", family = binomial)
+
+boosted <- ml(fmla_spline, method = "gbm")
+
+boosted$finalModel %>% 
+  varImp() %>% 
+  rownames_to_column("variable") %>% 
+  arrange(desc(Overall))
+```
+
