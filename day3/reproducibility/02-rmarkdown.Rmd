@@ -20,35 +20,72 @@ opts_chunk$set(warning = FALSE, message = FALSE)
 
 # Rmarkdown files
 
-```{r, echo=FALSE, comment=""}
-cat(readLines("hello-world.Rmd"), sep="\n")
-```
+*   These are plain-text (not binary) files
+    
+    ```{r hello-rmd, echo=FALSE, comment=""}
+    cat(readLines("hello-world.Rmd"), sep="\n")
+    ```
 
 # Main components of a Rmd file
 
-*   The header: Information about the document.
+*   The header: Information about the document in [yaml](https://en.wikipedia.org/wiki/YAML){target="_blank"} format
     
-    ```{r, echo=FALSE, comment=""}
+    ```{r hello-rmd-yaml, echo=FALSE, comment=""}
     cat(readLines("hello-world.Rmd")[1:6], sep="\n")
     ```
 
 *   R code chunks (with options)
     
-    ```{r, echo=FALSE, comment=""}
+    ```{r hello-rmd-chunk1, echo=FALSE, comment=""}
     cat(readLines("hello-world.Rmd")[16:18], sep="\n")
     ```
 
 *   R code chunks (without options)
 
-    ```{r, echo=FALSE, comment=""}
+    ```{r hello-rmd-chunk2, echo=FALSE, comment=""}
     cat(readLines("hello-world.Rmd")[24:26], sep="\n")
     ```
+
+---
+
+*   Some other options include:
+
+    -   `cache`: Logical, when `TRUE` saves the result of the code chunk so it
+        doesn't need to compute it every time (handy for time-consuming code!)
+        
+    -   `messages`: Logical, when `FALSE` it suppress whatever message the R
+        code in the chunk generates.
+        
+    -   `fig.cap`: Character vector. Specifies the title of plots generated
+        whitin the chunk.
+        
+    More [here](https://yihui.name/knitr/options/#chunk_options).
+
+
+# How it works
+
+<div align="center">
+<img src="../../fig/rmarkdownflow.png" style="width:800px;">
+
+Source: RStudio website https://rmarkdown.rstudio.com/lesson-2.html
+</div>
+
+*   The function `render` passes the Rmd file to [**knitr**](https://cran.r-project.org/package=knitr)
+
+*   knitr executes the R code (or whatever code is there), and creates a `md` file
+    (markdown, not Rmarkdown)
     
+*   Then the `md` file is passed to [**pandoc**](http://pandoc.org/),
+    which ultimately compiles the
+    document in the desired format as specified in the `output` option
+    of the header.
+
 # Rmarkdown supports other formats
 
-*   The following code chunk requires having the [**reticulate**](https://cran.r-project.org/package=reticulate) R package
-    
-    ```{r, comment="", echo=FALSE}
+*   The following code chunk requires having the [**reticulate**](https://cran.r-project.org/package=reticulate) R package (R interface to Python)
+
+
+    ```{r pypy, comment="", echo=FALSE}
     cat("```{python some-py-code}\nprint \"Hello World\"\nimport this\n```\n")
     ```
         
@@ -61,7 +98,11 @@ cat(readLines("hello-world.Rmd"), sep="\n")
 
 # Summarizing Gapminder
 
-```{r }
+```{r stats-by-year}
+# Loading the package
+library(gapminder)
+
+# Calculating stats at the year level
 stats_by_year <- gapminder %>%
   group_by(year) %>%
   summarise(
@@ -82,7 +123,7 @@ stats_by_year
 *   It has the nice feature that you don't need to be explicit about the format,
     i.e. it will automatically guess what type of document you are working with.
 
-    ```{r}
+    ```{r kable}
     knitr::kable(
         stats_by_year,
         caption = "Year stats from the gapminder data",
@@ -102,7 +143,7 @@ stats_by_year
 *   This means that you don't need to think about what is the final output
     format
     
-    ```{r, results='asis'}
+    ```{r pander, results='asis'}
     pander::pandoc.table(
       stats_by_year, 
       caption = "Year stats from the gapminder data"
@@ -130,7 +171,7 @@ models <- list(model1, model2, model3, model4)
 
 *   The R package [**texreg**](https://cran.r-project.org/package=texreg){target="_blank"}
     
-    ```{r table-html, results='asis'}
+    ```{r texreg, results='asis'}
     htmlreg(models, doctype=FALSE)
     ```
 
@@ -142,7 +183,7 @@ models <- list(model1, model2, model3, model4)
 
 *   The R package [**pander**](https://cran.r-project.org/package=pander){target="_blank"}
 
-    ```{r, results='asis'}
+    ```{r memisc, results='asis'}
     library(memisc)
     tab <- mtable(
       `Model 1` = model1,
@@ -152,6 +193,16 @@ models <- list(model1, model2, model3, model4)
       summary.stats=c("sigma","R-squared","F","p","N")
     ) %>% write.mtable(file = stdout(), format = "HTML")
     ```
+
+# Plots with Rmarkdown
+
+```{r plot}
+ggplot(diamonds, aes(x = carat, y = price, color=cut)) + 
+  geom_point() +
+  ggtitle("Plots with Rmarkdown just work")
+
+```
+
 
 # Assignment
 
