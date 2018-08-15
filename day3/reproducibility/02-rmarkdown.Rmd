@@ -1,5 +1,5 @@
 ---
-title: 'R Bootcamp day 3<br>Reproducible Research<br><img src="../../fig/trojan-rlogo.svg" style="width:250px;">'
+title: 'R Bootcamp day 3<br>Reproducible Research (part 2)<br><img src="../../fig/trojan-rlogo.svg" style="width:250px;">'
 author: <a href="https://ggvy.cl"><b>George G. Vega Yon</b></a><br>vegayon@usc.edu<br><br>University of Southern California<br>Department of Preventive Medicine
 date: August 15th, 2018
 output: 
@@ -80,6 +80,23 @@ Source: RStudio website https://rmarkdown.rstudio.com/lesson-2.html
     document in the desired format as specified in the `output` option
     of the header.
 
+# Questions
+
+Taking a look at the Rmarkdown cheatsheet, answer the following questions:
+
+1.  How can you write bold faced text? What about italics?
+
+2.  Include a 1st, 2nd, and 3rd level headers in a document?
+
+3.  Include an R code **chunk** without it being evaluated?
+
+4.  Tell pandoc to compile a MS Word document?
+
+5.  Include a figure from a `png` file that you have in the same folder as your
+    markdown document?
+    
+6.  Include a mathematical equation?
+
 # Rmarkdown supports other formats
 
 *   The following code chunk requires having the [**reticulate**](https://cran.r-project.org/package=reticulate) R package (R interface to Python)
@@ -96,25 +113,29 @@ Source: RStudio website https://rmarkdown.rstudio.com/lesson-2.html
     ```
 
 
-# Summarizing Gapminder
+# Tables with Rmarkdown
 
-```{r stats-by-year}
-# Loading the package
-library(gapminder)
-
-# Calculating stats at the year level
-stats_by_year <- gapminder %>%
-  group_by(year) %>%
-  summarise(
-    `Life Expectancy` = mean(lifeExp),
-    `Population`      = mean(pop),
-    `GDP pp`          = mean(gdpPercap)
-  ) %>%
-  arrange(year)
-
-stats_by_year
-```
-
+*   Suppose that we want to include the following data as a table part of our
+    document
+    
+    ```{r stats-by-year}
+    # Loading the package
+    library(gapminder)
+    
+    # Calculating stats at the year level
+    stats_by_year <- gapminder %>%
+      group_by(year) %>%
+      summarise(
+        `Life Expectancy` = mean(lifeExp),
+        `Population`      = mean(pop),
+        `GDP pp`          = mean(gdpPercap)
+      ) %>%
+      arrange(year)
+    
+    stats_by_year
+    ```
+    
+    There are at least 2 ways of doing it
 
 # Tabulation with `knitr::kable`
 
@@ -136,7 +157,7 @@ stats_by_year
 
 # Tabulation with `pander::pandoc.table`
 
-*   Another (very cool) R package is `pander`
+*   Another (very cool) R package is [**pander**](https://cran.r-project.org/package=pander)
 
 *   It provides helper functions to work with pandoc's markdown format
 
@@ -153,26 +174,32 @@ stats_by_year
 
 # Regression tables
 
-```{r multiple-regressions, warning=FALSE, message=FALSE}
-library(texreg)
-data(diamonds, package="ggplot2")
+*   There is a lot of functions around to include regression output
 
-# Model 1
-model1 <- lm(price ~ carat, data = diamonds)
-model2 <- lm(price ~ carat + depth, data = diamonds)
-model3 <- lm(price ~ carat + table, data = diamonds)
-model4 <- lm(price ~ carat + depth + table, data = diamonds)
+*   Suppose that we run the following models on the `diamonds` dataset
+    
+    ```{r multiple-regressions, warning=FALSE, message=FALSE}
+    data(diamonds, package="ggplot2")
+    
+    # Model 1
+    model1 <- lm(price ~ carat, data = diamonds)
+    model2 <- lm(price ~ carat + depth, data = diamonds)
+    model3 <- lm(price ~ carat + table, data = diamonds)
+    model4 <- lm(price ~ carat + depth + table, data = diamonds)
+    
+    # Let's put it all in a list to handle it together
+    models <- list(model1, model2, model3, model4)
+    ```
 
-# Let's put it all in a list to handle it together
-models <- list(model1, model2, model3, model4)
-```
+*   How can we include these in our report/paper?
+
 
 # Regression tables with texreg
 
 *   The R package [**texreg**](https://cran.r-project.org/package=texreg){target="_blank"}
     
     ```{r texreg, results='asis'}
-    htmlreg(models, doctype=FALSE)
+    texreg::htmlreg(models, doctype=FALSE)
     ```
 
 *   It also has the functions `texreg`, for LaTeX tables, and `screenreg`, for plaintext output
@@ -196,12 +223,14 @@ models <- list(model1, model2, model3, model4)
 
 # Plots with Rmarkdown
 
-```{r plot}
-ggplot(diamonds, aes(x = carat, y = price, color=cut)) + 
-  geom_point() +
-  ggtitle("Plots with Rmarkdown just work")
-
-```
+*   In the case of plots, these just work!
+    
+    ```{r plot}
+    ggplot(diamonds, aes(x = carat, y = price, color=cut)) + 
+      geom_point() +
+      ggtitle("Plots with Rmarkdown just work")
+    
+    ```
 
 
 # Assignment
@@ -222,3 +251,17 @@ Notice that the `mean` function will be handy, but be aware of missing values
 
 The document should be compiled as `html_document` (you can try other formats
 if you like).
+
+
+# Thank you!
+
+<div align="center">
+R Bootcamp day 2<br>Simulation and Language Fundamentals<br><img src="../fig/trojan-rlogo.svg" style="width:250px;"><br>
+</div>
+
+
+<div align="center" style="font-size:40px;">
+**website**: [ggvy.cl](https://ggvy.cl)<br><br>
+**twitter**: [\@gvegayon](https://twitter.com/gvegayon)<br><br>
+**github**: [gvegayon](https://github.com/gvegayon)<br><br>
+</div>

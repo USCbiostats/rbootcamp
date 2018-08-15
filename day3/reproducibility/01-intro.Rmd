@@ -1,51 +1,46 @@
 ---
-title: 'R Bootcamp day 3<br>Reproducible Research<br><img src="../../fig/trojan-rlogo.svg" style="width:250px;">'
+title: 'R Bootcamp day 3<br>Reproducible Research (part 1)<br><img src="../../fig/trojan-rlogo.svg" style="width:250px;">'
 author: <a href="https://ggvy.cl"><b>George G. Vega Yon</b></a><br>vegayon@usc.edu<br><br>University of Southern California<br>Department of Preventive Medicine
 date: August 15th, 2018
 output: 
   slidy_presentation:
-    footer: R Bootcamp (Day 2)
+    footer: R Bootcamp (Day 3)
     highlight: pygments
     font_adjustment: -1
 ---
 
-## Reproducible Research
+# Reproducible Research
 
 > "The term reproducible research refers to the idea that the ultimate product
 > of academic research is the paper along with the __full computational environment
 > used to produce the results in the paper such as the code, data, etc.__ that
 > can be used to reproduce the results and __create new work based on the research__"
 
-\raggedleft 
 
 [Wiki](https://en.wikipedia.org/wiki/Reproducibility#Reproducible_research)
 
-## Reproducible Research (cont. II) {.smaller}
+# Reproducible Research (cont. II) 
 
 -   A major new issue in sciences (overall):
     * Accessible Reproducible Research ([Mesirov, __Science__ 2010](http://science.sciencemag.org/content/327/5964/415))
     * Again, and Again, and Again, ... ([Jasny et al., __Science__ 2011](http://science.sciencemag.org/content/334/6060/1225))
     * Challenges in Irreproducible Research ([__nature__ topic](http://www.nature.com/news/reproducibility-1.17552))
     
-## How to 'Reproducible Research'
+# How to 'Reproducible Research'
 
 - What you can do:
     * Provide __raw__ data (raw, i.e. before "cleaning it"),
     * Provide source code (what ever programming environment you are using) for reproducing:
   _cleaned data_, models, tables, figures, etc.
     * Hopefully have a neat way of coding your programs: Inline Comments, Indentation of control-flow statements (for, while, case, switch, ifelse, etc.)
+
 - What else
     * Try using version control software (such as git) to make your research "opensource"
     * Avoid using proprietary software (hopefully always)
 
+- More resources at CRAN task View [Reproducible Research](https://cran.r-project.org/web/views/ReproducibleResearch.html)
 
-- R
-    * Try using [knitr](https://cran.r-project.org/web/packages/knitr/index.html) and [Rmarkdown](https://cran.r-project.org/web/packages/rmarkdown/index.html)
-    * [texreg](https://cran.r-project.org/web/packages/texreg/index.html) for fancy regression tables.
-    * Checkout `?grDevices::Devices`.
-    * More resources at CRAN task View [Reproducible Research](https://cran.r-project.org/web/views/ReproducibleResearch.html)
-
-## Some Refs. on Reproducible Research {.smaller}
+# Some Refs. on Reproducible Research {.smaller}
 
 *   __JAMA__ On the "Statistical Analysis Subsection"
     
