@@ -1,0 +1,31 @@
+---
+title: "Hello World"
+author: "Truly Yours"
+date: "Today"
+output: html_document
+---
+
+# First level header
+
+## Second level header
+
+Some text that goes along with the document
+
+Code chunks can have tags, like the one here
+
+```{r first-code-chunk}
+sqrt(pi)
+```
+
+And also, they can have options. For example, if you don't want the source code
+to be printed out, you add the option `echo = FALSE` as in the following code
+chunk
+
+```{r second-code-chunk, echo=FALSE}
+plot(USArrests)
+```
+
+
+
+
+
