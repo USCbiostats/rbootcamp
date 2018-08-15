@@ -1,5 +1,5 @@
 # Day 3
 
-1.  Data Visualization ([slides](https://htmlpreview.github.io/?https://github.com/USCbiostats/rbootcamp/blob/master/day3/data-viz/data_viz_slides.html) / [exercises](https://github.com/USCbiostats/rbootcamp/blob/master/day3/data-viz/exercises.Rmd).
+1.  Data Visualization ([slides](https://htmlpreview.github.io/?https://github.com/USCbiostats/rbootcamp/blob/master/day3/data-viz/data_viz_slides.html) / [exercises](https://github.com/USCbiostats/rbootcamp/blob/master/day3/data-viz/exercises.Rmd)).
 
 2.  Reproducible Research 
