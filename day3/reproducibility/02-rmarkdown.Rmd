@@ -1,0 +1,173 @@
+---
+title: 'R Bootcamp day 3<br>Reproducible Research<br><img src="../../fig/trojan-rlogo.svg" style="width:250px;">'
+author: <a href="https://ggvy.cl"><b>George G. Vega Yon</b></a><br>vegayon@usc.edu<br><br>University of Southern California<br>Department of Preventive Medicine
+date: August 15th, 2018
+output: 
+  slidy_presentation:
+    footer: R Bootcamp (Day 3)
+    highlight: pygments
+    font_adjustment: -1
+---
+
+```{r setup-chunk, echo=FALSE, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(dplyr)
+library(gapminder)
+library(knitr)
+
+opts_chunk$set(warning = FALSE, message = FALSE)
+```
+
+# Rmarkdown files
+
+```{r, echo=FALSE, comment=""}
+cat(readLines("hello-world.Rmd"), sep="\n")
+```
+
+# Main components of a Rmd file
+
+*   The header: Information about the document.
+    
+    ```{r, echo=FALSE, comment=""}
+    cat(readLines("hello-world.Rmd")[1:6], sep="\n")
+    ```
+
+*   R code chunks (with options)
+    
+    ```{r, echo=FALSE, comment=""}
+    cat(readLines("hello-world.Rmd")[16:18], sep="\n")
+    ```
+
+*   R code chunks (without options)
+
+    ```{r, echo=FALSE, comment=""}
+    cat(readLines("hello-world.Rmd")[24:26], sep="\n")
+    ```
+    
+# Rmarkdown supports other formats
+
+*   The following code chunk requires having the [**reticulate**](https://cran.r-project.org/package=reticulate) R package
+    
+    ```{r, comment="", echo=FALSE}
+    cat("```{python some-py-code}\nprint \"Hello World\"\nimport this\n```\n")
+    ```
+        
+    
+    ```{python some-py-code, echo=FALSE}
+    print "Hello World"
+    import this
+    ```
+
+
+# Summarizing Gapminder
+
+```{r }
+stats_by_year <- gapminder %>%
+  group_by(year) %>%
+  summarise(
+    `Life Expectancy` = mean(lifeExp),
+    `Population`      = mean(pop),
+    `GDP pp`          = mean(gdpPercap)
+  ) %>%
+  arrange(year)
+
+stats_by_year
+```
+
+
+# Tabulation with `knitr::kable`
+
+*   The knitr package provides the function `kable` to print tables.
+
+*   It has the nice feature that you don't need to be explicit about the format,
+    i.e. it will automatically guess what type of document you are working with.
+
+    ```{r}
+    knitr::kable(
+        stats_by_year,
+        caption = "Year stats from the gapminder data",
+        format.args = list(big.mark=",")
+        )
+    ```
+
+*   Checkout [**kableExtra**](https://cran.r-project.org/package=kableExtra) which
+    provides extensions to the `kable` function.
+
+# Tabulation with `pander::pandoc.table`
+
+*   Another (very cool) R package is `pander`
+
+*   It provides helper functions to work with pandoc's markdown format
+
+*   This means that you don't need to think about what is the final output
+    format
+    
+    ```{r, results='asis'}
+    pander::pandoc.table(
+      stats_by_year, 
+      caption = "Year stats from the gapminder data"
+      )
+    ```
+
+
+# Regression tables
+
+```{r multiple-regressions, warning=FALSE, message=FALSE}
+library(texreg)
+data(diamonds, package="ggplot2")
+
+# Model 1
+model1 <- lm(price ~ carat, data = diamonds)
+model2 <- lm(price ~ carat + depth, data = diamonds)
+model3 <- lm(price ~ carat + table, data = diamonds)
+model4 <- lm(price ~ carat + depth + table, data = diamonds)
+
+# Let's put it all in a list to handle it together
+models <- list(model1, model2, model3, model4)
+```
+
+# Regression tables with texreg
+
+*   The R package [**texreg**](https://cran.r-project.org/package=texreg){target="_blank"}
+    
+    ```{r table-html, results='asis'}
+    htmlreg(models, doctype=FALSE)
+    ```
+
+*   It also has the functions `texreg`, for LaTeX tables, and `screenreg`, for plaintext output
+
+*   The problem, you have to be explicit in the type of table that you want to print
+
+# Regression tables with memisc
+
+*   The R package [**pander**](https://cran.r-project.org/package=pander){target="_blank"}
+
+    ```{r, results='asis'}
+    library(memisc)
+    tab <- mtable(
+      `Model 1` = model1,
+      `Model 2` = model2,
+      `Model 3` = model3,
+      `Model 4` = model4,
+      summary.stats=c("sigma","R-squared","F","p","N")
+    ) %>% write.mtable(file = stdout(), format = "HTML")
+    ```
+
+# Assignment
+
+Using the dataset [**worldbank.csv**](worldbank.csv){target="_blank"}, write 
+down an Rmarkdown document with the following:
+
+1.  Include a table with the average value per `region` of the variables
+    `hiv`, `cell`, and `gdp_ppp`.
+
+2.  A plot with the average `hiv` prevalence worldwide by year.
+    
+3.  Include a regression table with the following linear model
+    `hiv ~ log(gdp_ppp) + gini + factor(region)`.
+ 
+Notice that the `mean` function will be handy, but be aware of missing values
+(how does the `mean` function solves this?).
+
+The document should be compiled as `html_document` (you can try other formats
+if you like).
