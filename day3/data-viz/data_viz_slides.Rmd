@@ -1,0 +1,1133 @@
+---
+title: "<span style='color:#E69F00'>Data Vizualization in R</span>"
+subtitle: "<span style='color:#56B4E9'>Base R and ggplot2</span> <br>"
+author: "Malcolm Barrett <br>"
+date: "08/15/2018"
+output:
+  xaringan::moon_reader:
+    css: ["default", "theme.css", "fonts.css"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, fig.align = "center", dpi = 320, fig.height = 4)
+library(mbmisc)
+library(tidyverse)
+library(tidymeta)
+library(datasauRus)
+
+diabetes <- read_csv("diabetes.csv")
+```
+
+class: inverse-ns, center
+
+# Getting started
+## `r font_col("Setup:", "#E69F00")` open the file `exercises.Rmd` in the `day3/data-viz` folder. 
+
+## Load the tidyverse package. "diabetes.csv" is also in this folder; get a feel for what the path to that file is. 
+
+---
+
+class: inverse-ns, center
+
+# Data Visualization with R
+## `r font_col("Base R", "#E69F00")` has many tools that are `r font_col("fast and easy", "#E69F00")`. Often works well with other `r font_col("packages", "#56B4E9")`.
+
+---
+
+class: inverse-ns, center
+
+# Data Visualization with R
+## `r font_col("Base R has many tools that are fast and easy. Often works well with other packages", "#6C7B7F")`
+## `r font_col("ggplot2", "#E69F00")` works well with the `r font_col("tidyverse", "#E69F00")` and is `r font_col("friendly and powerful", "#56B4E9")`
+
+---
+
+class: inverse-ns, center
+
+# Data Visualization with R
+## `r font_col("Base R has many tools that are fast and easy. Often works well with other packages", "#6C7B7F")`
+## `r font_col("ggplot2 works well with the tidyverse and is friendly and powerful", "#6C7B7F")`
+## `r font_col("Better plots", "#E69F00")` are `r font_col("better communication", "#56B4E9")`
+
+---
+
+# Plots in Base R
+
+```{r}
+as_tibble(mtcars)
+```
+
+---
+
+# `hist()`
+
+```{r, fig.height=4}
+hist(mtcars$mpg, breaks = 20)
+```
+
+---
+
+# `plot()`
+
+```{r, fig.height=4}
+plot(mtcars$hp, mtcars$mpg)
+```
+
+---
+
+# `plot()`
+
+```{r, fig.height=4, eval=FALSE}
+plot(mtcars$hp, mtcars$mpg)
+
+model <- lm(mpg ~ hp, data = mtcars)
+abline(model, lty = "dashed")
+```
+
+---
+
+```{r, fig.height=4, echo=FALSE}
+plot(mtcars$hp, mtcars$mpg)
+
+model <- lm(mpg ~ hp, data = mtcars)
+abline(model, lty = "dashed")
+```
+
+---
+
+class: inverse-ns, center
+
+background-image: url(tidyhex.png)
+
+---
+background-image: url(http://hexb.in/hexagons/ggplot2.png)
+background-position: 90% 10%
+
+# ggplot2: Elegant Data Visualizations in R
+
+## a Layered Grammar of Graphics
+
+---
+background-image: url(http://hexb.in/hexagons/ggplot2.png)
+background-position: 90% 10%
+
+# ggplot2: Elegant Data Visualizations in R
+
+## `r font_col("a Layered Grammar of Graphics", "#E5E5E5")`
+## Data is mapped to aesthetics; Statistics and plot are linked
+
+---
+background-image: url(http://hexb.in/hexagons/ggplot2.png)
+background-position: 90% 10%
+
+# ggplot2: Elegant Data Visualizations in R
+
+## `r font_col("a Layered Grammar of Graphics", "#E5E5E5")`
+## `r font_col("Data is mapped to aesthetics; Statistics and plot are linked", "#E5E5E5")`
+## Sensible defaults; Infinitely extensible
+
+---
+
+background-image: url(http://hexb.in/hexagons/ggplot2.png)
+background-position: 90% 10%
+
+## Publication quality and beyond
+
+### [https://nyti.ms/2jUp36n](https://nyti.ms/2jUp36n)
+
+### [http://bit.ly/2KSGZLu](http://bit.ly/2KSGZLu)
+
+---
+
+```{r}
+ggplot()
+```
+
+---
+
+```{r}
+ggplot(mtcars, aes(x = mpg, y = hp))
+```
+
+---
+
+```{r}
+ggplot(mtcars, aes(x = mpg, y = hp)) +
+  geom_point()
+```
+
+---
+
+# `ggplot()`
+#### `ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) + `
+####  &nbsp;&nbsp; `<GEOM_FUNCTION>()`
+
+--
+
+## Add layers with `r font_col("<code>+</code>", "#E69F00")`
+
+--
+
+## Put `+` at the `r font_col("end", "#E69F00")` of a line
+
+--
+
+## map aesthetics with `r font_col("<code>aes()</code>", "#E69F00")`
+
+---
+
+## Your Turn 1
+
+## Read in the `diabetes` data.
+
+```{r}
+
+```
+
+## Write and run the code from this slide to make a graph. Pay strict attention to spelling, capitalization, and parentheses!
+
+```{r, eval = FALSE}
+ggplot(data = diabetes, mapping = aes(x = weight, y = hip)) +
+  geom_point()
+```
+
+---
+
+```{r}
+diabetes <- read_csv("diabetes.csv")
+
+ggplot(data = diabetes, mapping = aes(x = weight, y = hip)) +
+  geom_point()
+```
+
+---
+
+# Aesthetics: `aes()`
+
+#### `ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) + `
+####  &nbsp;&nbsp; `<GEOM_FUNCTION>()`
+ 
+--
+
+## Aesthetics `r font_col("map", "#E69F00")` the data to the `r font_col("plot", "#56B4E9")`.
+ 
+---
+
+# Aesthetics: `aes()`
+
+```{r, eval = FALSE}
+ggplot(mtcars, aes(x = mpg, y = hp, color = cyl)) + geom_point()
+
+ggplot(mtcars, aes(x = mpg, y = hp, size = cyl)) + geom_point()
+
+ggplot(mtcars, aes(x = mpg, y = hp, alpha = cyl)) + geom_point()
+
+ggplot(mtcars, aes(x = mpg, y = hp, shape = cyl)) + geom_point()
+```
+
+---
+
+## Your Turn 2
+
+## Add `color`, `size`, `alpha`, and `shape` aesthetics to your graph using the `gender` variable. Experiment.  
+
+```{r, eval=FALSE}
+ggplot(data = diabetes, 
+       mapping = aes(x = weight, y = hip)) +
+  geom_point()
+```
+
+## Try moving the mapping argument to `geom_point()`. Add in any aesthetics you found helpful.
+
+---
+
+```{r}
+ggplot(data = diabetes, 
+       mapping = aes(x = weight, y = hip, color = gender)) +
+  geom_point()
+```
+
+---
+
+```{r}
+ggplot(data = diabetes, 
+       mapping = aes(x = weight, y = hip, size = gender)) +
+  geom_point()
+```
+
+---
+
+```{r}
+ggplot(data = diabetes, 
+       mapping = aes(x = weight, y = hip, alpha = gender)) +
+  geom_point()
+```
+
+---
+
+```{r}
+ggplot(data = diabetes, 
+       mapping = aes(x = weight, y = hip, shape = gender)) +
+  geom_point()
+```
+
+---
+
+```{r}
+ggplot(data = diabetes) +
+  geom_point(mapping = aes(x = weight, y = hip, 
+                           color = gender, shape = gender))
+```
+
+---
+
+# geoms
+
+## What shape does the data take?
+
+--
+
+## `geom_point()`
+
+--
+
+## `geom_line()`
+
+--
+
+## `geom_violin()`
+
+--
+
+# `r font_col("Check the cheatsheet!", "#E69F00")`
+
+---
+
+## Your Turn 3
+
+## Replace this scatterplot with one that draws boxplots. 
+
+```{r, eval = FALSE}
+ggplot(diabetes, aes(gender, chol)) + geom_point()
+```
+
+---
+
+```{r}
+ggplot(diabetes, aes(gender, chol)) + geom_boxplot()
+```
+
+---
+
+## Your Turn 4
+
+## 1. Make a histogram of the `glyhb` variable in `diabetes`.
+
+```{r}
+
+```
+
+## 2. Redo the `glyhb` plot as a density plot.
+
+```{r}
+
+```
+
+---
+
+```{r}
+ggplot(diabetes, aes(x = glyhb)) + 
+  geom_histogram()
+```
+
+---
+
+```{r}
+ggplot(diabetes, aes(x = glyhb)) + 
+  geom_density()
+```
+
+---
+
+
+```{r}
+diabetes %>% 
+  ggplot(aes(x = frame)) + 
+    geom_bar()
+```
+
+---
+
+```{r}
+diabetes %>% 
+  drop_na() %>% 
+  ggplot(aes(x = frame)) + 
+    geom_bar()
+```
+
+---
+
+## Your Turn 5
+
+## Make a bar chart `frame` colored by `gender`. Then, try it with the `fill` aesthetic instead of `color`.
+
+```{r, eval=FALSE}
+diabetes %>% 
+  drop_na() %>% 
+  ______() + 
+  ______()
+```
+
+---
+
+```{r}
+diabetes %>% 
+  drop_na() %>% 
+  ggplot(aes(x = frame, fill = gender)) + 
+    geom_bar()
+```
+
+---
+
+## Positions
+
+### `geom_bar(position = "<POSITION>")`
+
+--
+
+## When we have aesthetics mapped, how are they positioned?
+
+--
+
+## bar: dodge, fill, stacked (default)
+
+--
+
+## point: jitter
+
+---
+
+```{r}
+ggplot(mtcars, aes(x = factor(am), y = hp)) + 
+  geom_point()
+```
+
+---
+
+```{r}
+ggplot(mtcars, aes(x = factor(am), y = hp)) + 
+  geom_point(position = "jitter")
+```
+
+---
+
+```{r}
+ggplot(mtcars, aes(x = factor(am), y = hp)) + 
+  geom_jitter(width = .1, height = 0)
+```
+
+---
+
+## Your Turn 6
+
+## Take your code for the bar chart before (using the `fill` aesthetic). Experiment with different `position` values: "dodge", "fill", "stack"
+
+---
+
+```{r}
+diabetes %>% 
+  drop_na() %>% 
+  ggplot(aes(x = frame, fill = gender)) + 
+    geom_bar(position = "stack")
+```
+
+---
+
+```{r}
+diabetes %>% 
+  drop_na() %>% 
+  ggplot(aes(x = frame, fill = gender)) + 
+    geom_bar(position = "dodge")
+```
+
+---
+
+```{r}
+diabetes %>% 
+  drop_na() %>% 
+  ggplot(aes(x = frame, fill = gender)) + 
+    geom_bar(position = "fill")
+```
+
+---
+
+## Mapping vs setting
+
+## Cool, but how do I just make everything `r font_col("blue", "#56B4E9")`?
+
+--
+
+## `geom_point(aes(x, y), color = "blue")`
+
+--
+
+## To set a color, put it `r font_col("outside", "#E69F00")` `aes()`
+
+---
+
+```{r}
+ggplot(mtcars, aes(x = mpg, y = hp, color = cyl)) + 
+  geom_point(color = "blue")
+```
+
+---
+
+```{r}
+ggplot(mtcars, aes(x = mpg, y = hp, color = cyl)) + 
+  geom_point(aes(color = "blue"))
+```
+
+---
+
+## Adding layers
+
+```{r eval = FALSE}
+ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
+  <GEOM_FUNCTION>() +
+  <GEOM_FUNCTION>() +
+  <SCALE_FUNCTION>() + 
+  <THEME_FUNCTION>()
+```
+
+---
+
+## Your Turn 7
+
+#### Run the code after every change you make.
+
+#### 1. Predict what this code will do. Then run it. 
+#### 2. Add a `linetype` aesthetic for `gender`. Run it again.
+#### 3. *Set* the color of `geom_smooth()` to "black"
+#### 4. Add `se = FALSE` to the `geom_smooth()`
+#### 5. It's hard to see the lines well now. How about setting `alpha = .2` in `geom_point()`?
+#### 6. Jitter the points. You can either change the geom or change the `position` argument.
+#### 7. Add another layer, `theme_bw()`. Remember to use `+`.
+
+```{r, eval=FALSE}
+ggplot(diabetes, aes(weight, hip)) + 
+  geom_point() +
+  geom_smooth()
+```
+
+---
+
+```{r}
+ggplot(diabetes, aes(weight, hip)) + 
+  geom_point() +
+  geom_smooth()
+```
+
+---
+
+```{r}
+ggplot(diabetes, aes(weight, hip)) + 
+  geom_point() +
+  geom_smooth(aes(linetype = gender))
+```
+
+---
+
+```{r}
+ggplot(diabetes, aes(weight, hip)) + 
+  geom_point() +
+  geom_smooth(aes(linetype = gender), col = "black")
+```
+
+---
+
+```{r}
+ggplot(diabetes, aes(weight, hip)) + 
+  geom_point() +
+  geom_smooth(aes(linetype = gender), col = "black", se = FALSE)
+```
+
+---
+
+```{r}
+ggplot(diabetes, aes(weight, hip)) + 
+  geom_point(alpha = .2) +
+  geom_smooth(aes(linetype = gender), col = "black", se = FALSE)
+```
+
+---
+
+```{r}
+ggplot(diabetes, aes(weight, hip)) + 
+  geom_jitter(alpha = .2) +
+  geom_smooth(aes(linetype = gender), col = "black", se = FALSE)
+```
+
+---
+
+```{r}
+ggplot(diabetes, aes(weight, hip)) + 
+  geom_jitter(alpha = .2) +
+  geom_smooth(aes(linetype = gender), col = "black", se = FALSE) +
+  theme_bw()
+```
+
+---
+
+## Facets
+
+## Easy peazy panels
+
+--
+
+## `facet_grid()`
+## `facet_wrap()`
+
+--
+
+## `x ~ y`
+## ` ~ y`
+## `x ~ .`
+
+---
+
+```{r}
+diamonds %>% 
+  ggplot(aes(x = carat, price)) + 
+  geom_point() + 
+  facet_grid(cut ~ clarity)
+```
+
+---
+
+## Your Turn 8
+
+### Use a facet grid by `gender` and `location`
+
+```{r, eval=FALSE}
+ggplot(diabetes, aes(weight, hip)) + 
+  geom_point() +
+  geom_smooth()
+```
+
+---
+
+```{r}
+ggplot(diabetes, aes(weight, hip)) + 
+  geom_point() +
+  geom_smooth() + 
+  facet_grid(gender ~ location)
+```
+
+---
+
+```{r}
+diamonds %>% 
+  ggplot(aes(x = carat, price)) + 
+  geom_point() + 
+  facet_wrap(~clarity)
+```
+
+---
+
+## datasauRus
+
+```{r}
+library(datasauRus)
+datasaurus_dozen 
+
+```
+
+---
+
+## Your Turn 9
+
+#### 1. Load the `datasauRus` package. This package includes a data set called `datasaurus_dozen`.
+#### 2. Use dplyr to summarize the correlation between `x` and `y`. First, group it by `dataset`, and then summarize with the `cor()`  function. Call the new variable `corr`. What's it look like?
+#### 3. Mutate `corr`. Round it to 3 digits. Then, mutate it again (or wrap it around your first change) using: `paste("corr:", corr)`
+#### 4. Save the summary data frame as `corrs`.
+#### 5. Pass `datasaurus_dozen` to `ggplot()` and add a point geom
+#### 6. Use a facet (wrap) for `dataset`.
+#### 7. Add a text geom. For this geom, set `data = corrs`. You also need to use `aes()` in this call to set `label = corr`, `x = 50`, and `y = 110`.
+
+---
+
+```{r}
+corrs <- datasaurus_dozen %>% 
+  group_by(dataset) %>% 
+  summarize(corr = cor(x, y)) %>% 
+  mutate(corr = round(corr, 3),
+         corr = paste("corr:", corr))
+
+corrs
+```
+
+---
+
+```{r, eval=FALSE}
+datasaurus_dozen %>% 
+  ggplot(aes(x, y)) + 
+    geom_point() + 
+    geom_text(data = corrs, aes(label = corr, x = 50, y = 110)) +
+    facet_wrap(~dataset)
+```
+
+---
+
+```{r, echo=FALSE, fig.height=5.5}
+datasaurus_dozen %>% 
+  ggplot(aes(x, y)) + 
+    geom_point() + 
+    geom_text(data = corrs, aes(label = corr, x = 50, y = 110)) +
+    facet_wrap(~dataset)
+```
+
+---
+
+## Scales
+
+--
+
+## position scales
+
+### `scale_x_continuous()`
+### `scale_y_date()`
+### `scale_x_log10()`
+
+---
+
+## Scales
+
+## aesthetic scales
+
+### `scale_color_hue()`
+### `scale_fill_brewer()`
+### `scale_shape_manual()`
+
+---
+
+```{r}
+mtcars %>% 
+ggplot(aes(hp, mpg, col = factor(cyl))) + 
+  geom_point() + 
+  scale_x_log10() + 
+  scale_colour_brewer(palette = "Set2")
+```
+
+---
+
+## Your Turn 10
+
+#### 1. Change the color scale by adding a scale layer. Experiment with `scale_color_distiller()` and `scale_color_viridis_c()`. Check the help pages for different palette options.
+#### 2. Set the color aesthetic to `gender`. Try `scale_color_brewer()`.
+#### 3. Set the colors manually with `scale_color_manual()`. Use `values = c("#E69F00", "#56B4E9")` in the function call.
+#### 4. Change the legend title for the color legend. Use the `name` argument in whatever scale function you're using.
+
+```{r, eval = FALSE}
+diabetes %>% 
+  ggplot(aes(waist, hip, col = weight)) + 
+  geom_point() 
+```
+
+---
+
+```{r}
+diabetes %>% 
+  ggplot(aes(waist, hip, col = weight)) + 
+  geom_point() + 
+  scale_color_viridis_c()
+```
+
+---
+
+```{r}
+diabetes %>% 
+  ggplot(aes(waist, hip, col = gender)) + 
+  geom_point() + 
+  scale_color_brewer()
+```
+
+---
+
+```{r}
+diabetes %>% 
+  ggplot(aes(waist, hip, col = gender)) + 
+  geom_point() + 
+  scale_color_manual(values = c("#E69F00", "#56B4E9"))
+```
+
+---
+
+```{r}
+diabetes %>% 
+  ggplot(aes(waist, hip, col = gender)) + 
+  geom_point() + 
+  scale_color_manual(name = "Sex", values = c("#E69F00", "#56B4E9"))
+```
+
+---
+
+## Color Palettes
+
+## [https://github.com/EmilHvitfeldt/r-color-palettes](https://github.com/EmilHvitfeldt/r-color-palettes)
+
+---
+
+## Themes
+
+--
+
+## Non-data ink (text, background, etc)
+
+--
+
+## Prespecified themes: `theme_gray()` (default), `theme_minimal()`, `theme_light()`, etc.
+
+--
+
+## `theme()`
+
+---
+
+```{r, eval=FALSE}
+mtcars %>% 
+ggplot(aes(hp, mpg, col = factor(cyl))) + 
+  geom_point(size = 3) + 
+  scale_x_log() + 
+  scale_colour_brewer(name = "Cylinders", palette = "Set2") +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 16),
+        legend.text = element_text(size = 8, face = "bold"),
+        legend.direction = "horizontal")
+```
+
+---
+
+```{r, echo=FALSE}
+mtcars %>% 
+ggplot(aes(hp, mpg, col = factor(cyl))) + 
+  geom_point(size = 3) + 
+  scale_x_log() + 
+  scale_colour_brewer(name = "Cylinders", palette = "Set2") +
+  theme_minimal() +
+  theme(axis.text = element_text(size = 16),
+        legend.text = element_text(size = 8, face = "bold"),
+        legend.direction = "horizontal")
+```
+
+---
+
+## Your Turn 11
+
+#### 1. Change the theme using one of the built-in theme functions. 
+#### 2. Use `theme()` to change the legend to the bottom with `legend.position = "bottom"`.
+#### 3. Remove the axis ticks by setting the `axis.ticks` argument to `element_blank()`
+#### 4. Change the font size for the axis titles. Use `element_text()`. Check the help page if you don't know what option to change.
+
+```{r, eval=FALSE}
+diabetes %>% 
+  ggplot(aes(waist, hip, col = weight)) + 
+  geom_point() +
+  scale_color_viridis_c()
+```
+
+---
+
+```{r}
+diabetes %>% 
+  ggplot(aes(waist, hip, col = weight)) + 
+  geom_point() +
+  scale_color_viridis_c() +
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        axis.ticks = element_blank(),
+        axis.title = element_text(size = 16))
+```
+
+---
+
+### High-density plots
+
+```{r}
+data_frame(x = rnorm(10000), y = rnorm(10000)) %>% 
+  ggplot(aes(x, y)) + 
+  geom_point()
+```
+
+---
+
+## High-density plots
+
+--
+
+## Transparency
+
+--
+
+## Binning
+
+---
+
+```{r}
+data_frame(x = rnorm(50000), y = rnorm(50000)) %>% 
+  ggplot(aes(x, y)) + 
+  geom_point(alpha = .05)
+```
+
+---
+
+```{r}
+data_frame(x = rnorm(50000), y = rnorm(50000)) %>% 
+  ggplot(aes(x, y)) + 
+  geom_bin2d()
+```
+
+---
+
+```{r}
+data_frame(x = rnorm(50000), y = rnorm(50000)) %>% 
+  ggplot(aes(x, y)) + 
+  geom_hex()
+```
+
+---
+
+## Your Turn 12
+
+#### Take a look at the `diamonds` data set from ggplot2. How many rows does it have?
+```{r, eval=FALSE}
+diamonds
+```
+
+#### 1. Make a scatterplot of `carat` vs. `price`. How's it look?
+#### 2. Try adjusting the transparency. 
+#### 3. Replace `geom_point()` with 2d bins.
+#### 4. Try hex bins.
+
+---
+
+```{r}
+diamonds %>% 
+  ggplot(aes(x = carat, price)) + 
+  geom_point()
+```
+
+---
+
+```{r}
+diamonds %>% 
+  ggplot(aes(x = carat, price)) + 
+  geom_point(alpha = .05)
+```
+
+---
+
+```{r}
+diamonds %>% 
+  ggplot(aes(x = carat, price)) + 
+  geom_bin2d()
+```
+
+---
+
+```{r}
+diamonds %>% 
+  ggplot(aes(x = carat, price)) + 
+  geom_hex()
+```
+
+---
+
+## Labels, titles, and legends
+
+## Add a title: 
+#### `ggtitle()`, `labs(title = "My Awesome Plot")`
+
+--
+
+## Change a label: 
+#### `xlab()`, `ylab()`, `labs(x = "X!", y = "Y!!")`
+
+--
+
+## Change a legend: 
+#### scale function, `labs(color = "Wow, labs does everything", fill = "Yup")`
+
+---
+
+## Your Turn 13
+
+#### 1. Add a title. 
+#### 2. Change the x and y axis labels to include the unites (inches for `hip` and pounds for `weight`). You can use either `labs()` or `xlab()` and `ylab()`
+#### 3. Add `scale_linetype()` and set the `name` argument to "Sex".
+
+```{r, eval=FALSE}
+ggplot(diabetes, aes(weight, hip, linetype = gender)) +
+  geom_jitter(alpha = .2, size = 2.5) +
+  geom_smooth(color = "black", se = FALSE) + 
+  theme_bw(base_size = 12)
+```
+
+---
+
+```{r, fig.height=3.9}
+ggplot(diabetes, aes(weight, hip, linetype = gender)) +
+  geom_jitter(alpha = .2, size = 2.5) +
+  geom_smooth(color = "black", se = FALSE) + 
+  theme_bw(base_size = 12) +
+  labs(x = "Weight (lbs)", y = "Hip (inches)") +
+  ggtitle("Hip and Weight by Sex") + 
+  scale_linetype(name = "Sex")
+```
+
+---
+
+## Saving plots
+
+--
+
+## `ggsave(p, path = "figure_name.png", dpi = 320)`
+
+---
+
+## Your Turn 14
+
+## Save the last plot and then locate it in the files pane.
+
+```{r}
+
+```
+
+---
+class: inverse-ns, center
+
+# Data Visualization Principles
+
+---
+class: inverse-ns, center
+
+# Data Visualization Principles
+
+## `r font_col("Simplify and focus", "#E69F00")`
+
+---
+class: inverse-ns, center
+
+# Data Visualization Principles
+
+## `r font_col("Simplify and focus", "#6C7B7F")`
+## `r font_col("Increase your text size", "#E69F00")`
+
+---
+class: inverse-ns, center
+
+# Data Visualization Principles
+
+## `r font_col("Simplify and focus", "#6C7B7F")`
+## `r font_col("Increase your text size", "#6C7B7F")`
+## `r font_col("Avoid pie charts (use bar charts)", "#E69F00")`
+
+---
+
+class: inverse-ns, center
+
+# Data Visualization Principles
+
+## `r font_col("Simplify and focus", "#6C7B7F")`
+## `r font_col("Increase your text size", "#6C7B7F")`
+## `r font_col("Avoid pie charts (use bar charts)", "#6C7B7F")`
+## `r font_col("Avoid line drawings (use fill/color)", "#E69F00")`
+
+---
+
+class: inverse-ns, center
+
+# Data Visualization Principles
+
+## `r font_col("Simplify and focus", "#6C7B7F")`
+## `r font_col("Increase your text size", "#6C7B7F")`
+## `r font_col("Avoid pie charts (use bar charts)", "#6C7B7F")`
+## `r font_col("Avoid line drawings (use fill/color)", "#6C7B7F")`
+## `r font_col("Stay 2D", "#E69F00")`
+
+---
+
+## `r font_col("Bonus!", "#E69F00")`
+
+--
+
+## Arranging plots
+
+--
+
+## Spatial plots
+
+--
+
+## Interactive plots
+
+--
+
+## Animated plots
+
+---
+
+class: inverse-ns, center
+
+# Take aways:
+## `plot()`, `hist()`, and friends are useful for quick plots and sometimes work with packages
+
+## ggplot2 is a powerful, extensible plotting system.
+
+---
+
+class: inverse-ns, center
+
+# Take aways:
+
+## You can use this code template to make thousands of graphs with ggplot2.
+
+```{r eval = FALSE}
+ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
+  <GEOM_FUNCTION>() +
+  <SCALE_FUNCTION>() + 
+  <THEME_FUNCTION>()
+```
+
+---
+
+class: inverse-ns, center
+
+![](https://media.giphy.com/media/OWefeMtyJex4A/giphy.gif)
+
+---
+
+class: inverse, center
+
+# Resources
+## [R for Data Science](http://r4ds.had.co.nz/): A comprehensive but friendly introduction to the tidyverse. Free online.
+## [DataCamp](https://www.datacamp.com/): ggplot2 courses and tidyverse courses
+## [ggplot2: Elegant Graphics for Data Analysis](https://smile.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/ref=sr_1_2?ie=UTF8&qid=1524362742&sr=8-2&keywords=ggplot2): The official ggplot2 book
+
+---
+
+class: inverse, center, middle
+
+# Thank you!
+
+![](https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif)
+
+### `r icon::fa("github")` [malcolmbarrett](https://github.com/malcolmbarrett/)
+### `r icon::fa("twitter")` [@malco_barrett](https://twitter.com/malco_barrett)
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
