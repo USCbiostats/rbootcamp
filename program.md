@@ -75,7 +75,7 @@ We will also be using Git
     b. (optional) Chapter 27 of "R for Data Science": R Markdown (by Hadley Wickham and Garrett Grolemund) (download [here](http://r4ds.had.co.nz/data-visualisation.html))
     
     c. (optional) A Layered Grammar of Graphics (by Hadley Wickham) (download [here](http://vita.had.co.nz/papers/layered-grammar.html))
-4.  **DAY 4: Hackathon** Seat around your fellow Bootcamp-mates and do some coding while
+4.  **DAY 4: Hackathon** Share a space with your fellow Bootcamp-mates and do some coding while
     receiving assistance from other R users.
 
 5.  **DAY 5: Present the results** A round of lightning talks where Bootcamp attendees get to show-off
