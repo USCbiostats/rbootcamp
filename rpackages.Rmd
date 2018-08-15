@@ -110,3 +110,6 @@ devtools::install_github("clauswilke/colorblindr")
 ```{r eval=FALSE}
 devtools::install_github("thomasp85/scico")
 ```
+
+- A comprehensive list of color palettes in R and a corresponding R package
+[R Color Palettes](https://github.com/EmilHvitfeldt/r-color-palettes)

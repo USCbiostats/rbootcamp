@@ -89,17 +89,22 @@ Redo the `glyhb` plot as a density plot.
 
 ```
 
+---
+
 ## Your Turn 5
 
-Make a bar chart `hwy` colored by `class`. Then, try it with the `fill` aesthetic instead of `color`.
+Make a bar chart `frame` colored by `gender`. Then, try it with the `fill` aesthetic instead of `color`.
 
 ```{r}
-
+diabetes %>% 
+  drop_na() %>% 
+  ______() + 
+  ______()
 ```
 
 ## Your Turn 6
 
-Take your code for the bar chart above (using the `fill` aesthetic). Experiment with different `position` values: "dodge", "fill", "stacked"
+Take your code for the bar chart above (using the `fill` aesthetic). Experiment with different `position` values: "dodge", "fill", "stack"
 
 ```{r}
 
@@ -144,9 +149,9 @@ ggplot(diabetes, aes(weight, hip)) +
 
 ```
 
-4. Pass `datasaurus_dozen` to `ggplot()` and add a point geom
-5. Use a facet for `dataset`.
-6. Add a text geom. For this geom, set `data = corrs`. You also need to use `aes()` in this call to set `label = corr`, `x = 50`, and `y = 110`.
+5. Pass `datasaurus_dozen` to `ggplot()` and add a point geom
+6. Use a facet (wrap) for `dataset`.
+7. Add a text geom. For this geom, set `data = corrs`. You also need to use `aes()` in this call to set `label = corr`, `x = 50`, and `y = 110`.
 
 ```{r}
 datasaurus_dozen 
@@ -163,13 +168,14 @@ datasaurus_dozen
 ```{r}
 diabetes %>% 
   ggplot(aes(waist, hip, col = weight)) + 
-  geom_point() 
+  geom_point() +
+  scale_color_viridis_c()
 ```
 
 ## Your Turn 11
 
-1. Change the theme using on of the built-in theme functions. 
-2. Use `theme` to change the legend to the bottom with `legend.position = "bottom"`.
+1. Change the theme using one of the built-in theme functions. 
+2. Use `theme()` to change the legend to the bottom with `legend.position = "bottom"`.
 3. Remove the axis ticks by setting the `axis.ticks` argument to `element_blank()`
 4. Change the font size for the axis titles. Use `element_text()`. Check the help page if you don't know what option to change.
 
