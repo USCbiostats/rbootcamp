@@ -6,7 +6,7 @@ output:
   slidy_presentation:
     footer: R Bootcamp (Day 3)
     highlight: pygments
-    font_adjustment: -1
+    # font_adjustment: -1
 ---
 
 # Reproducible Research
@@ -21,10 +21,24 @@ output:
 
 # Reproducible Research (cont. II) 
 
--   A major new issue in sciences (overall):
-    * Accessible Reproducible Research ([Mesirov, __Science__ 2010](http://science.sciencemag.org/content/327/5964/415))
-    * Again, and Again, and Again, ... ([Jasny et al., __Science__ 2011](http://science.sciencemag.org/content/334/6060/1225))
-    * Challenges in Irreproducible Research ([__nature__ topic](http://www.nature.com/news/reproducibility-1.17552))
+A major new issue in sciences (overall):
+
+* Accessible Reproducible Research ([Mesirov, __Science__ 2010](http://science.sciencemag.org/content/327/5964/415))
+
+* Again, and Again, and Again, ... ([Jasny et al., __Science__ 2011](http://science.sciencemag.org/content/334/6060/1225))
+
+* Challenges in Irreproducible Research ([__nature__ topic](http://www.nature.com/news/reproducibility-1.17552))
+
+* Reproducibility of computational workflows is automated using continuous analysis ([Beaulieu-Jones & Greene, __nature biotechnology__ 2017](https://www.nature.com/articles/nbt.3780?foxtrotcallback=true))
+
+---
+
+<div align="center">
+<img src="../../fig/docker-paper-nature.jpg" style="width:750px">
+
+Figure 2 : Research computing versus container-based approaches for differential gene expression analysis of HeLa cells.
+(source: Reproducibility of computational workflows is automated using continuous analysis)
+</div>
     
 # How to 'Reproducible Research'
 
@@ -37,6 +51,7 @@ output:
 - What else
     * Try using version control software (such as git) to make your research "opensource"
     * Avoid using proprietary software (hopefully always)
+    * Try using something like [Docker](https://docker.com)
 
 - More resources at CRAN task View [Reproducible Research](https://cran.r-project.org/web/views/ReproducibleResearch.html)
 
