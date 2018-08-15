@@ -1,9 +1,13 @@
 Bootcamp Suggested Projects
 ================
 
-Here you’ll find some examples of simulations/programming tasks that you
-could work
-on.
+The last part of the Bootcamp consists on working on a particular
+R-programming project. The idea is that you, either by yourself or with
+a team, go full hands-on and apply what you’ve learned during the
+Bootcamp.
+
+Here you’ll find some examples of projects/problems that you could work
+on:
 
 | Proj. \# | Title                                                                                      | Difficulty | Keywords                            | Author             |
 | :------- | :----------------------------------------------------------------------------------------- | :--------- | :---------------------------------- | :----------------- |
@@ -22,3 +26,10 @@ on.
 | 15       | [Find and Present on a Package](15-present-package/README.rmd)                             | easy       | packages                            | Malcolm Barrett    |
 | 16       | [Analyze the Effect of Right Heart Catheterization on Survival](16-analyze-rhc/README.rmd) | medium     | analysis                            | Malcolm Barrett    |
 | 17       | [miniGWAS](17-gwas1/)                                                                      | medium     | genetic association, GWAS           | Miguel Pereira     |
+
+We encourage you to use **Github** and **R Markdown** to manage and
+present your projects.
+
+We will be discussing projects on our [Slack
+Workspace](https://usc-rbootcamp.slack.com) (sign in using your @USC.edu
+email address).

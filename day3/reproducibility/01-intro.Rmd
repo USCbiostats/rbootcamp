@@ -6,7 +6,6 @@ output:
   slidy_presentation:
     footer: R Bootcamp (Day 3)
     highlight: pygments
-    # font_adjustment: -1
 ---
 
 # Reproducible Research

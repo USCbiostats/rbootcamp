@@ -225,7 +225,7 @@ Taking a look at the Rmarkdown cheatsheet, answer the following questions:
 
 *   In the case of plots, these just work!
     
-    ```{r plot}
+    ```{r plot, echo=FALSE}
     ggplot(diamonds, aes(x = carat, y = price, color=cut)) + 
       geom_point() +
       ggtitle("Plots with Rmarkdown just work")

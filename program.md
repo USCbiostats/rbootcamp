@@ -54,13 +54,6 @@ We will also be using Git
 
     b.  Extended example of statistical computing with R (simulations).
 
-    c.  **Assignments**: (1) Read in some dataset using the read.table
-        > function, (2) Generate a subsample of 10% the data using the
-        > runif function and compute the mean of it. (3) Repeat yourself
-        > and draw a 1,000 samples of size 10% and, using the functions
-        > hist and abline, plot a histogram of the mean and draw a
-        > vertical line at the place where the total mean lives.
-        
     **Readings**:
     
     a.  Chapter 20 of "R programming for Data Science" (by Roger D. Peng) (download [here](https://bookdown.org/rdpeng/rprogdatascience/simulation.html))
@@ -69,9 +62,9 @@ We will also be using Git
 
 3.  **DAY 3**
 
-    a.  R and Reproducible research: git, rmarkdown, and friends.
-
-    b.  Communicating: Data viz with base R and ggplot2 (an overview)
+    a.  Communicating: Data viz with base R and ggplot2 (an overview)
+    
+    b.  R and Reproducible research: git, rmarkdown, and friends.
 
     c.  Presentation of (proposed) projects (complete list [here](projects/))
     

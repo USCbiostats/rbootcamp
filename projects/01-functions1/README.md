@@ -5,5 +5,15 @@ difficulty: easy
 author: George G. Vega Yon
 ---
 
-Write out your own R function for computing cumulative sums and compare it with
-the `cumsum` in R. Are you able to achive speed gains?
+Write out your own R function for:
+
+1.  computing cumulative sums and compare it with
+the `cumsum` in R.
+
+2.  Calculating means and compare it with the `mean` function in `R`.
+
+3.  Standarize a vector as in (X - mean(X))/Sd(X) and compare it with the `scale`.
+
+Bonus:
+
+4.  Are you able to achieve speed gains?

@@ -5,6 +5,8 @@ difficulty: hard
 author: George G. Vega Yon
 ---
 
+# Simulate "Conway's Game of Life"
+
 ## Description
 
 Directly from [wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)

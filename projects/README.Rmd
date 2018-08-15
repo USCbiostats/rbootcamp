@@ -3,7 +3,11 @@ title: Bootcamp Suggested Projects
 output: github_document
 ---
 
-Here you'll find some examples of simulations/programming tasks that you could work on.
+The last part of the Bootcamp consists on working on a particular R-programming
+project. The idea is that you, either by yourself or with a team, go full hands-on
+and apply what you've learned during the Bootcamp.
+
+Here you'll find some examples of projects/problems that you could work on:
 
 
 ```{r, results='asis', echo=FALSE}
@@ -43,3 +47,8 @@ knitr::kable(ans)
 
 ```
 
+We encourage you to use **Github** and **R Markdown** to manage and present your
+projects.
+
+We will be discussing projects on our [Slack Workspace](https://usc-rbootcamp.slack.com)
+(sign in using your @USC.edu email address).
