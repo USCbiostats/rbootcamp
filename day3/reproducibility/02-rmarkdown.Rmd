@@ -256,7 +256,7 @@ if you like).
 # Thank you!
 
 <div align="center">
-R Bootcamp day 2<br>Simulation and Language Fundamentals<br><img src="../fig/trojan-rlogo.svg" style="width:250px;"><br>
+R Bootcamp day 2<br>Simulation and Language Fundamentals<br><img src="../../fig/trojan-rlogo.svg" style="width:250px;"><br>
 </div>
 
 
