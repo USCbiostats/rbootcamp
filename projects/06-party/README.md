@@ -5,7 +5,7 @@ difficulty: medium
 author: George G. Vega Yon
 ---
 
-# The party game
+# Description
 
 You have been invited to a party in which the host is giving away a present.
 Sited in round table, the host, you and 8 other guests pass the present
@@ -22,10 +22,9 @@ Since you are the host's best friend, he allows you to pick the chair first.
 The question: What chair will you pick? The one to the left of the host,
 the one to the right, or one that is the farthest away from him?
 
-Write down a function to simulate the game, and plot the distribution of
-the number of times that each one of the chairs 2 to 10 gets the present
-last.
+# Objectives
 
-Can you show that the result looks something like this? (do you believe?)
+1.  Write down a function to simulate the game, and plot the distribution of
+    the number of times that each one of the chairs 2 to 10 gets the present
+    last.
 
-<img src="party.svg" style="width:500px" alt="Distribution of the outcome">

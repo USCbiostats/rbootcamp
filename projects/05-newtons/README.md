@@ -5,8 +5,11 @@ difficulty: medium
 author: George G. Vega Yon
 ---
 
+# Objectives
+
 Implement the Newton-Raphson method of optimization as a funciton that receives
-the 1st and 2nd derivative, and find the optimum (or zero root) of the following function:
+the 1st and 2nd derivative, and find the optimum (or zero root) of the following
+function:
 
 1.  `f(x) = (x - pi)^3` (minimum at about pi)
 

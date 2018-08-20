@@ -5,14 +5,24 @@ difficulty: hard
 author: George G. Vega Yon
 ---
 
-Squares on a plane are colored variously either black or white. We arbitrarily identify one square as the "ant". The ant can travel in any of the four cardinal directions at each step it takes. The "ant" moves according to the rules below:
+#  Description
 
-* At a white square, turn 90° right, flip the color of the square, move forward one unit
-* At a black square, turn 90° left, flip the color of the square, move forward one unit
+Squares on a plane are colored variously either black or white. We arbitrarily
+identify one square as the "ant". The ant can travel in any of the four cardinal
+directions at each step it takes. The "ant" moves according to the rules below:
 
-# Objective
+*   At a white square, turn 90° right, flip the color of the square, move forward
+    one unit
+    
+*   At a black square, turn 90° left, flip the color of the square, move forward
+    one unit
 
-Here is the expected result
+# Objectives
+
+1.  Using the algorithm described in the previous section, write down an R script
+    that simulates the movement of the ant and plot it.
+
+Here is an animation of the expected result.
 
 ![](ant.gif)
 

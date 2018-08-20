@@ -5,6 +5,8 @@ difficulty: easy
 author: George G. Vega Yon
 ---
 
+# Objectives
+
 Write out your own R function for:
 
 1.  computing cumulative sums and compare it with

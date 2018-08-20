@@ -5,9 +5,7 @@ difficulty: hard
 author: George G. Vega Yon
 ---
 
-# Simulate "Conway's Game of Life"
-
-## Description
+# Description
 
 Directly from [wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 
@@ -18,16 +16,24 @@ Directly from [wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
 > 3. Any live cell with more than three live neighbors dies, as if by overpopulation.
 > 4. Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 
-## Things to consider
+# Objectives
 
-1.  *The grid is infinite*, so, in the case of edge cells, to calculate the number of active neighbors, you'll need to consider the opposite side of it.
+1.  Simulate conway's game of life
 
-2.  You can either use the [magick](https://cran.r-project.org/package=magick), or the [animation](https://cran.r-project.org/package=animation) R packages to create a GIF animation of your work.
+To achieve so, you need to consider the following
 
-3.  Try using matrix algebra to compute the number of active neighbours, otherwise the problem can become very hard to compute (in terms of speed).
+1.  *The grid is infinite*, so, in the case of edge cells, to calculate the number
+    of active neighbors, you'll need to consider the opposite side of it.
+
+2.  Try using matrix algebra to compute the number of active neighbours,
+    otherwise the problem can become very hard to compute (in terms of speed).
 
 To motivate, here you'll find a couple of examples that I was able to build for this:
 
 ![The Glider and The Beacon](life1.gif)
 
 ![A randomly active population (75%)](life2.gif)
+
+You can either use the [magick](https://cran.r-project.org/package=magick), or
+the [animation](https://cran.r-project.org/package=animation) R packages to
+create a GIF animation of your work.
