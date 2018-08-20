@@ -5,24 +5,35 @@ difficulty: hard
 author: George G. Vega Yon
 ---
 
-# Monopoly
+# Objectives
 
-## Objectives
-
-What should be the best strategy to play Monopoly (in terms of property purchase)? A question that has keep be awake several nights. The idea is to create a simulation function that provides a solution to this problem. To do so, you need to consider the following:
+What should be the best strategy to play Monopoly (in terms of property
+purchase)? A question that has keep be awake several nights. The idea is to create
+a simulation function that provides a solution to this problem. To do so, you
+need to consider the following:
 
 1.  Users throw 2 six-sided-die at the same time to advance.
+
 2.  There are 40 possible spots to fall on.
-3.  When users fall in chance/community chest spots, there are some cards that may ask them to move around the board (that changes everything!).
-4.  If the player hits double three times in a row, he goes imidiately to jail (more on die rules [here](http://monopoly.wikia.com/wiki/Die)).
+
+3.  When users fall in chance/community chest spots, there are some cards
+    that may ask them to move around the board (that changes everything!).
+    
+4.  If the player hits double three times in a row, he goes imidiately to jail
+    (more on die rules [here](http://monopoly.wikia.com/wiki/Die)).
 
 To ease the simulation, assume that:
 
 1.  There's only a single player (saad)
-2.  Tthe player has infinite resources (in other words, don't mess with bankrupcy rules), and
-3.  The game ends once the player has passed through all the positions.
 
-If everything goes as expected, you should be getting something like the following plot in which the distribution of the number of times an indivual steps into any of the 40 locations of the board (excluding chance and community chest).
+2.  Tthe player has infinite resources (in other words, don't mess with bankrupcy
+    rules), and
+    
+3.  The game ends at the turn number 500.
+
+If everything goes as expected, you should be getting something like the following
+plot in which the distribution of the number of times an indivual steps into any
+of the 40 locations of the board (excluding chance and community chest).
 
 ![](monopoly.png)
 

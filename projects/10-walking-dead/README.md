@@ -5,7 +5,7 @@ difficulty: hard
 author: George G. Vega Yon
 ---
 
-# Instructions
+# Objectives
 
 Simulate a contagion process with the following rules:
 

@@ -5,6 +5,8 @@ difficulty: medium
 author: George G. Vega Yon
 ---
 
+# Description
+
 The following message has been intercepted.
 
 ```
@@ -37,16 +39,18 @@ bv awmnce gvlw bv vbfwxvnv,
 avcv nwcfucfe icvmodubv.
 ```
 
-Your mission: use your R-skills to manipulate the text and decode the message.
-To do so, you should use the following dictionary that our field agents have
-found.
+# Objectives
 
-```
-dict <-
-c("v", "g", "z", "n", "e", "k", "t", "x", "u", "l", "h", "b", 
-"f", "m", "w", "a", "o", "c", "p", "i", "d", "s", "y", "q", "r", 
-"j", " ", ",", ".", "'", "(", ")")
-```
-
-Where the first 26 elements can be mapped to the 26 letters of the Roman alphabet.
-The remainder should be taken as is.
+1.  Your mission: use your R-skills to manipulate the text and decode the
+    message. To do so, you should use the following dictionary that our field
+    agents have found.
+    
+    ```
+    dict <-
+    c("v", "g", "z", "n", "e", "k", "t", "x", "u", "l", "h", "b", 
+    "f", "m", "w", "a", "o", "c", "p", "i", "d", "s", "y", "q", "r", 
+    "j", " ", ",", ".", "'", "(", ")")
+    ```
+    
+    Where the first 26 elements can be mapped to the 26 letters of the English
+    alphabet. The remainder should be taken as is.
