@@ -1,8 +1,6 @@
 # R Bootcamp for Scientific Computing <img src="fig/trojan-rlogo.svg" width="150px" align="right">
 
-**Instructors**
-
-[George G. Vega Yon](https://ggvy.cl), and [Malcolm Barret](https://malco.io)
+**Instructors**: [**George G. Vega Yon**](https://ggvy.cl), and [**Malcolm Barrett**](https://malco.io)
 
 
 **Website**: https://github.com/USCbiostats/rbootcamp
