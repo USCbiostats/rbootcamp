@@ -3,9 +3,12 @@
 A snapshot of the Fall 2018 version can be found [here](https://github.com/USCbiostats/rbootcamp/tree/fall2018).
 
 
-**Draft of the 2019 version** (WIP)
+## Draft of the 2019 version (WIP)
 
-
+Class | Monday | Tuesday | Wednesday | Thursday | Friday |
+|:--|:--|:--|:--|:--|:--|
+|  *Track 1, AM:<br>Intro to Data Analysis* | -- Intro <br> -- Rstudio cloud <br> -- Basics <br> -- Cool stuff  | -- Reading data <br> -- dplyr | -- (Before class) Installation help <br> -- ggplot2 (+ types and stat functions) |  -- tidyr <br> -- Modeling <br> -- Whole game | -- R Markdown <br> -- Hackathon |
+|  *Track 2, PM:<br>Statistical Computing* | -- Review <br> -- Functions <br> -- Functional programming <br> -- Simulations  | -- Profiling <br> -- Benchmarking <br> -- Linear algebra | -- RCPP |  -- Parallel Computing <br> -- HPC | -- R Markdown <br> -- Hackathon |
 
 **Instructors**: [**George G. Vega Yon**](https://ggvy.cl), and [**Malcolm Barrett**](https://malco.io)
 
