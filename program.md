@@ -2,6 +2,11 @@
 
 A snapshot of the Fall 2018 version can be found [here](https://github.com/USCbiostats/rbootcamp/tree/fall2018).
 
+
+**Draft of the 2019 version** (WIP)
+
+
+
 **Instructors**: [**George G. Vega Yon**](https://ggvy.cl), and [**Malcolm Barrett**](https://malco.io)
 
 
