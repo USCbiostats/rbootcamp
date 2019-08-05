@@ -7,8 +7,8 @@ A snapshot of the Fall 2018 version can be found [here](https://github.com/USCbi
 
 Class | Monday | Tuesday | Wednesday | Thursday | Friday |
 |:--|:--|:--|:--|:--|:--|
-|  *Track 1, AM:<br>Intro to Data Analysis* | -- Intro <br> -- Rstudio cloud <br> -- Basics <br> -- Cool stuff  | -- Reading data <br> -- dplyr | -- (Before class) Installation help <br> -- ggplot2 (+ types and stat functions) |  -- tidyr <br> -- Modeling <br> -- Whole game | -- R Markdown <br> -- Hackathon |
-|  *Track 2, PM:<br>Statistical Computing* | -- Review <br> -- Functions <br> -- Functional programming <br> -- Simulations  | -- Profiling <br> -- Benchmarking <br> -- Linear algebra | -- RCPP |  -- Parallel Computing <br> -- HPC | -- R Markdown <br> -- Hackathon |
+|  *Track 1, AM:<br>Intro to Data Analysis* | -- Reading data with readr and haven <br> -- data manipulation with dplyr |-- data visualization with ggplot2  |  -- Before class: Installation help <br>  -- Tidying data with tidyr <br> -- Modeling in R <br> | -- Dynamic documents with R Markdown <br> -- Whole game | -- Fun with R Markdown <br> -- Hackathon |
+|  *Track 2, PM:<br>Statistical Computing* | -- Review <br> -- Functions <br> -- Functional programming <br> -- Simulations  | -- Profiling <br> -- Benchmarking <br> -- Linear algebra | -- RCPP |  -- Parallel Computing <br> -- HPC | -- Fun with R Markdown <br> -- Hackathon |
 
 **Instructors**: [**George G. Vega Yon**](https://ggvy.cl), and [**Malcolm Barrett**](https://malco.io)
 
@@ -17,8 +17,8 @@ Class | Monday | Tuesday | Wednesday | Thursday | Friday |
 
 This boot camp has as main goal to give a general overview of scientific
 computing, and in particular, on the R programming language. It is
-divided in 5 days. The first three days will be a mix of presentations
-and hands-on work, and the last two will be 100% hands-on where the
+divided in 5 days. The first four days will be a mix of presentations
+and hands-on work, and the last day will be primarily hands-on where the
 attendees are expected to work on [**a short project**](projects/) and present their
 results at the end of the boot camp.
 
