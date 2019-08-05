@@ -24,15 +24,18 @@ results at the end of the boot camp.
 
 ## Dates
 
-The bootcamp will take place on the week of Monday August 13th, 2018:
+The bootcamp will take place on the week of Monday August 19th, 2019:
 
-|    | Day/Time | Room |
+|    | Day | Room |
 |:---|:---|---:|
-| **Lecture 1** | Monday, August 13, 10 AM to 2 PM | SSB 116 |
-| **Lecture 2** | Tuesday, August 14, 10 AM to 2 PM | SSB 116|
-| **Lecture 3** | Wednesday, August 15, 10 AM to 2 PM | SSB 116|
-| **Hackathon** (*after student orientation*) | Thursday, August 16, 2:30 PM to 5:30 PM | SSB 116|
-| **Final Presentations** | Friday, August 17, 10 AM to 1 PM | SSB 114|
+| **Lecture 1** | Monday, August 19 | SSB 116 |
+| **Lecture 2** | Tuesday, August 20 | SSB 116|
+| **Lecture 3** | Wednesday, August 21 | SSB 116|
+| **Lecture 4** | Thursday, August 22 | SSB 116|
+| **Final Presentations** | Friday, August 23 | SSB 116|
+
+The DA track will take place between 10AM and 1PM, and the SC track between 2PM and 5PM.
+The last day, Friday 23rd, we will a single joint session at 2PM.
 
 
 ## Prerequisites
@@ -50,49 +53,7 @@ We will also be using Git
 
 ## Schedule
 
-1.  **DAY 1**: 
-
-    a.  Introduction: What, Why, and How with R
-
-    a.  Data analysis with Tidyverse
-        
-    **Readings**:
-    
-    a.  Chapter 4 of "R programming for Data Science" (by Roger D. Peng) (download [here](https://bookdown.org/rdpeng/rprogdatascience/r-nuts-and-bolts.html))
-
-2.  **DAY 2**:
-
-    a.  R Language fundamentals and Statistical Computing.
-
-    b.  Extended example of statistical computing with R (simulations).
-
-    **Readings**:
-    
-    a.  Chapter 20 of "R programming for Data Science" (by Roger D. Peng) (download [here](https://bookdown.org/rdpeng/rprogdatascience/simulation.html))
-    
-    b. (optional) Chapter on Functional Programming of "Advanced R"" (by Hadley Wickham) (download [here](http://adv-r.had.co.nz/Functional-programming.html))
-
-3.  **DAY 3**
-
-    a.  Communicating: Data viz with base R and ggplot2 (an overview)
-    
-    b.  R and Reproducible research: git, rmarkdown, and friends.
-
-    c.  Presentation of (proposed) projects (complete list [here](projects/))
-    
-    **Readings**:
-    
-    a.  Chapter 3 of "R for Data Science": Data Visualisation (by Hadley Wickham and Garrett Grolemund) (download [here](http://r4ds.had.co.nz/data-visualisation.html))
-    
-    b. (optional) Chapter 27 of "R for Data Science": R Markdown (by Hadley Wickham and Garrett Grolemund) (download [here](http://r4ds.had.co.nz/data-visualisation.html))
-    
-    c. (optional) A Layered Grammar of Graphics (by Hadley Wickham) (download [here](http://vita.had.co.nz/papers/layered-grammar.html))
-    
-4.  **DAY 4: Hackathon** Share a space with your fellow Bootcamp-mates and do some coding while
-    receiving assistance from other R users.
-
-5.  **DAY 5: Present the results** A round of lightning talks where Bootcamp attendees get to show-off
-    what they learned in the Bootcamp, doing short five-minute presentations.
+TBD
 
 # References
 
