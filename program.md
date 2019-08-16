@@ -7,8 +7,8 @@ A snapshot of the Fall 2018 version can be found [here](https://github.com/USCbi
 
 Class | Monday | Tuesday | Wednesday | Thursday | Friday |
 |:--|:--|:--|:--|:--|:--|
-|  *Track 1, AM:<br>Intro to Data Analysis* | -- Reading data with readr and haven <br> -- data manipulation with dplyr |-- data visualization with ggplot2  |  -- Before class: Installation help <br>  -- Tidying data with tidyr <br> -- Modeling in R <br> | -- Dynamic documents with R Markdown <br> -- Whole game | -- Fun with R Markdown <br> -- Hackathon |
-|  *Track 2, PM:<br>Statistical Computing* | -- Review <br> -- Functions <br> -- Functional programming <br> -- Simulations  | -- Profiling <br> -- Benchmarking <br> -- Linear algebra | -- RCPP |  -- Parallel Computing <br> -- HPC | -- Fun with R Markdown <br> -- Hackathon |
+|  *Track 1, AM:<br>Intro to Data Analysis* | -- Reading data with readr and haven <br> -- data manipulation with dplyr |-- data visualization with ggplot2  |  -- Before class: Installation help <br>  -- Tidying data with tidyr <br> -- Modeling in R <br> | -- Dynamic documents with R Markdown <br> -- Fun with R Markdown <br> -- Whole game | <br> -- Code Cafe |
+|  *Track 2, PM:<br>Statistical Computing* | -- Review <br> -- Functions <br> -- Functional programming <br> -- Simulations  | -- Profiling <br> -- Benchmarking <br> -- Linear algebra | -- RCPP |  -- Parallel Computing <br> -- HPC | -- Code Cafe |
 
 **Instructors**: [**George G. Vega Yon**](https://ggvy.cl), and [**Malcolm Barrett**](https://malco.io)
 
