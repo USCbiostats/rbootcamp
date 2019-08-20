@@ -1,0 +1,315 @@
+---
+title: 'R Bootcamp day 2<br>Statistical Computing Track<br><img src="../fig/trojan-rlogo.svg" style="width:250px;">'
+author: <a href="https://ggvy.cl"><b>George G. Vega Yon</b></a><br>vegayon@usc.edu<br><br>University of Southern California<br>Department of Preventive Medicine
+date: August 20th, 2019
+output: 
+  slidy_presentation:
+    footer: R Bootcamp (Day 2)
+    highlight: pygments
+    font_adjustment: -1
+---
+
+# A recap from Day 1
+
+1.  R has 6 atomic types...
+    
+2.  R Core has several functions for simulating and computing statistical
+    distributions. The names start with...
+    
+3.  Overall, we should use (blank) instead of for-loops.
+
+4.  We should set `set.seed` (blank).
+    
+  
+# Beyond the vector
+
+A very important data-type... matrices. You tell me about them
+
+*  What are matrices in R?
+
+*  How are matrices stored in R?
+
+*  How many fundamental matrix types live in core R?
+
+# Beyond the vector (cont'd)
+
+"Fundamental" types of matrices:
+
+1.  **Dense ("regular") matrix** Fully supported by base R
+
+2.  **Sparse matrix** Only store the non-zero values. Can be row or column
+    major... the Compress colum-major class `dgCMatrix` in the Matrix package,
+    for example.
+    
+    Two main R packages: [Matrix](https://cran.r-project.org/package=Matrix) and
+    [SparseM](https://cran.r-project.org/package=SparseM).
+    
+    **Matrix** is fully supported by
+    [RcppArmadillo](https://cran.r-project.org/package=RcppArmadillo) and
+    [RcppEigen](https://cran.r-project.org/package=RcppEigen) (will talk more
+    about these on Wednesday!)
+    
+    If you work with spatial data... then these are your friends!
+    
+3.  **File-backed matrices** Usually dense, but doesn't fit in memory!
+    One package for working with this: [bigmemory](https://cran.r-project.org/package=bigmemory).
+    
+    Also supported by RcppArmadillo and RcppEigen (I believe?).
+   
+
+# Matrix algebra 101
+
+*   **Matrix**: A special class of array, are vectors with a `dim` attribute of length 2 (number of rows and number of columns).
+    
+    ```{r}
+    mymat <- matrix(1:9, ncol=3) # A matrix with numbers 1 through 9 with 3 columns
+    mymat
+    str(mymat)
+    ```
+    
+    R stores elements in column major-order. We can access matrices elements in the following way.
+    
+    ```{r, collapse=TRUE}
+    mymat[1, 2] # The element in the (1, 2) location of the matrix
+    mymat[4]    # The fourth element in the vector... which is (1, 2)
+    ```
+    
+    Matrices can have row and column names too.
+  
+# Matrix algebra 101 (cont'd)
+
+*   Some matrix fundamental operators, for matrices `A`, and `B` (both square) with the same dimensions (just for the examples):
+
+    *   Element wise product, addition, substraction, and quotient: `A * B`, `A + B`, `A - B`, `A/B`
+    *   Transpose `t(A)`.
+    *   Inverse `solve(A)`.
+    *   Column and row bind, `cbind(A, B)`, `rbind(A, B)`.
+    *   Matrix product between both `A %*% B`.
+    
+*   Your favorite model can be simulated using linear algebra!
+    
+    ```{r eg-ols-sim}
+    # Simulating an Linear Model
+    set.seed(181)
+    X <- cbind(1, rnorm(1000))
+    y <- X %*% cbind(c(2.3, 5)) + rnorm(1000)
+    
+    # Estimating the model using the lm function
+    coef(lm(y ~ -1 + X))
+    
+    # O a la linear algebra :)
+    solve(t(X) %*% X) %*% t(X) %*% y
+    ```
+
+
+# Matrix problems:
+
+*   Given the following matrices `A`, `B`, and C
+    
+    ```{r, R.options=list(digits=2)}
+    set.seed(122)
+    A <- matrix(rnorm(12), ncol=3)
+    B <- matrix(rnorm(12), nrow=3)
+    C <- A %*% cbind(1:3) + rnorm(4) # Adding a vector of length 4!
+    ```
+    
+    Compute
+    
+    1.  Compute the matrix product between `A` and `B`
+    2.  Generate the transpose of `A`
+    3.  Merge `A` and `B` by row and by column. 
+    3.  Calculate the element-wise product of `A` and the transpose of `B`.
+    4.  Calculate The inverse of the cross product of `A`, this is $(A^\mbox{t}\times A)^{-1}$
+    5.  Compute $(A^\mbox{t} A)^{-1} A^\mbox{t} C$. How could you do this with a single command in R?
+  
+
+    ```{r, eval=FALSE, echo=FALSE}
+    # Matrix multiplication:
+    A %*% B
+
+    # Transpose
+    t(A)
+    
+    # Element-wise product
+    A*t(B)
+
+    # Inverse
+    solve(t(A) %*% A)
+    
+    # OLS
+    solve(t(A) %*% A) %*% t(A) %*% C
+    ```
+
+# Matrix obects in R
+
+Some language-specifics
+
+- Finding the maximum value of every row: `max.col`
+
+- Using the `which` function in matrices (set `arr.ind = TRUE`)
+
+- Aggregation functions: `colSums`, `colMeans`, `row...`
+
+- Other functions: `norm`, `lower.tri`
+
+# Example: indexing columns
+
+*   Imagine that you have a dataset with 100 rows and 5 columns (usually these
+    numbers are bigger...)
+    
+*   Each cell reports the p-value of some association tests of the i-th row with
+    the k-th column.
+    
+*   Task: For each row, select the column with the lowest value.
+    
+    ```{r eg-indexing-columns-dgp1}
+    set.seed(11122)
+    
+    dat <- matrix(runif(100*5), nrow = 100)
+    head(dat)
+    ```
+    
+    ```{r eg-indexing-columns-sol1, include=FALSE}
+    # To get the min is equivalent to get the max of the negative!
+    idx <- max.col(-dat)
+    head(idx)
+    
+    # Let's just see the first observations
+    cbind(
+      head(dat),
+      lowest = head(dat[cbind(1:100, idx)])
+    )
+    ```
+
+
+# Example: indexing rows
+
+*   Now suppose that the data is a bit different: 5 rows and 100 columns.
+
+*   Task: For each column, select the row with the highest value.
+    
+    ```{r eg-indexing-columns-dgp2}
+    set.seed(881)
+    
+    dat <- matrix(runif(100*5), nrow = 5)
+    str(dat)
+    ```
+    
+    ```{r eg-indexing-columns-sol2, include = FALSE}
+    # Well... we don't have a max.row... but we can always transpose it!
+    idx <- max.col(-t(dat))
+    head(idx)
+    
+    cbind(
+      head(dat),
+      lowest = head(dat[cbind(idx, 1:100)])
+    )
+    ```
+
+
+# Problem 1
+
+*   A bernoulli graph, also known as an Erdos-Renyi graph, is a simple model which
+    is fully characterized by the density of the graph.
+
+*   In a graph with probability parameter $p$ and $n$ nodes (vertices), the
+    expected number of ties is $pn^2$, e.g. if $n = 100$ and $p = 0.1$
+    $E(m) = 100^2 \times 0.1 = 1,000$.
+
+*   Simulate a bernoulli network (a.k.a. Erdos-Renyi graph) with parameter p = .01
+   (chance of any edge) and n = 1e3.
+    
+    ```{r solution-er, eval=FALSE, echo=FALSE}
+    set.seed(81)
+    # How many edges
+    n   <- 1e3
+    m   <- rbinom(1, n^2, .05)
+    
+    # Where are the edges?
+    idx <- sample.int(n^2, m, FALSE)
+    mat <- matrix(0, 1e3, 1e3)
+    mat[idx] <- 1L
+    
+    image(mat)
+    ```
+
+# Example with a big graph
+
+Let's imagine we want to do the same with a network of size 50,000 with density
+.0005. The expected number of ties is 1,250,000.
+
+```{r solution-er2}
+set.seed(81)
+# How many edges
+n   <- 5e4
+m   <- rbinom(1, n^2, .0005)
+
+# Where are the edges?
+idx <- sample.int(n^2, m, FALSE)
+
+library(Matrix)
+# Getting the row
+idx_row <- (idx - 1) %% n + 1
+idx_col <- (idx - 1) %/% n + 1
+
+# Empty sparse
+mat <- sparseMatrix(
+  i = idx_row,
+  j = idx_col,
+  x = rep(1, length(idx_row)),
+  dims = c(n, n)
+  )
+
+# Is it working?
+sum(mat) == m
+```
+
+```{r er-space-saver}
+print(object.size(mat), units = "Mb") # Sparse matrix
+(8 * n^2) / 1024^2 # Dense matrix
+```
+
+
+
+# Questions 5
+
+1.  Create a function to simulate OLS (ordinary least squares) data with the following:
+    
+    *   An argument `n`: Number of observations to make
+    *   An argument `beta`: Coefficient with default value 0.3
+    *   An argument `alpha`: Coefficient with default value 4
+    *   `X` and the error are N(0, 1)
+    *   The function should return both `Y` and `X`
+    
+    To generate 100 OLS model observations, you can type in
+        
+    ```r
+    X <- rnorm(100)
+    Y <- 4 + X*0.3 + rnorm(100)
+    ```
+    
+2.  To make sure you are doing OK, try estimating your model using the `lm`
+    function with a large simulation of observations.
+        
+
+
+# Thank you!
+
+<div align="center">
+R Bootcamp day 2<br>Statistical Computing Track<br><img src="../fig/trojan-rlogo.svg" style="width:250px;"><br>
+</div>
+
+
+<div align="center" style="font-size:40px;">
+**website**: [ggvy.cl](https://ggvy.cl)<br><br>
+**twitter**: [\@gvegayon](https://twitter.com/gvegayon)<br><br>
+**github**: [gvegayon](https://github.com/gvegayon)<br><br>
+</div>
+
+
+# Session info
+
+```{r}
+devtools::session_info()
+```
+
