@@ -220,10 +220,14 @@ Some language-specifics
    (chance of any edge) and n = 1e3.
     
     ```{r solution-er, eval=FALSE, echo=FALSE}
+    # Example 1
+    M <- matrix(NA, 100, 100)
+    M[] <- as.integer(runif(10000) < .1)
+    
     set.seed(81)
     # How many edges
     n   <- 1e3
-    m   <- rbinom(1, n^2, .05)
+    m   <- rbinom(1, n^2, .01)
     
     # Where are the edges?
     idx <- sample.int(n^2, m, FALSE)
