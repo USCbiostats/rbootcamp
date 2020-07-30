@@ -1,16 +1,16 @@
 # R Bootcamp <img src="fig/trojan-rlogo.svg" width="150px" align="right">
 
-A snapshot of the Fall 2018 version can be found [here](https://github.com/USCbiostats/rbootcamp/tree/fall2018).
+A snapshot of the Fall 2018 version can be found [here](https://github.com/USCbiostats/rbootcamp/tree/fall2018), and snapshot of the Fall 2019 version can be found [here](https://github.com/USCbiostats/rbootcamp/tree/fall2019).
 
 
-## Draft of the 2019 version (WIP)
+## Draft of the 2020 version (WIP)
 
-Class | Monday | Tuesday | Wednesday | Thursday | Friday |
-|:--|:--|:--|:--|:--|:--|
-|  *Track 1, AM:<br>Intro to Data Analysis* | -- Reading data with readr and haven <br> -- data manipulation with dplyr |-- data visualization with ggplot2  |  -- Before class: Installation help <br>  -- Tidying data with tidyr <br> -- Modeling in R <br> | -- Dynamic documents with R Markdown <br> -- Fun with R Markdown <br> -- Whole game | <br> -- Code Cafe |
-|  *Track 2, PM:<br>Statistical Computing* | -- Review <br> -- Functions <br> -- Functional programming <br> -- Simulations  | -- Profiling <br> -- Benchmarking <br> -- Linear algebra | -- RCPP |  -- Parallel Computing <br> -- HPC | -- Code Cafe |
+- **Lecture 1** What is R? an 
 
-**Instructors**: [**George G. Vega Yon**](https://ggvy.cl), and [**Malcolm Barrett**](https://malco.io)
+- **Lecture 2** Data wrangling fundamentals
+
+- **Lecture 3** Automatic docs with Rmarkdown
+
 
 
 **Website**: https://github.com/USCbiostats/rbootcamp
