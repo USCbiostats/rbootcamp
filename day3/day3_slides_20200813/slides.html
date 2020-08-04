@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Automatic Reports with RMarkdown</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Keren Xu" />
+    <script src="libs/header-attrs-2.3/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/robot.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/robot-fonts.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.0.20/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.0.20/tile-view.js"></script>
+    <script src="libs/xaringanExtra-webcam-0.0.1/webcam.js"></script>
+    <script id="xaringanExtra-webcam-options" type="application/json">{"width":"300","height":"225","margin":"1em"}</script>
+    <link href="libs/panelset-0.0.20/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset-0.0.20/panelset.js"></script>
+    <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+    <script src="libs/jquery-1.12.4/jquery.min.js"></script>
+    <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-1.3.1/leaflet.js"></script>
+    <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+    <script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+    <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+    <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+class: center, middle, inverse  
+
+# Automatic Reports with RMarkdown   
+### R Bootcamp for Scientific Computing 2020: Lecture 3   
+&lt;b&gt;
+&lt;b&gt;
+#### 2020/08/13  
+
+&lt;img src="hex-stickers.png" width="70%" height="70%" /&gt;
+
+
+---
+background-image: url(https://github.com/rstudio/hex-stickers/blob/master/PNG/rmarkdown.png?raw=true)
+background-position: 95% 10%  
+background-size: 20%   
+
+# Overview   
+### 1. What is RMarkdown/Markdown?         
+
+### 2. "Knit" Scripts to Reports       
+
+### 3. My Favorite Packages Using RMarkdown     
+
+---
+# What is RMarkdown/Markdown?         
+
+.center[
+&lt;img src="intro.png" width="100%" height="100%" /&gt;
+]  
+ 
+
+---
+# A .rmd file          
+
+.right-column[
+&lt;img src="rmdfile.png" width="80%" height="80%" /&gt;
+]  
+
+--
+
+.left-column[  
+&lt;b&gt;  
+&lt;b&gt;  
+ **YAML**   
+ "YAML Ain't Markup Language"
+&lt;b&gt;    
+&lt;b&gt;   
+&lt;b&gt;  
+ **TEXT**   
+ "Markdown language"
+  
+ **Code Chunk**   
+]   
+---
+class: inverse 
+# Activity #1 (create a .rmd file)    
+
+--
+
+.center[
+&lt;img src="notebookinterface.png" width="90%" height="90%" /&gt;
+]
+
+
+---
+background-image: url(https://github.com/rstudio/hex-stickers/blob/master/PNG/knitr.png?raw=true)
+background-position: 95% 10%  
+background-size: 10% 
+# Render output  
+
+.pull-left[
+
+```r
+library(rmarkdown)
+render("***.Rmd")  
+```
+]
+
+.pull-right[
+use the “**Knit**” button in the RStudio IDE 
+]
+
+--
+
+## How it works?   
+
+.center[
+&lt;img src="rmarkdownflow.png" width="90%" height="90%" /&gt;
+]
+
+---
+class: inverse 
+# Activity #2 (render a .rmd file)    
+
+--
+
+.center[
+&lt;img src="renderfile.png" width="90%" height="90%" /&gt;
+]
+
+---
+.right-column[
+&lt;img src="rmdfile.png" width="80%" height="80%" /&gt;
+]  
+
+.left-column[  
+&lt;b&gt;  
+&lt;b&gt;  
+ **YAML**   
+ "YAML Ain't Markup Language"
+&lt;b&gt;    
+&lt;b&gt;   
+&lt;b&gt;  
+ **TEXT**   
+ "Markdown language"
+  
+ **Code Chunk**   
+]   
+
+---
+background-image: url(markdown.png)
+background-position: 98% 5%  
+background-size: 5% 
+.panelset[
+.panel[
+.panel-name[Header]   
+
+.pull-left[
+## Markdown text   
+```no-highlight
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+
+```
+]
+
+.pull-right[
+## Rendered text   
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+
+]
+
+]
+
+.panel[
+.panel-name[Emphasis]   
+.pull-left[
+## Markdown text   
+```no-highlight
+Italics, with *asterisks* or _underscores_.
+
+Bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
+
+Strikethrough uses two tildes. ~~Scratch this.~~
+```
+]
+
+.pull-right[
+## Rendered text   
+Italics, with *asterisks* or _underscores_.
+
+Bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
+
+Strikethrough uses two tildes. ~~Scratch this.~~
+
+]
+
+]
+
+.panel[
+.panel-name[Lists]   
+.pull-left[
+## Markdown text   
+```no-highlight
+1. First ordered list item
+2. Another item
+* Unordered sub-list. 
+1. Actual numbers don't matter, just that it's a number
+1. Ordered sub-list
+4. And another item.
+
+An indented paragraphs within list items.
+
+Asterisks Unordered list can use asterisks
+- Or minuses
++ Or pluses
+```
+]
+
+.pull-right[
+## Rendered text   
+1. First ordered list item
+2. Another item
+  * Unordered sub-list. 
+1. Actual numbers don't matter, just that it's a number
+  1. Ordered sub-list
+4. And another item.
+
+   An indented paragraphs within list items.
+
+* Unordered list can use asterisks
+- Or minuses
++ Or pluses
+
+]
+
+]
+
+
+
+.panel[
+.panel-name[Links]   
+.pull-left[
+## Markdown text   
+```no-highlight
+[I'm an inline-style link](https://github.com/)
+
+[I'm an inline-style link with title](https://github.com/ "Github Homepage")
+
+[I'm an inline-style link with reference-style][1]
+
+[link text itself]
+
+URLs and URLs in angle brackets will automatically get
+turned into links. 
+https://github.com or &lt;https://github.com&gt; 
+
+
+
+[1]: https://github.com/
+[link text itself]: https://github.com/
+```
+]
+
+.pull-right[
+## Rendered text   
+[I'm an inline-style link](https://github.com/)
+
+[I'm an inline-style link with title](https://github.com/ "Github Homepage")
+
+[I'm an inline-style link with reference-style][1]
+
+[link text itself]
+
+URLs and URLs in angle brackets will automatically get turned into links. 
+https://github.com or &lt;https://github.com&gt;
+
+
+
+[1]: https://github.com/
+[link text itself]: https://github.com/
+
+]
+
+]
+
+
+.panel[
+.panel-name[Images]   
+.pull-left[
+## Markdown text   
+```no-highlight
+Inline-style: 
+![alt text](https://logos-download.com/wp-content/uploads
+/2016/09/SpongeBob_SquarePants_picture_running.png 
+"Logo Title Text 1")
+
+Reference-style: 
+![alt text][logo]
+
+[logo]: https://logos-download.com/wp-content/uploads/2016/09
+/SpongeBob_SquarePants_picture_running.png 
+"Logo Title Text 2"
+```
+]
+
+.pull-right[
+## Rendered text   
+Inline-style: 
+![alt text](https://logos-download.com/wp-content/uploads/2016/09/SpongeBob_SquarePants_picture_running.png "Logo Title Text 1")
+
+
+]
+
+]
+
+
+.panel[
+.panel-name[Syntax]   
+.pull-left[
+## Markdown text   
+```no-highlight
+Inline `code` has `back-ticks around` it.
+```
+&lt;pre lang="no-highlight"&gt;&lt;code&gt;```javascript
+var s = "JavaScript syntax highlighting";
+alert(s);
+&lt;pre lang="no-highlight"&gt;&lt;code&gt;```
+
+```no-highlight    
+
+```python   
+s = "Python syntax highlighting"
+print s 
+```
+```
+
+]
+
+.pull-right[
+## Rendered text     
+
+&lt;img src="inlinecode.png" width="80%" height="80%" /&gt;
+
+```javascript
+var s = "JavaScript syntax highlighting";
+alert(s);
+```
+```python
+s = "Python syntax highlighting"
+print s
+```  
+ 
+]
+
+]
+
+
+.panel[
+.panel-name[Blockquotes]   
+.pull-left[
+## Markdown text   
+```no-highlight
+&gt; I'm a quote in a block.
+```
+]
+
+.pull-right[
+## Rendered text   
+&gt; I'm a quote in a block.
+
+]
+
+]
+
+.panel[
+.panel-name[Tables]   
+.pull-left[
+## Markdown text   
+```no-highlight
+Colons can be used to align columns.
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+There must be at least 3 dashes separating each header cell.
+The outer pipes (|) are optional, and you don't need to make the 
+raw Markdown line up prettily. You can also use inline Markdown.
+
+Markdown | Less | Pretty
+--- | --- | ---
+`Still` | *renders* | **nicely**
+1 | 2 | 3
+```
+]
+
+.pull-right[
+## Rendered text   
+Colons can be used to align columns.
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+There must be at least 3 dashes separating each header cell.
+The outer pipes (|) are optional, and you don't need to make the 
+raw Markdown line up prettily. You can also use inline Markdown.
+
+Markdown | Less | Pretty
+--- | --- | ---
+`Still` | *renders* | **nicely**
+1 | 2 | 3
+
+]
+
+]
+
+]
+  
+---
+class: inverse
+# Activity #3 (write in Markdown)    
+.panelset[
+.panel[
+.panel-name[Task]   
+# Hello World (H1)
+## This is a .md document (H2)   
+
+Hi **Humans**!   
+Jane Doe here, I like   
+
+- Node.r   
+  ~~That's what I'm made of!~~
+- Coffee.md   
+
+
+I've had tacos on the moon and find them _far superior_ to Earth tacos. 
+
+]
+
+.panel[
+.panel-name[Solution]   
+
+```no-highlight
+# Hello World (H1)
+## This is a .md document (H2)   
+
+Hi **Humans**!   
+Jane Doe here, I like   
+
+- Node.r   
+  ~~That's what I'm made of!~~
+- Coffee.md   
+
+
+I've had tacos on the moon and find them _far superior_ to Earth tacos.
+```
+]
+]
+
+
+---
+
+.right-column[
+&lt;img src="rmdfile.png" width="80%" height="80%" /&gt;
+]  
+
+.left-column[  
+&lt;b&gt;  
+&lt;b&gt;  
+ **YAML**   
+ "YAML Ain't Markup Language"
+&lt;b&gt;    
+&lt;b&gt;   
+&lt;b&gt;  
+ **TEXT**   
+ "Markdown language"
+  
+ **Code Chunk**   
+]     
+
+---
+
+# Code Chunk #1   
+
+&lt;img src="codechunk1.png" width="100%" height="100%" /&gt;
+
+---
+# Rendered Output #1  
+
+
+```r
+# create leaflet graph
+library(leaflet)
+leaflet() %&gt;%
+  addTiles() %&gt;%
+  addMarkers(lng=-118.196980, 
+             lat=34.065764, 
+             popup="Soto Street Building.&lt;/br&gt;
+             No, no one is here.") 
+```
+
+<div id="htmlwidget-b7967143ba1ca4a0a60f" style="width:504px;height:504px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b7967143ba1ca4a0a60f">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[34.065764,-118.19698,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Soto Street Building.<\/br>\n             No, no one is here.",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[34.065764,34.065764],"lng":[-118.19698,-118.19698]}},"evals":[],"jsHooks":[]}</script>
+
+---
+
+# Code Chunk #2  
+
+&lt;img src="codechunk2.png" width="100%" height="100%" /&gt;
+
+---
+# Rendered Output #2  
+
+<div id="htmlwidget-4a6bd81f203440d34a49" style="width:504px;height:504px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4a6bd81f203440d34a49">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[34.065764,-118.19698,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Soto Street Building.<\/br>\n             No, no one is here.",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[34.065764,34.065764],"lng":[-118.19698,-118.19698]}},"evals":[],"jsHooks":[]}</script>
+
+---
+# Code Chunk #3     
+
+&lt;img src="codechunk3.png" width="100%" height="100%" /&gt;
+
+---
+# Rendered Output #3    
+
+
+```r
+# create leaflet graph
+library(leaflet)
+leaflet() %&gt;%
+  addTiles() %&gt;%
+  addMarkers(lng=-118.196980, 
+             lat=34.065764, 
+             popup="Soto Street Building.&lt;/br&gt;
+             No, no one is here.") 
+```
+
+---
+# Code Chunk #4   
+
+&lt;img src="codechunk4.png" width="100%" height="100%" /&gt;
+
+---
+# Rendered Output #4    
+
+
+```r
+# create leaflet graph
+library(leaflet)
+leaflet() %&gt;%
+  addTiles() %&gt;%
+  addMarkers(lng=-118.196980, 
+             lat=34.065764, 
+             popup="Soto Street Building.&lt;/br&gt;
+             No, no one is here.") 
+```
+
+<div id="htmlwidget-76ebadb50ea7173f259e" style="width:40%;height:40%;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-76ebadb50ea7173f259e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[34.065764,-118.19698,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Soto Street Building.<\/br>\n             No, no one is here.",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[34.065764,34.065764],"lng":[-118.19698,-118.19698]}},"evals":[],"jsHooks":[]}</script>
+
+---
+# Other language engines   
+
+```r
+names(knitr::knit_engines$get())
+```
+
+```
+##  [1] "awk"       "bash"      "coffee"    "gawk"      "groovy"    "haskell"  
+##  [7] "lein"      "mysql"     "node"      "octave"    "perl"      "psql"     
+## [13] "Rscript"   "ruby"      "sas"       "scala"     "sed"       "sh"       
+## [19] "stata"     "zsh"       "highlight" "Rcpp"      "tikz"      "dot"      
+## [25] "c"         "cc"        "fortran"   "fortran95" "asy"       "cat"      
+## [31] "asis"      "stan"      "block"     "block2"    "js"        "css"      
+## [37] "sql"       "go"        "python"    "julia"     "sass"      "scss"
+```
+
+
+--
+.pull-left[
+### Code chunks  
+&lt;img src="engine.png" width="100%" height="100%" /&gt;
+]
+
+.pull-right[
+### Rendered output  
+
+```python
+x = 'hello, python world!'
+print(x.split(' '))
+```
+
+```
+## ['hello,', 'python', 'world!']
+```
+
+
+```bash
+echo "Hello Bash!"
+```
+
+```
+## Hello Bash!
+```
+
+]
+
+---
+
+.right-column[
+&lt;img src="rmdfile.png" width="80%" height="80%" /&gt;
+]  
+
+.left-column[  
+&lt;b&gt;  
+&lt;b&gt;  
+ **YAML**   
+ "YAML Ain't Markup Language"
+&lt;b&gt;    
+&lt;b&gt;   
+&lt;b&gt;  
+ **TEXT**   
+ "Markdown language"
+  
+ **Code Chunk**   
+]     
+
+---
+background-image: url(https://upload.wikimedia.org/wikipedia/commons/7/74/Zotero_logo.svg)
+background-position: 95% 10%  
+background-size: 20%   
+# Citr  
+
+.pull-left[
+`citr` provides functions and an RStudio addin to search a BibTeX-file to create and insert formatted Markdown citations into the current document.  
+Github: https://github.com/crsh/citr   
+
+```r
+install.packages("citr")
+```
+or
+
+```r
+devtools::install_github("crsh/citr")
+```
+
+**Better BibTeX integration**    
+If you are using `Zotero`, you can install the Better BibTeX extension. Once the extension is installed, citr can access all your references and keep your bibliography file updated.    
+
+]
+
+.pull-right[
+![alt text](https://github.com/crsh/citr/raw/master/tools/images/addin_demo.gif)
+
+]
+
+
+---
+background-image: url(https://annakrystalli.me/talks/assets/logos/xaringan-hex.png)
+background-position: 95% 5%  
+background-size: 10%   
+# Xaringan   
+.pull-left[   
+
+An R package for creating slideshows with `remark.js` through R Markdown.    
+Github: https://github.com/yihui/xaringan  
+
+
+```r
+remotes::install_github('yihui/xaringan')
+```
+
+&lt;iframe src="https://slides.yihui.org/xaringan/#1" width="80%" height="400px"&gt;&lt;/iframe&gt;
+
+]
+
+--
+.pull-right[   
+## xaringanExtra    
+
+`xaringanExtra` is a playground of enhancements and extensions for xaringan slides.      
+Github: https://github.com/gadenbuie/xaringanExtra    
+
+
+```r
+xaringanExtra::use_xaringan_extra(c("tile_view", "webcam"))
+```
+]
+
+---
+background-image: url(https://user-images.githubusercontent.com/163582/51942716-66be4180-23dd-11e9-8dbc-fdb4f465d1c2.png)
+background-position: 95% 5%   
+background-size: 10%   
+# pagedown   
+.pull-left[   
+
+Github: https://github.com/rstudio/pagedown   
+
+![](https://user-images.githubusercontent.com/163582/46879762-7a34a500-ce0c-11e8-87e3-496f3577ff05.png)
+
+
+]
+
+--
+.pull-right[   
+&lt;b&gt;
+&lt;b&gt;
+&lt;b&gt;
+![](https://user-images.githubusercontent.com/163582/47672385-e12dba00-db7f-11e8-92de-af94d5bab12f.jpg)
+
+]
+
+---
+background-image: url(https://github.com/mitchelloharawild/vitae/raw/master/man/figures/logo.png)
+background-position: 95% 5%  
+background-size: 10%   
+# vitae     
+
+Github: https://github.com/mitchelloharawild/vitae     
+
+![](https://slides.mitchelloharawild.com/vitae/resources/twentyseconds.png)
+
+---
+background-image: url(https://github.com/brentthorne/posterdown/raw/master/images/betterhexlogo.png)
+background-position: 95% 5%   
+background-size: 10%   
+# posterdown       
+
+Github: https://github.com/brentthorne/posterdown     
+Posterdown was created as a proof-of-concept that it is possible to make a beautiful poster using open source reproducible code.    
+
+&lt;img src="posters.png" width="100%" height="100%" /&gt;
+---  
+
+---
+background-image: url(https://camo.githubusercontent.com/0cab37d0a0a1237bc1fd97f41ceff51ce42f4444/68747470733a2f2f626f6f6b646f776e2e6f72672f79696875692f626c6f67646f776e2f696d616765732f6c6f676f2e706e67)
+background-position: 95% 5%   
+background-size: 10%   
+# blogdown      
+
+Github: https://github.com/rstudio/blogdown       
+Generate `static` websites based on `R Markdown` and `Hugo`.    
+
+&lt;img src="hugothemes.png" width="100%" height="100%" /&gt;
+
+---
+# Recommended readings  
+
+- R Markdown: The Definitive Guide by Yihui Xie et al. [[link](https://bookdown.org/yihui/rmarkdown/)]
+
+- R Markdown Cheat Sheet [[link](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)]
+
+- Markdown Cheat Sheet [[link](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)]
+---
+
+class: center, middle, inverse  
+# Thanks for attending!   
+
+😄
+
+### Keep in touch @kerenxuepi    
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
