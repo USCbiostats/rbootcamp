@@ -38,10 +38,13 @@ editor_options:
 <figcaption>A nice way to see R vs RStudio by [ModernDive](https://moderndive.com/) (original tweet [here](https://twitter.com/ModernDive/status/1171456164938141697))</figcaption>
 </figure>
 
+---
 
 ## R in the terminal
 
 <img src="r-command-line.png" width="600px">
+
+---
 
 ## R + RStudio
 
@@ -56,6 +59,8 @@ Let's see a live view of RStudio!...
 All the code for this section can be downloaded [here](slides.R). The entire presentation (which contains the code) was generated using RMarkdown and can be downloaded from [here](slides.Rmd).
 
 (you will learn more about RMarkdown in day 3!)
+
+---
 
 ## Set-up: Loading R packages and Data
 
@@ -82,11 +87,15 @@ Or also equally valid
 
 (let's checkout how does the help file looks like!)
 
+---
+
 ## Questions A:
 
 1. What other arguments does the function `data()` accepts?
 
 2. What does the function `glm` does?
+
+---
 
 ## Looking at the Data
 
@@ -120,6 +129,8 @@ ncol(diamonds)
 ```
 
 Now let's get our hands dirty and do some visualization!
+
+---
 
 ## A Walk Through Example with ggplot2
 
@@ -254,7 +265,9 @@ Get it from CRAN here: https://cran.r-project.org/package=gganimate
 
 Get it from CRAN here: https://cran.r-project.org/package=ggridges
 
-## Excercises
+---
+
+## Questions B
 
 1. Reproduce the last plot but this time put `carat` in the `y` axis and `price` in the `x` axis.
 
@@ -286,6 +299,8 @@ ggplot(data = mpg) +
     color    = "Drive train"
   )
 ```
+
+---
 
 ## References
 
