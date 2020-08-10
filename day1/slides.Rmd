@@ -13,6 +13,15 @@ editor_options:
   chunk_output_type: inline
 ---
 
+# Overview
+
+1. What is R and Rstudio?
+
+2. Getting help with R.
+
+3. A live example with ggplot2.
+
+
 # Part 1: What is R?
 
 ## First questions
@@ -93,7 +102,7 @@ Or also equally valid
 
 1. What other arguments does the function `data()` accepts?
 
-2. What does the function `glm` does?
+2. What does the function `str` does?
 
 ---
 
@@ -139,14 +148,14 @@ The `ggplot2` R package is for sure the most popular way to build plots in R. He
 
 ```{r viz-0a, echo=FALSE, cache=TRUE}
 ggplot(data = diamonds) +
-  geom_point(mapping = aes(x = carat, y = price, color = clarity)) +
-  facet_wrap(~color) + 
+  geom_point(mapping = aes(x = carat, y = price, color = color)) +
+  facet_wrap(~clarity) + 
   labs(
-    title    = "Price of Diamonds (by color)",
+    title    = "Price of Diamonds (by clarity)",
     subtitle = "data from the ggplot2 R package",
     x        = "Weight of the diamond (carat)",
     y        = "Price in US dollars",
-    color    = "Clarity from \n I1 (worst) to IF (best)"
+    color    = "Color from \n J (worst) to D (best)"
     )
 ```
 
@@ -202,21 +211,21 @@ ggplot(data = diamonds) +
 
 ---
 
-How does the clarity affect the price?
+How does the color affect the price?
 
 ```{r viz-2, cache=TRUE}
 ggplot(data = diamonds) +
-  geom_point(mapping = aes(x = carat, y = price, color = clarity))
+  geom_point(mapping = aes(x = carat, y = price, color = color))
 ```
 
 ---
 
-Now, how about the actual color of the diamond?
+Now, how about clarity of the diamond?
 
 ```{r viz-3, cache=TRUE}
 ggplot(data = diamonds) +
-  geom_point(mapping = aes(x = carat, y = price, color = clarity)) +
-  facet_wrap(~color)
+  geom_point(mapping = aes(x = carat, y = price, color = color)) +
+  facet_wrap(~clarity)
 ```
 
 ---
@@ -225,16 +234,18 @@ Finally, let's add some titles to make it look nicer
 
 ```{r viz-4, cache=TRUE}
 ggplot(data = diamonds) +
-  geom_point(mapping = aes(x = carat, y = price, color = clarity)) +
-  facet_wrap(~color) + 
+  geom_point(mapping = aes(x = carat, y = price, color = color)) +
+  facet_wrap(~clarity) + 
   labs(
-    title    = "Price of Diamonds (by color)",
+    title    = "Price of Diamonds (by clarity)",
     subtitle = "data from the ggplot2 R package",
     x        = "Weight of the diamond (carat)",
     y        = "Price in US dollars",
-    color    = "Clarity from \n I1 (worst) to IF (best)"
+    color    = "Color from \n J (worst) to D (best)"
     )
 ```
+
+---
 
 ## What else can we do?
 
@@ -287,7 +298,28 @@ ggplot(data = < DATA >) +
   )
 ```
 
-```{r mpg-sol, eval=FALSE, echo=FALSE}
+---
+
+## Question B 1: Solution 
+
+```{r viz-4-swapped, cache=TRUE}
+ggplot(data = diamonds) +
+  geom_point(mapping = aes(x = price, y = carat, color = color)) +
+  facet_wrap(~clarity) + 
+  labs(
+    title    = "Price of Diamonds (by clarity)",
+    subtitle = "data from the ggplot2 R package",
+    y        = "Weight of the diamond (carat)",
+    x        = "Price in US dollars",
+    color    = "Color from \n J (worst) to D (best)"
+    )
+```
+
+---
+
+## Question B 2: Solution 
+
+```{r mpg-sol, eval=TRUE, echo=TRUE}
 data(mpg)
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, color = drv)) +
@@ -298,6 +330,15 @@ ggplot(data = mpg) +
     y        = "Highway MPG",
     color    = "Drive train"
   )
+```
+
+---
+
+## Bonus: An example using Boxplots
+
+```{r example-w-boxplot, cache = TRUE}
+ggplot(data = diamonds) +
+  geom_boxplot(mapping = aes(x = clarity, y = price, fill = clarity)) 
 ```
 
 ---
