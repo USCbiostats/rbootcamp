@@ -11,7 +11,7 @@ A snapshot of the Fall 2018 version can be found [here](https://github.com/USCbi
 
 - **Lecture 3** Automatic docs with Rmarkdown
 
-This year's presenters: @NataliaZemlianskaia, @erickawaguchi, and @XUKEREN. With the support of @lailylajiang @AbigailHorn, @EmilHvitfeldt, and @gvegayon.
+This year's presenters: [@NataliaZemlianskaia](https://github.com/NataliaZemlianskaia), [@erickawaguchi](https://github.com/erickawaguchi), and [@XUKEREN](https://github.com/XUKEREN). With the support of [@lailylajiang](https://github.com/lailylajiang) [@AbigailHorn](https://github.com/AbigailHorn), [@EmilHvitfeldt](https://github.com/EmilHvitfeldt), [@malcolmbarrett](https://github.com/malcolmbarrett), and [@gvegayon](https://github.com/gvegayon).
 
 **Website**: https://github.com/USCbiostats/rbootcamp
 
