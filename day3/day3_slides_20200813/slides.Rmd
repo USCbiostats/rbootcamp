@@ -785,6 +785,8 @@ knitr::include_graphics("hugothemes.png")
 - R Markdown Cheat Sheet [[link](https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf)]
 
 - Markdown Cheat Sheet [[link](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)]
+
+- R Markdown 10-minute tutorial [[link](https://commonmark.org/help/tutorial)]
 ---
 
 class: center, middle, inverse  
