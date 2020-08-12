@@ -10,7 +10,7 @@ output:
     highlight: pygments
     font_adjustment: -1
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 
 # Overview
