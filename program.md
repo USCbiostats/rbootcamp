@@ -5,6 +5,8 @@ A snapshot of the Fall 2018 version can be found [here](https://github.com/USCbi
 
 ## Draft of the 2020 version (WIP)
 
+Recorded sessions available on YouTube [here](https://www.youtube.com/playlist?list=PLnKhSzUbsBIk_OqfCWx6d2Olv0E9cxHSj).
+
 - **Lecture 1** What is R? A motivating example of data viz 
 
 - **Lecture 2** Data wrangling fundamentals
