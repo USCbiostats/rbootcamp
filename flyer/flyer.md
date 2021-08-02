@@ -22,9 +22,9 @@ The event consists of three lectures:
 
 |    | Day | 
 |:---|:---|
-| **Lecture 1: What is R? A motivating example of data viz** | Monday, August 23 | 
-| **Lecture 2: Data wrangling with R** | Wednesday, August 25 |
-| **Lecture 3: Automatic Reports with RMarkdown** | Thursday, August 26 |
+| **Lecture 1: What is R? A motivating example of data viz** | Monday, August 16 | 
+| **Lecture 2: Data wrangling with R** | Wednesday, August 18 |
+| **Lecture 3: Automatic Reports with RMarkdown** | Thursday, August 19 |
 
 All sessions will be held online (and recorded) with Zoom between 11.30 AM and 12.30 PM.
 The [**event**](https://usc.zoom.us/j/93207535931) is password-protected. The password
