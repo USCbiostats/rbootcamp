@@ -8,7 +8,7 @@
  
 ## What
 
-As you know, at the Department of Preventive Medicine, each year, volunteers across the
+As you know, at the Department of Population and Public Health Sciences, each year, volunteers across the
 Department join forces to offer what we call "**The R Bootcamp**." This year is no exception,
 and like last time, the event will take place online. 
 
