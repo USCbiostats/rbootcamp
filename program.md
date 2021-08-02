@@ -3,11 +3,11 @@
 A snapshot of previous versins can be found at:
 
 - [Fall 2020](https://github.com/USCbiostats/rbootcamp/tree/fall2020)
- (recorded sessions available on YouTube [here](https://www.youtube.com/playlist?list=PLnKhSzUbsBIk_OqfCWx6d2Olv0E9cxHSj).
+ (recorded sessions available on YouTube [here](https://www.youtube.com/playlist?list=PLnKhSzUbsBIk_OqfCWx6d2Olv0E9cxHSj)).
 
-- [Fall 2019](https://github.com/USCbiostats/rbootcamp/tree/fall2019)
+- [Fall 2019](https://github.com/USCbiostats/rbootcamp/tree/fall2019).
 
-- [Fall 2018](https://github.com/USCbiostats/rbootcamp/tree/fall2018)
+- [Fall 2018](https://github.com/USCbiostats/rbootcamp/tree/fall2018).
 
 
 ## Draft of the 2021 version (WIP)
