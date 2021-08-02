@@ -1,11 +1,16 @@
 # R Bootcamp <img src="fig/trojan-rlogo.svg" width="150px" align="right">
 
-A snapshot of the Fall 2018 version can be found [here](https://github.com/USCbiostats/rbootcamp/tree/fall2018), and snapshot of the Fall 2019 version can be found [here](https://github.com/USCbiostats/rbootcamp/tree/fall2019).
+A snapshot of previous versins can be found at:
+
+- [Fall 2020](https://github.com/USCbiostats/rbootcamp/tree/fall2020)
+ (recorded sessions available on YouTube [here](https://www.youtube.com/playlist?list=PLnKhSzUbsBIk_OqfCWx6d2Olv0E9cxHSj).
+
+- [Fall 2019](https://github.com/USCbiostats/rbootcamp/tree/fall2019)
+
+- [Fall 2018](https://github.com/USCbiostats/rbootcamp/tree/fall2018)
 
 
-## Draft of the 2020 version (WIP)
-
-Recorded sessions available on YouTube [here](https://www.youtube.com/playlist?list=PLnKhSzUbsBIk_OqfCWx6d2Olv0E9cxHSj).
+## Draft of the 2021 version (WIP)
 
 - **Lecture 1** What is R? A motivating example of data viz 
 
@@ -13,7 +18,7 @@ Recorded sessions available on YouTube [here](https://www.youtube.com/playlist?l
 
 - **Lecture 3** Automatic docs with Rmarkdown
 
-This year's presenters: [@NataliaZemlianskaia](https://github.com/NataliaZemlianskaia), [@erickawaguchi](https://github.com/erickawaguchi), and [@XUKEREN](https://github.com/XUKEREN). With the support of [@lailylajiang](https://github.com/lailylajiang) [@AbigailHorn](https://github.com/AbigailHorn), [@EmilHvitfeldt](https://github.com/EmilHvitfeldt), [@malcolmbarrett](https://github.com/malcolmbarrett), and [@gvegayon](https://github.com/gvegayon).
+This year's presenters: [@erickawaguchi](https://github.com/erickawaguchi) and Sarah Piombo.
 
 **Website**: https://github.com/USCbiostats/rbootcamp
 
