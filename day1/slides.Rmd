@@ -1,9 +1,10 @@
 ---
 title: 'R Bootcamp day 1<br>What is R? A motivating example of data viz<br><img src="../fig/trojan-rlogo.svg" style="width:250px;">'
 author:
+  - Sarah Piombo
   - Natalia Zemlianskaia 
   - George G. Vega Yon
-date: August 11th, 2020
+date: August 16th, 2021
 output:
   slidy_presentation:
     footer: R Bootcamp (day1)

@@ -24,7 +24,7 @@ This year's presenters: [@erickawaguchi](https://github.com/erickawaguchi) and S
 
 This boot camp has as main goal to give a general overview of scientific
 computing, and in particular, on the R programming language. It is
-divided in 3 presentations. 
+divided in 3 presentations. More information [here](flyer/README.md).
 
 ## Prerequisites
 
