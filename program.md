@@ -1,30 +1,30 @@
 # R Bootcamp <img src="fig/trojan-rlogo.svg" width="150px" align="right">
 
-A snapshot of previous versins can be found at:
+A snapshot of previous versions can be found at:
+
+
+- [Fall 2021](https://github.com/USCbiostats/rbootcamp/tree/fy2021)
 
 - [Fall 2020](https://github.com/USCbiostats/rbootcamp/tree/fall2020)
- (recorded sessions available on YouTube [here](https://www.youtube.com/playlist?list=PLnKhSzUbsBIk_OqfCWx6d2Olv0E9cxHSj)).
-
+ 
 - [Fall 2019](https://github.com/USCbiostats/rbootcamp/tree/fall2019).
 
 - [Fall 2018](https://github.com/USCbiostats/rbootcamp/tree/fall2018).
 
 
-## Draft of the 2021 version (WIP)
+## 2022 Schedule
 
-- **Lecture 1** What is R? A motivating example of data viz 
+| Syntax      | Description |
+| ----------- | ----------- |
+| Header      | Title       |
+| Paragraph   | Text        |
 
-- **Lecture 2** Data wrangling fundamentals
-
-- **Lecture 3** Automatic docs with Rmarkdown
-
-This year's presenters: [@erickawaguchi](https://github.com/erickawaguchi) and Sarah Piombo.
 
 **Website**: https://github.com/USCbiostats/rbootcamp
 
-This boot camp has as main goal to give a general overview of scientific
+This bootcamp has as main goal to give a general overview of scientific
 computing, and in particular, on the R programming language. It is
-divided in 3 presentations. More information [here](flyer/README.md).
+divided in 3 presentations. More information [here](flyer/flyer.pdf).
 
 ## Prerequisites
 
