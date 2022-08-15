@@ -1,0 +1,150 @@
+---
+title: "Parallel computing in R"
+author: "Eleanor Zhang"
+date: '2022-08-13'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# 
+if (!require(parallel)) install.packages("parallel")
+```
+
+## Learning materials
+
+- Quick intro: https://nceas.github.io/oss-lessons/parallel-computing-in-r/parallel-computing-in-r.html
+- Chapter 22 in R programming for Data Science by Roger Peng: https://bookdown.org/rdpeng/rprogdatascience/parallel-computation.html
+
+## Check computational resources
+
+Each core can be hyper-threading, so 2 physical cores are amplified as 4 "logical" core.  
+A stack overflow post that nicely explained [threads](https://stackoverflow.com/questions/5201852/what-is-a-thread-really)
+```{r}
+library(parallel)
+detectCores()
+```
+
+2 physical cores on CPU
+```{r}
+detectCores(logical=FALSE)
+```
+
+Caution: Not always reliable on Unix-like operational system.
+
+## mcapply() function (Forking method)
+
+### Example 1: System sleep
+
+```{r}
+system.time(
+  lapply(1:2, 
+        function(i) {Sys.sleep(5)})
+)
+```
+
+Main process is forked into 2 sub-processes. Then collect results from 2 sub-processes.
+This mc* function is not applicable to Windows operating system due to this forking mechanism.
+```{r}
+system.time(
+  mclapply(1:2, 
+           function(i) {Sys.sleep(5)}, ## Do nothing for 5 seconds
+           mc.cores = 2) ## Split this job across 2 cores
+)
+```
+
+
+## Example 2: use bootstrap to calculate standard errors
+
+Subset to total 100 flower samples of versicolor and virginica
+```{r}
+iris_subset <- iris[which(iris$Species %in% c("versicolor", "virginica")),]
+table(iris_subset$Species)
+```
+
+run logistic regression to test association between sepal length and species and obtain slope estimate and standard errors
+```{r}
+res <- glm(Species~Sepal.Length, family=binomial(logit), data=iris_subset)
+summary(res)$coefficient
+```
+
+
+```{r}
+trials <- seq(1, 1000)
+boot_fx <- function(trial, dat) {
+  ind <- sample(1:nrow(dat), nrow(dat), replace=TRUE)
+  result1 <- glm(Species~Sepal.Length, family=binomial(logit), data=dat[ind,])
+  beta1 <- coefficients(result1)[[2]]
+  return(beta1)
+}
+```
+
+
+```{r}
+system.time({
+  results <- lapply(trials, boot_fx, iris_subset)
+})
+sd(unlist(results))
+```
+
+
+```{r}
+system.time({
+  results <- mclapply(trials, boot_fx, iris_subset, mc.cores = 3)
+})
+sd(unlist(results))
+```
+
+## Reproducibility in mcapply()
+
+set.seed() doesn't work in parallel version
+```{r}
+set.seed(1)
+r <- mclapply(1:4, 
+              function(i) {rnorm(3)},
+              mc.cores = 4)
+str(r)
+```
+
+Use "L'Ecuyer-CMRG" random number generator: each subprocess is reproducible
+```{r}
+RNGkind("L'Ecuyer-CMRG") # 
+set.seed(1)
+r <- mclapply(1:4, 
+              function(i) {rnorm(3)},
+              mc.cores = 4)
+str(r)
+```
+
+## parLapply() function (socket method)
+
+```{r}
+boot_fx <- function(trial) {
+  ind <- sample(1:nrow(iris_subset), nrow(iris_subset), replace=TRUE)
+  result1 <- glm(Species~Sepal.Length, family=binomial(logit), data=iris_subset[ind,])
+  beta1 <- coefficients(result1)[[2]]
+  return(beta1)
+}
+```
+
+
+```{r}
+# build a "cluster" in which multiple process can communicate
+cl <- makeCluster(4)
+
+# clusterExport(cl, "iris_subset")
+clusterSetRNGStream(cl, 1)
+clusterExport(cl, "iris_subset")
+
+r <- parLapply(cl, 1:1000, boot_fx)
+sd(unlist(r)) # ~0.485
+
+# remember to stop cluster
+stopCluster(cl)
+```
+
+```{r}
+for (mean_val in c(0, 1)){
+  print(rnorm(3, mean=mean_val, sd=1))
+}
+```
+

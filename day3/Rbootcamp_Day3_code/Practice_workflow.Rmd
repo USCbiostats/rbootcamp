@@ -1,0 +1,224 @@
+---
+title: "Work flow on HPC"
+output:
+  html_document:
+    df_print: paged
+---
+
+## Part I: Set up
+
+### Set up DUO
+
+https://itservices.usc.edu/duo/
+
+
+### Log in
+
+1. Check network connection:  
+On-campus: connect to "USC secure wireless"  
+Off-campus: connect to VPN (see [website](https://itservices.usc.edu/vpn/) for set-up)
+
+2. Open shell command line interface (eg. Terminal on Mac):  
+
+```{shell}
+ssh <username>@discovery.usc.edu
+```
+
+### Navigate the file directories
+
+In Terminal:
+```{shell}
+# print current directory
+pwd
+
+# change to your scratch1 directory (or type cds)
+cd /scratch1/<username>
+pwd 
+
+# change to your scratch2 directory (or type cds2)
+cd /scratch2/<username>
+pwd 
+```
+
+
+## Download and install Anaconda (Optional but I highly recommend)
+
+### Step 1: Download installer
+1. Open a browser and go to: https://docs.conda.io/en/latest/miniconda.html#linux-installers
+
+2. Download "Miniconda3 Linux 64-bit"
+- right click on the text and copy
+- select "copy link address"
+
+3. Back in shell terminal:
+- change directory to your personal home directory: `cd /home1/<username>` (username is your USC NetID)
+- In Terminal: `wget <paste your address here>`
+
+### Step 2: Install
+
+In shell:  
+- `bash Miniconda3-latest-Linux-x86_64.sh`  
+- Follow the prompts (accept default if unsure)  
+- When finished, type `exit` to log out and then log in again for conda set-up to take effect
+
+Additional Anaconda install [instructions](https://conda.io/projects/conda/en/latest/user-guide/install/linux.html)
+
+### Step 3: create an environment for R
+
+In shell:  
+
+1. Create an empty environment and give it a name, eg. rbootcamp:
+```{shell}
+conda create -n rbootcamp
+```
+
+2. Activate this environment:
+```{shell}
+conda activate rbootcamp
+```
+
+3. Install R, tidyverse and data.table libraries: 
+```{shell}
+conda install -c conda-forge r-base r-tidyverse r-data.table 
+```
+
+Note:  
+- follow prompts when installing  
+- you can also specify versions for R by adding `r-base=4.2.0`, but for now conda will figure out the best version in the environment that make all packages compatible
+
+4. Check for installed package in current environment:
+```{shell}
+conda list
+```
+
+Note: you should find r-base, r-data.table, r-tidyverse and many other dependencies package
+
+## Part II: use R
+
+### 1) Request interactive node
+
+In shell: ask for an interactive node (last for 1 hour, one cpu, 10 Gb memory)
+```{shell}
+salloc --time=1:00:00 --mem=10Gb
+```
+
+### 2) Load R
+
+If you set up conda environment, activate the R environment:
+```{shell}
+conda activate rbootcamp
+```
+
+If not, load R modules and compliers:
+```{shell}
+module purge                  # remove all currently loaded modules 
+module load gcc/11.3.0        # load complier
+module load openblas/0.3.20   # load linear algebra subprogram
+module load r/4.2.1
+```
+
+Then type `R` to start a R session.
+
+### 2) try out code using mclapply()
+
+```{r eval=FALSE}
+library(parallel)
+numCores <- detectCores() # How many cores on this compute node?
+numCores
+detectCores(logical=FALSE) # How many physical cores on this compute node?
+
+system.time(
+  mclapply(1:numCores, 
+           function(i) {Sys.sleep(5)}, ## Do nothing for 5 seconds
+           mc.cores = numCores)        ## Split this job across numCores cores
+)
+# this should take elapsed time ~5 seconds
+```
+
+Play with other code in parallel.Rmd file and see run time
+
+## Part III: work with files and using batch jobs
+
+### Example 1: bootstrap
+
+1. Change directory to your home directory
+```{shell}
+cd /home1/<username>
+pwd
+```
+
+2. Create a directory called "rbootcamp" and a sub-directory "result". Then change directory
+```{shell}
+# make a new directory called "rbootcamp"
+mkdir rbootcamp
+
+# change directory to ./rbootcamp
+cd rbootcamp
+
+# make a new directory called "result" in rbootcamp directory
+mkdir result 
+```
+
+3. Copy the code directory I created to your own home directory
+```{shell}
+# -r means to copy every file recursively
+cp -r /project/ekawaguc_906/RBootcamp2022/code ./
+```
+
+look at file content:
+```{shell}
+# change directory
+cd ./code
+
+# list all items in this directory
+ls
+
+# view R code (type q to exit the view mode)
+less glm_iris.R
+
+# print the first 10 lines to the screen
+head glm_iris.R
+```
+
+4. Run Rscript
+```{shell}
+# Run Rscript to run logistic regression of Species ~ Sepal.Length
+Rscript ./glm_iris.R Sepal.Length 1 ../result
+
+# Check result
+less ../result/Sepal.Length.tsv
+```
+
+5. Submit batch job
+```{shell}
+sbatch glm_iris.batch.sh
+```
+
+6. checking running job status
+```{shell}
+squeue -u <username>
+```
+
+### Example 2: read and subset large datafiles
+
+Here we will read and filter for summary statistics from genome-wide association study (GWAS). Each file contains ~29 million genetic variants (rows) and 52 columns of their statistics
+
+```{shell}
+# check there are three files in data directory and see their file size 
+# each file is gziped file with size > 2Gb
+ls -lh /project/ekawaguc_906/RBootcamp2022/data
+
+# change to code directory if you haven't
+cd ./code 
+
+# activate rbootcamp environment if you haven't
+conda activate rbootcamp 
+
+# submit batch jobs to read 3 files
+sbatch read_data.batch.sh
+```
+
+It takes ~10mins for each task to finish. When it's finished, check results in the result directory.
+```{shell}
+less ../result/Height.tsv.bgz
+```
