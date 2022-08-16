@@ -1,0 +1,452 @@
+---
+title: "Data Manipulation with dplyr"
+author: "Vahan Aslanyan"
+format: 
+  revealjs:
+    theme: dark
+---
+
+## Data Wrangling and Manipulation
+
+- Makes data accessible to users
+
+- Creates final dataset(s) for projects (analysis,report,etc)
+
+- Create new variables or summaries
+
+- Rename the variables or observations
+
+## Data Frames
+
+- Data frames are the most common structures used for analyses
+
+- Identifiable columns (with preferably non-empty headers) containing variables of interest
+
+- Rows containing observed values of variables of interest
+
+- Mixed formats allowed (strings, dates, numeric values); matrices can be transformed into dataframe
+
+## Example
+
+```{r}
+#| echo: true
+#| output-location: fragment
+# to install: install.packages("nycflights13")
+# to install: install.packages("tidyverse")
+library(nycflights13)
+library("dplyr")
+top_n(flights,10) #from nycflight13 package
+```
+
+
+## Data manipulation--Reasons
+
+- Original data is not ready to use
+
+- Maybe you are interested in a subset of variables
+
+- Maybe you are only interested in specific observations
+
+- Maybe you need to create new variables (morning arrivals vs evening arrivals)
+
+- Maybe you need to fix the encoding of the variables (arr_time is an integer now, we need to have it as time)
+
+## Data manipulation--Motivation
+
+- Certain effort goes into data manipulation
+
+- 80/20 rule: 80% of time is spent cleaning up data, 20%--doing analyses or generating insights
+
+- We want a clean readable code
+
+- We want our steps to be intuitive
+
+## Dplyr package
+
+- "Grammar of data manipulation"
+
+- Provides a consistent set of verbs that help solve the most common data manipulation challenges
+
+- <https://dplyr.tidyverse.org/>
+
+- Cheat sheet: <https://github.com/rstudio/cheatsheets/blob/master/data-transformation.pdf>
+
+## Dplyr basics
+- Pick observations by their values (filter())
+
+- Reorder the rows (arrange())
+
+- Pick variables by their names (select())
+
+- Create new variables with functions of existing variables (mutate())
+
+- Collapse many values down to a single summary (summarise())
+
+These can all be used in conjunction with group_by() which changes the scope of each function from operating on the entire dataset to operating on it group-by-group.
+
+
+## Filter rows with filter()
+
+filter() allows to subset observations based on their values. For example we can select all flights on January first with:
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2"
+#| output-location: fragment
+flights%>%
+  filter(month==1,day==1)->flight_Jan01
+top_n(flight_Jan01,10)  
+```
+
+
+## Comparisons
+R useses the standard suite for comparisons
+
+- `>` greater than
+-  `>=` greater than or equal to
+
+- < less than
+
+- <= less than or equal to
+
+- == equal
+
+- != not equal
+
+
+
+## Exercise: Early bird
+
+A traveler always has meetings at 10 am so she has to arrive before 8:30 to be there on time. She is planning a trip in May and wants to arrive in STL before then. Create a dataframe flights_830 that contains all May flights that arrive at STL before 8:30
+
+## Exercise: Early bird
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2"
+#| output-location: fragment
+flights%>%
+  filter(month==5, arr_time<=830,dest=="STL")->flights_830
+flights_830  
+```
+
+
+## Logical operators
+
+- & and
+
+- `|` or
+
+- ! not
+
+Now lets get all flights in November and December:
+
+
+```{r}
+#| echo: true
+#| output-location: fragment
+filter(flights, month == 11 | month == 12)
+```
+
+## Logical operators
+```{r}
+#| echo: true
+
+#| output-location: fragment
+
+flights%>%filter(month==11| month ==12)
+```
+
+## Logical operators
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+filter(flights, month %in% c(11, 12))
+```
+
+## Logical operators
+
+If we wanted to find flights that weren’t delayed (on arrival or departure) by more than two hours, you could use either of the following two filters:
+```{r}
+#| echo: true
+#| output-location: fragment
+filter(flights, !(arr_delay > 120 | dep_delay > 120))
+```
+
+## Logical operators
+```{r}
+#| echo: true
+#| output-location: fragment
+filter(flights, arr_delay <= 120, dep_delay <= 120)
+```
+
+
+## Missing values
+
+Missing values `NA`s make comparison tricky. If we want to determine if a value is missing, use is.na():
+
+```{r}
+#| echo: true
+#| output-location: fragment
+df <- tibble(x = c(1, NA, 3))
+df%>%filter(is.na(x) | x > 1)
+```
+
+
+## Arrange rows with arrange()
+
+- arrange() works similarly to filter() except that instead of selecting rows, it changes their order.
+- It takes a data frame and a set of column names (or more complicated expressions) to order by. 
+- If you provide more than one column name, each additional column will be used to break ties in the values of preceding columns.
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+flights%>%arrange(year, month, day)
+```
+
+## Arrange rows with arrange()-Continued
+
+- Use desc() to re-order by a column in descending order:
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+flights%>%arrange(desc(dep_delay))
+```
+
+## Arrange rows with arrange()-Continued
+
+- Missing values are always sorted at the end:
+
+```{r}
+#| echo: true
+#| output-location: fragment
+
+df <- tibble(x = c(5, 2, NA))
+arrange(df, x)
+```
+
+
+## Select columns with select()
+
+- Narrow in on the variables we are interested in
+
+- Select() allows to rapidly zoom in on a useful subset using operations based on the names of the variables
+
+
+```{r}
+#| echo: true
+#| output-location: fragment
+# Select columns by name
+select(flights, year,month, day)
+
+```
+
+## Select columns with select()
+
+```{r}
+#| echo: true
+#| output-location: fragment
+# Select all columns between year and day (inclusive)
+select(flights, year:day)
+```
+
+## Select columns with select()
+
+```{r}
+#| echo: true
+#| output-location: fragment
+# Select all columns except those from year to day (inclusive)
+select(flights, -(year:day))
+
+```
+
+## Select columns with select()
+
+- There are a number of helper functions we can use within select():
+
+- starts_with("abc"): matches names that begin with "abc"
+
+- ends_with("xyz"): matches names that end with "xyz"
+
+- contains("ijk"): matches names that contain "ijk"
+
+- num_range("x", 1:3): matches x1, x2, and x3
+
+
+## Select columns with select()
+
+- everything() is useful for rearranging columns
+
+```{r}
+select(flights, time_hour, air_time, everything())
+```
+
+
+## Rename variables with rename()
+
+```{r}
+#| echo: true
+#| output-location: fragment
+rename(flights, tail_num = tailnum)
+```
+
+
+
+## Add new variable with mutate()
+
+- Sometimes we need to create new columns that are function of existing columns
+
+- mutate() always add new columns at the end of the dataset
+
+```{r}
+#| echo: true
+
+
+flights_sml <- select(flights, 
+  year:day, 
+  ends_with("delay"), 
+  distance, 
+  air_time
+)
+```
+
+## Add new variable with mutate()
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2|3"
+#| output-location: fragment
+mutate(flights_sml,
+  gain = dep_delay - arr_delay,
+  speed = distance / air_time * 60
+)
+
+
+```
+
+## Add new variable with mutate()
+We can refer to columns that we have just created
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2|3"
+#| output-location: fragment
+mutate(flights_sml,
+  gain = dep_delay - arr_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+)
+```
+## Add new variable with mutate()
+
+We can use transmute() if we only want to keep the new variables
+
+```{r}
+#| echo: true
+#| output-location: fragment
+transmute(flights,
+  gain = dep_delay - arr_delay,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+)
+```
+
+## Grouped summaries with summarise()
+
+- summarise() collapses a data frame to a single row
+```{r}
+#| echo: true
+#| output-location: fragment
+summarise(flights, delay = mean(dep_delay, na.rm = TRUE))
+```
+
+## Grouped summaries with summarise()
+
+- summarise() has limited usefulness unless we pair it with group_by()
+
+- group_by()  changes the unit of analysis from the complete dataset to individual groups
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2"
+#| output-location: fragment
+by_day <- group_by(flights, year, month, day)
+summarise(by_day, delay = mean(dep_delay, na.rm = TRUE))
+```
+
+
+## Combining multiple operations with the pipe
+
+We want to explore the relationship between the distance and average delay for each location
+
+- group flights by destination
+
+- summarise to compute distance, average delay, and number of flights
+
+- filter to remove noisy points and Honolulu airports, which is almost twise as fat away as the next closest airport
+
+
+
+## Combining multiple operations with the pipe
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2|3|4|5|7"
+#| output-location: fragment
+by_dest <- group_by(flights, dest)
+delay <- summarise(by_dest,
+  count = n(),
+  dist = mean(distance, na.rm = TRUE),
+  delay = mean(arr_delay, na.rm = TRUE)
+)
+delay <- filter(delay, count > 20, dest != "HNL")
+```
+
+## Combining multiple operations with the pipe
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2|3|4|5|6|7|8|9"
+#| output-location: fragment
+delays <- flights %>% 
+  group_by(dest) %>% 
+  summarise(
+    count = n(),
+    dist = mean(distance, na.rm = TRUE),
+    delay = mean(arr_delay, na.rm = TRUE)
+  ) %>% 
+  filter(count > 20, dest != "HNL")
+```
+
+## Final exercise
+
+Let's look at how the average performance of batters in baseball is related to the number of times they're at bat.
+
+- Use Lahman package to compute the batting average of every major league baseball player
+
+- create batting average variable `ba` (sum of hits(H)/sum of opportunities to his the ball (AB))
+
+- create total opportunities to hit the ball variable `ab`(see above for definition)
+
+- only keep batters with 100 and more opportunities
+
+
+## Final exercise
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2|3|4|5|6|7|8"
+#| output-location: fragment
+library(Lahman)
+batting<-Lahman::Batting
+batters <- batting %>% 
+  group_by(playerID) %>% 
+  summarise(
+    ba = sum(H, na.rm = TRUE) / sum(AB, na.rm = TRUE),
+    ab = sum(AB, na.rm = TRUE)
+  )%>%filter(ab>100)
+```
+

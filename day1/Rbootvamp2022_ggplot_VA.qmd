@@ -1,0 +1,230 @@
+---
+title: "Data Visualization with ggplot2"
+author: "Vahan Aslanyan"
+format: 
+  revealjs:
+    theme: dark
+  html:
+    fig-width: 8
+    fig-height: 4
+---
+
+## GGPlot2
+
+-   Popular package to build figures and visualize data
+
+-   Website: <https://ggplot2.tidyverse.org/>
+
+-   Cheatsheet: <https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf>
+
+
+## Example
+
+```{r}
+#| echo: true
+#| output-location: fragment
+# to install: install.packages("tidyverse")
+library("ggplot2")
+ggplot(mpg, aes(displ, hwy, colour = class)) + 
+  geom_point()
+#displ=engine displacement, in litres, highway miles per gallon
+```
+
+## Structure
+Overall Basic structure
+
+- first argument is the dataset you will be using (ggplot(data))
+
+- aes() short for aesthetics, indicates columns that we will be using in the figure
+
+- if not explicitly defined, the first argument will go on x axis, the second on y axis
+
+- color and fill are also defined here, more on this later
+
+- geom_XXXX() function tells the type we want to plot (scatterplot, histogram, regression line, violin plot etc)
+
+- all this are added together using `+`
+
+## Structure
+
+- ggplot2 is extremely flexible, so mastering takes time
+
+- don't be afraid to google things you are stuck on, chances are someone already encountered and fixed it
+
+- now lets go back to our example
+
+## Creating a ggplot 
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2"
+#| output-location: fragment
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+```
+
+
+## Creating a ggplot 
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2"
+#| output-location: fragment
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy,color=class))
+```
+
+## Creating a ggplot
+
+Besides color we can pass shape, alpha to aes() 
+
+```{r}
+#| echo: true
+#| output-location: fragment
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy,size=class))
+#its going to be ugly
+```
+
+
+## Creating a ggplot 
+
+```{r}
+#| echo: true
+#| output-location: fragment
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy,alpha=class))
+```
+
+
+## Creating a ggplot 
+
+```{r}
+#| echo: true
+#| output-location: fragment
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy,shape=class))
+```
+
+## Creating a ggplot 
+We can also set the color manually. 
+```{r}
+#| echo: true
+#| output-location: fragment
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy),color="forestgreen")
+```
+
+## Creating a ggplot 
+Lets add a regression line here
+
+## Creating a ggplot
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2|3"
+#| output-location: fragment
+ggplot(data = mpg, aes(x = displ, y = hwy)) + 
+  geom_point()+
+  geom_line()
+```
+## Creating a ggplot 
+Lets add a regression line here
+
+## Creating a ggplot
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2|3"
+#| output-location: fragment
+ggplot(data = mpg, aes(x = displ, y = hwy)) + 
+  geom_point()+
+  geom_smooth(method = "lm")
+```
+
+## Creating a ggplot 
+Lets add a regression line here
+
+## Creating a ggplot
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2|3"
+#| output-location: fragment
+ggplot(data = mpg, aes(x = displ, y = hwy)) + 
+  geom_point()+
+  geom_smooth()
+```
+
+
+## Creating a ggplot--facets
+
+Split the plot into subplots that each display one subset of the data
+
+## Creating a ggplot--facets
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2|3"
+#| output-location: fragment
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_wrap(~ class, nrow = 2)
+```
+## Creating a ggplot--facets
+
+We can create subplots by 2 categorical variables using facet_grid()
+
+## Creating a ggplot--facets
+```{r}
+#| echo: true
+#| code-line-numbers: "|1|2|3"
+#| output-location: fragment
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_grid(drv ~ cyl)
+```
+## Creating a ggplot 
+Lets go back to our previous graph
+
+How can we improve this?
+
+## Creating a ggplot 
+
+```{r}
+#| echo: true
+#| output-location: fragment
+ggplot(data = mpg, aes(x = displ, y = hwy,color=class)) + 
+  geom_point()
+```
+
+## Creating a ggplot
+
+- We can change the background theme (my favorite is theme black and white (theme_bw())
+
+- We need a title
+
+- x and y axis labels can be more descriptive
+
+- legend label can be more descriptive
+
+## Creating a ggplot
+
+```{r}
+#| echo: true
+#| output-location: fragment
+ggplot(data = mpg, aes(x = displ, y = hwy,color=class)) + 
+  geom_point()+theme_bw()+
+  labs(title= "Highway miles per gallon (per vehicle class)",
+    subtitle= "created by ggplot2",x= "engine displacement, in litres",
+    y="highway miles per gallon",color="vehicle class")
+```
+
+## Extending ggplot
+
+- There are other packages that extend ggplot2
+
+- <https://exts.ggplot2.tidyverse.org/gallery/>
+
+
+## References
+
+- For both sections, I have used [R for data science]<https://r4ds.had.co.nz/>
+
+- A source I usually use for colors: <http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf>

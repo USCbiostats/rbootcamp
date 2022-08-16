@@ -12,7 +12,7 @@ Days 1, 2, and 3 will be held at **SSB 114** from **10am-12pm**. Day 0 will be o
 | Day     | Description | Slides|
 | ----------- | ----------- |----------- |
 | 8/15/2022 (Day 0) | Introduction to R and R Studio | 
-| 8/16/2022 (Day 1) | R for data management and visualization  | [Slides]|
+| 8/16/2022 (Day 1) | R for data management and visualization  | [Files](day1/)|
 | 8/17/2022 (Day 2) | Creating reproducible reports using R Markdown; Basic programming in R | [Slides]| 
 | 8/18/2022 (Day 3) | R on the HPC and parallel computing | [Slides](day3/Rbootcamp_Day3.pdf)|
 
