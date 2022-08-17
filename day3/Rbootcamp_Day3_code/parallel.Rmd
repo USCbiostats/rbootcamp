@@ -6,7 +6,6 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-# 
 if (!require(parallel)) install.packages("parallel")
 ```
 
@@ -40,6 +39,7 @@ system.time(
   lapply(1:2, 
         function(i) {Sys.sleep(5)})
 )
+# the first two are user and system CPU time, elpased is wall-clock time
 ```
 
 Main process is forked into 2 sub-processes. Then collect results from 2 sub-processes.
@@ -64,7 +64,7 @@ table(iris_subset$Species)
 run logistic regression to test association between sepal length and species and obtain slope estimate and standard errors
 ```{r}
 res <- glm(Species~Sepal.Length, family=binomial(logit), data=iris_subset)
-summary(res)$coefficient
+summary(res)$coefficient # close form estimates
 ```
 
 
@@ -118,24 +118,13 @@ str(r)
 ## parLapply() function (socket method)
 
 ```{r}
-boot_fx <- function(trial) {
-  ind <- sample(1:nrow(iris_subset), nrow(iris_subset), replace=TRUE)
-  result1 <- glm(Species~Sepal.Length, family=binomial(logit), data=iris_subset[ind,])
-  beta1 <- coefficients(result1)[[2]]
-  return(beta1)
-}
-```
-
-
-```{r}
 # build a "cluster" in which multiple process can communicate
 cl <- makeCluster(4)
 
-# clusterExport(cl, "iris_subset")
 clusterSetRNGStream(cl, 1)
-clusterExport(cl, "iris_subset")
+#clusterExport(cl, "iris_subset")
 
-r <- parLapply(cl, 1:1000, boot_fx)
+r <- parLapply(cl, 1:1000, boot_fx, iris_subset)
 sd(unlist(r)) # ~0.485
 
 # remember to stop cluster
@@ -143,8 +132,11 @@ stopCluster(cl)
 ```
 
 ```{r}
-for (mean_val in c(0, 1)){
-  print(rnorm(3, mean=mean_val, sd=1))
+# change function so that data is taken from global environment
+boot_fx <- function(trial) {
+  ind <- sample(1:nrow(iris_subset), nrow(iris_subset), replace=TRUE)
+  result1 <- glm(Species~Sepal.Length, family=binomial(logit), data=iris_subset[ind,])
+  beta1 <- coefficients(result1)[[2]]
+  return(beta1)
 }
 ```
-

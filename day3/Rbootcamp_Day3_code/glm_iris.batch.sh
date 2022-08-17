@@ -13,6 +13,7 @@ else
 fi
 
 # set path
+# TO DO: change this path to your own directory: /home1/<username>/rbootcamp/code
 cd /project/ekawaguc_906/RBootcamp2022/code
 
 # pull the idx'th line from file params and store in variable named params

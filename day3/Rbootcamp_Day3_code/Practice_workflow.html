@@ -1639,23 +1639,24 @@ pre code {
 
 <div id="part-i-set-up" class="section level2">
 <h2>Part I: Set up</h2>
-<div id="set-up-duo" class="section level3">
-<h3>Set up DUO</h3>
-<p><a href="https://itservices.usc.edu/duo/" class="uri">https://itservices.usc.edu/duo/</a></p>
+<div id="set-up-duo-and-vpn" class="section level3">
+<h3>Set up DUO and VPN</h3>
+<p>DUO: <a href="https://itservices.usc.edu/duo/" class="uri">https://itservices.usc.edu/duo/</a></p>
+<p>VPN: <a href="https://itservices.usc.edu/vpn/" class="uri">https://itservices.usc.edu/vpn/</a></p>
 </div>
 <div id="log-in" class="section level3">
 <h3>Log in</h3>
 <ol style="list-style-type: decimal">
 <li><p>Check network connection:<br />
 On-campus: connect to “USC secure wireless”<br />
-Off-campus: connect to VPN (see <a href="https://itservices.usc.edu/vpn/">website</a> for set-up)</p></li>
+Off-campus: connect to VPN</p></li>
 <li><p>Open shell command line interface (eg. Terminal on Mac):</p></li>
 </ol>
 <pre class="shell"><code>ssh &lt;username&gt;@discovery.usc.edu</code></pre>
 </div>
 <div id="navigate-the-file-directories" class="section level3">
 <h3>Navigate the file directories</h3>
-<p>In Terminal:</p>
+<p>In Shell:</p>
 <pre class="shell"><code># print current directory
 pwd
 
@@ -1667,40 +1668,41 @@ pwd
 cd /scratch2/&lt;username&gt;
 pwd </code></pre>
 </div>
-</div>
-<div id="download-and-install-anaconda-optional-but-i-highly-recommend" class="section level2">
-<h2>Download and install Anaconda (Optional but I highly recommend)</h2>
-<div id="step-1-download-installer" class="section level3">
-<h3>Step 1: Download installer</h3>
+<div id="download-and-install-anaconda-optional-but-i-highly-recommend" class="section level3">
+<h3>Download and install Anaconda (Optional but I highly recommend)</h3>
+<div id="step-1-download-installer" class="section level4">
+<h4>Step 1: Download installer</h4>
 <ol style="list-style-type: decimal">
 <li><p>Open a browser and go to: <a href="https://docs.conda.io/en/latest/miniconda.html#linux-installers" class="uri">https://docs.conda.io/en/latest/miniconda.html#linux-installers</a></p></li>
 <li><p>Download “Miniconda3 Linux 64-bit”</p></li>
 </ol>
 <ul>
-<li>right click on the text and copy</li>
-<li>select “copy link address”</li>
+<li>Right click on the text and copy</li>
+<li>Select “copy link address”</li>
 </ul>
 <ol start="3" style="list-style-type: decimal">
 <li>Back in shell terminal:</li>
 </ol>
 <ul>
-<li>change directory to your personal home directory:
+<li>Change directory to your personal home directory:
 <code>cd /home1/&lt;username&gt;</code> (username is your USC
 NetID)</li>
-<li>In Terminal: <code>wget &lt;paste your address here&gt;</code></li>
+<li>Download using:
+<code>wget &lt;paste your address here&gt;</code></li>
 </ul>
 </div>
-<div id="step-2-install" class="section level3">
-<h3>Step 2: Install</h3>
+<div id="step-2-install" class="section level4">
+<h4>Step 2: Install</h4>
 <p>In shell:<br />
-- <code>bash Miniconda3-latest-Linux-x86_64.sh</code><br />
+- Run bash script to install:
+<code>bash Miniconda3-latest-Linux-x86_64.sh</code><br />
 - Follow the prompts (accept default if unsure)<br />
-- When finished, type <code>exit</code> to log out and then log in again
-for conda set-up to take effect</p>
+- When finished, type <code>exit</code> to log out HPC and then log in
+again for conda set-up to take effect</p>
 <p>Additional Anaconda install <a href="https://conda.io/projects/conda/en/latest/user-guide/install/linux.html">instructions</a></p>
 </div>
-<div id="step-3-create-an-environment-for-r" class="section level3">
-<h3>Step 3: create an environment for R</h3>
+<div id="step-3-create-an-environment-for-r" class="section level4">
+<h4>Step 3: create an environment for R</h4>
 <p>In shell:</p>
 <ol style="list-style-type: decimal">
 <li>Create an empty environment and give it a name, eg. rbootcamp:</li>
@@ -1720,11 +1722,16 @@ for conda set-up to take effect</p>
 <code>r-base=4.2.0</code>, but for now conda will figure out the best
 version in the environment that make all packages compatible</p>
 <ol start="4" style="list-style-type: decimal">
+<li>Install nano text editor (or other options):</li>
+</ol>
+<pre class="shell"><code>conda install -c conda-forge nano</code></pre>
+<ol start="5" style="list-style-type: decimal">
 <li>Check for installed package in current environment:</li>
 </ol>
 <pre class="shell"><code>conda list</code></pre>
 <p>Note: you should find r-base, r-data.table, r-tidyverse and many
 other dependencies package</p>
+</div>
 </div>
 </div>
 <div id="part-ii-use-r" class="section level2">
@@ -1743,7 +1750,8 @@ Gb memory)</p>
 <pre class="shell"><code>module purge                  # remove all currently loaded modules 
 module load gcc/11.3.0        # load complier
 module load openblas/0.3.20   # load linear algebra subprogram
-module load r/4.2.1</code></pre>
+module load r/4.2.1
+# you will need to install tidyverse and data.table package within R using install.packages()</code></pre>
 <p>Then type <code>R</code> to start a R session.</p>
 </div>
 <div id="try-out-code-using-mclapply" class="section level3">
@@ -1751,7 +1759,8 @@ module load r/4.2.1</code></pre>
 <pre class="r"><code>library(parallel)
 numCores &lt;- detectCores() # How many cores on this compute node?
 numCores
-detectCores(logical=FALSE) # How many physical cores on this compute node?
+detectCores(logical=FALSE)
+# On HPC, the CPU cores are all logical core in fact. So you should be cautious about this command and read the HPC resource page to confirm.
 
 system.time(
   mclapply(1:numCores, 
@@ -1767,7 +1776,8 @@ system.time(
 <div id="example-1-bootstrap" class="section level3">
 <h3>Example 1: bootstrap</h3>
 <ol style="list-style-type: decimal">
-<li>Change directory to your home directory</li>
+<li>Change directory to your home directory and print current
+directory</li>
 </ol>
 <pre class="shell"><code>cd /home1/&lt;username&gt;
 pwd</code></pre>
@@ -1781,25 +1791,25 @@ mkdir rbootcamp
 # change directory to ./rbootcamp
 cd rbootcamp
 
-# make a new directory called &quot;result&quot; in rbootcamp directory
+# make a new directory called &quot;result&quot; within rbootcamp directory
 mkdir result </code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li>Copy the code directory I created to your own home directory</li>
 </ol>
-<pre class="shell"><code># -r means to copy every file recursively
+<pre class="shell"><code># -r means to copy every file recursively from that code directory
 cp -r /project/ekawaguc_906/RBootcamp2022/code ./</code></pre>
-<p>look at file content:</p>
+<p>look at file content in ./code:</p>
 <pre class="shell"><code># change directory
 cd ./code
 
 # list all items in this directory
 ls
 
-# view R code (type q to exit the view mode)
-less glm_iris.R
-
 # print the first 10 lines to the screen
-head glm_iris.R</code></pre>
+head glm_iris.R
+
+# view R code (type q to exit the view mode)
+less glm_iris.R</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li>Run Rscript</li>
 </ol>
@@ -1811,29 +1821,39 @@ less ../result/Sepal.Length.tsv</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li>Submit batch job</li>
 </ol>
+<p>First use nano text editor to change the line of “cd …” to your own
+directory</p>
+<pre class="shell"><code>nano glm_iris.batch.sh
+# Follow the TODO instruction</code></pre>
+<p>submit batch job</p>
 <pre class="shell"><code>sbatch glm_iris.batch.sh</code></pre>
-<ol start="6" style="list-style-type: decimal">
-<li>checking running job status</li>
-</ol>
+<p>checking running job status: eg. Pending, Running</p>
 <pre class="shell"><code>squeue -u &lt;username&gt;</code></pre>
+<p>Cancel jobs:</p>
+<pre class="shell"><code>scancel &lt;jobid&gt;</code></pre>
+<p>When you are done with using HPC, type <code>exit</code> in shell to
+disconnect with interactive node.</p>
 </div>
 <div id="example-2-read-and-subset-large-datafiles" class="section level3">
 <h3>Example 2: read and subset large datafiles</h3>
 <p>Here we will read and filter for summary statistics from genome-wide
 association study (GWAS). Each file contains ~29 million genetic
-variants (rows) and 52 columns of their statistics</p>
+variants on rows and 52 columns of statistics.</p>
 <pre class="shell"><code># check there are three files in data directory and see their file size 
-# each file is gziped file with size &gt; 2Gb
+# each file is bgz file with size &gt; 2Gb
 ls -lh /project/ekawaguc_906/RBootcamp2022/data
 
 # change to code directory if you haven&#39;t
 cd ./code 
 
 # activate rbootcamp environment if you haven&#39;t
-conda activate rbootcamp 
-
-# submit batch jobs to read 3 files
-sbatch read_data.batch.sh</code></pre>
+conda activate rbootcamp </code></pre>
+<p>Then edit the path in read_data.batch.sh file to change “cd …”
+directory</p>
+<pre class="shell"><code>nano read_data.batch.sh
+# Follow the TODO instruction</code></pre>
+<p>Submit batch jobs to read 3 files</p>
+<pre class="shell"><code>sbatch read_data.batch.sh</code></pre>
 <p>It takes ~10mins for each task to finish. When it’s finished, check
 results in the result directory.</p>
 <pre class="shell"><code>less ../result/Height.tsv.bgz</code></pre>

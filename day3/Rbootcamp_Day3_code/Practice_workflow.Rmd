@@ -7,16 +7,17 @@ output:
 
 ## Part I: Set up
 
-### Set up DUO
+### Set up DUO and VPN
 
-https://itservices.usc.edu/duo/
+DUO: https://itservices.usc.edu/duo/
 
+VPN: https://itservices.usc.edu/vpn/
 
 ### Log in
 
 1. Check network connection:  
 On-campus: connect to "USC secure wireless"  
-Off-campus: connect to VPN (see [website](https://itservices.usc.edu/vpn/) for set-up)
+Off-campus: connect to VPN
 
 2. Open shell command line interface (eg. Terminal on Mac):  
 
@@ -26,7 +27,7 @@ ssh <username>@discovery.usc.edu
 
 ### Navigate the file directories
 
-In Terminal:
+In Shell:
 ```{shell}
 # print current directory
 pwd
@@ -41,29 +42,29 @@ pwd
 ```
 
 
-## Download and install Anaconda (Optional but I highly recommend)
+### Download and install Anaconda (Optional but I highly recommend)
 
-### Step 1: Download installer
+#### Step 1: Download installer
 1. Open a browser and go to: https://docs.conda.io/en/latest/miniconda.html#linux-installers
 
 2. Download "Miniconda3 Linux 64-bit"
-- right click on the text and copy
-- select "copy link address"
+- Right click on the text and copy
+- Select "copy link address"
 
 3. Back in shell terminal:
-- change directory to your personal home directory: `cd /home1/<username>` (username is your USC NetID)
-- In Terminal: `wget <paste your address here>`
+- Change directory to your personal home directory: `cd /home1/<username>` (username is your USC NetID)
+- Download using: `wget <paste your address here>`
 
-### Step 2: Install
+#### Step 2: Install
 
 In shell:  
-- `bash Miniconda3-latest-Linux-x86_64.sh`  
+- Run bash script to install: `bash Miniconda3-latest-Linux-x86_64.sh`  
 - Follow the prompts (accept default if unsure)  
-- When finished, type `exit` to log out and then log in again for conda set-up to take effect
+- When finished, type `exit` to log out HPC and then log in again for conda set-up to take effect
 
 Additional Anaconda install [instructions](https://conda.io/projects/conda/en/latest/user-guide/install/linux.html)
 
-### Step 3: create an environment for R
+#### Step 3: create an environment for R
 
 In shell:  
 
@@ -86,7 +87,12 @@ Note:
 - follow prompts when installing  
 - you can also specify versions for R by adding `r-base=4.2.0`, but for now conda will figure out the best version in the environment that make all packages compatible
 
-4. Check for installed package in current environment:
+4. Install nano text editor (or other options):
+```{shell}
+conda install -c conda-forge nano
+```
+
+5. Check for installed package in current environment:
 ```{shell}
 conda list
 ```
@@ -115,6 +121,7 @@ module purge                  # remove all currently loaded modules
 module load gcc/11.3.0        # load complier
 module load openblas/0.3.20   # load linear algebra subprogram
 module load r/4.2.1
+# you will need to install tidyverse and data.table package within R using install.packages()
 ```
 
 Then type `R` to start a R session.
@@ -125,7 +132,8 @@ Then type `R` to start a R session.
 library(parallel)
 numCores <- detectCores() # How many cores on this compute node?
 numCores
-detectCores(logical=FALSE) # How many physical cores on this compute node?
+detectCores(logical=FALSE)
+# On HPC, the CPU cores are all logical core in fact. So you should be cautious about this command and read the HPC resource page to confirm.
 
 system.time(
   mclapply(1:numCores, 
@@ -141,7 +149,7 @@ Play with other code in parallel.Rmd file and see run time
 
 ### Example 1: bootstrap
 
-1. Change directory to your home directory
+1. Change directory to your home directory and print current directory
 ```{shell}
 cd /home1/<username>
 pwd
@@ -155,17 +163,17 @@ mkdir rbootcamp
 # change directory to ./rbootcamp
 cd rbootcamp
 
-# make a new directory called "result" in rbootcamp directory
+# make a new directory called "result" within rbootcamp directory
 mkdir result 
 ```
 
 3. Copy the code directory I created to your own home directory
 ```{shell}
-# -r means to copy every file recursively
+# -r means to copy every file recursively from that code directory
 cp -r /project/ekawaguc_906/RBootcamp2022/code ./
 ```
 
-look at file content:
+look at file content in ./code:
 ```{shell}
 # change directory
 cd ./code
@@ -173,11 +181,11 @@ cd ./code
 # list all items in this directory
 ls
 
-# view R code (type q to exit the view mode)
-less glm_iris.R
-
 # print the first 10 lines to the screen
 head glm_iris.R
+
+# view R code (type q to exit the view mode)
+less glm_iris.R
 ```
 
 4. Run Rscript
@@ -190,22 +198,37 @@ less ../result/Sepal.Length.tsv
 ```
 
 5. Submit batch job
+
+First use nano text editor to change the line of "cd ..." to your own directory
+```{shell}
+nano glm_iris.batch.sh
+# Follow the TODO instruction
+```
+
+submit batch job
 ```{shell}
 sbatch glm_iris.batch.sh
 ```
 
-6. checking running job status
+checking running job status: eg. Pending, Running 
 ```{shell}
 squeue -u <username>
 ```
 
+Cancel jobs:
+```{shell}
+scancel <jobid>
+```
+
+When you are done with using HPC, type `exit` in shell to disconnect with interactive node.
+
 ### Example 2: read and subset large datafiles
 
-Here we will read and filter for summary statistics from genome-wide association study (GWAS). Each file contains ~29 million genetic variants (rows) and 52 columns of their statistics
+Here we will read and filter for summary statistics from genome-wide association study (GWAS). Each file contains ~29 million genetic variants on rows and 52 columns of statistics.
 
 ```{shell}
 # check there are three files in data directory and see their file size 
-# each file is gziped file with size > 2Gb
+# each file is bgz file with size > 2Gb
 ls -lh /project/ekawaguc_906/RBootcamp2022/data
 
 # change to code directory if you haven't
@@ -213,8 +236,16 @@ cd ./code
 
 # activate rbootcamp environment if you haven't
 conda activate rbootcamp 
+```
 
-# submit batch jobs to read 3 files
+Then edit the path in read_data.batch.sh file to change "cd ..." directory
+```{shell}
+nano read_data.batch.sh
+# Follow the TODO instruction
+```
+
+Submit batch jobs to read 3 files
+```{shell}
 sbatch read_data.batch.sh
 ```
 
