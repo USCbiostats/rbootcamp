@@ -1,0 +1,33 @@
+---
+title: ""
+format: pdf
+editor: visual
+---
+
+# R Bootcamp for Scientific Computing 2023
+
+![](../fig/hex-stickers.png){width=600}
+
+## What
+
+Each year, volunteers from the Department of Population and Public Health Sciences offer "**The R Bootcamp**." This year, we are excited to be back to hosting this event in person. The Bootcamp consists of three lectures and will provide a general overview of the R programming language.
+
+## When
+
+The event consists of three lectures:
+
+|    | Day | 
+|:-------|:---|
+| **Lecture 1: Introduction to R and data viz** | Tuesday, August 15 | 
+| **Lecture 2: Data wrangling with R** | Wednesday, August 16 |
+| **Lecture 3: Automatic Reports with Quarto** | Thursday, August 17 |
+
+All sessions will be held in **SSB 114** (and on Zoom) between **1 PM and 2 PM**.
+The [**Zoom meeting**](https://usc.zoom.us/j/94981155347) is password-protected and password will be provided with RSVP.
+
+## RSVP and More info
+
+Please RSVP [**here**](https://forms.gle/X5vQJE2S7vKeyEWTA).
+
+For more details, including a detailed version of the program, please visit our website
+https://bit.ly/usc-rbootcamp, or send an email to **kelly.street\@usc.edu**.

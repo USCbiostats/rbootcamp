@@ -5,7 +5,7 @@
 *.ppt
 *.pptx
 # Other
-flyer/
+# flyer/
 simulations/*/*.html
 .Rproj.user
 .httr-oauth
