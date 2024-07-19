@@ -10,4 +10,4 @@ simulations/*/*.html
 .Rproj.user
 .httr-oauth
 .Rhistory
-
+*/.DS_Store

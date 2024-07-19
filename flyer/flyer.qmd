@@ -4,9 +4,9 @@ format: pdf
 editor: visual
 ---
 
-# R Bootcamp for Scientific Computing 2023
+# R Bootcamp for Scientific Computing 2024
 
-![](../fig/hex-stickers.png){width=600}
+![](../fig/hex-stickers.png){width="600"}
 
 ## What
 
@@ -16,18 +16,16 @@ Each year, volunteers from the Department of Population and Public Health Scienc
 
 The event consists of three lectures:
 
-|    | Day | 
-|:-------|:---|
-| **Lecture 1: Introduction to R and data viz** | Tuesday, August 15 | 
-| **Lecture 2: Data wrangling with R** | Wednesday, August 16 |
-| **Lecture 3: Automatic Reports with Quarto** | Thursday, August 17 |
+|                                               | Day                  |
+|:----------------------------------------------|:---------------------|
+| **Lecture 1: Intro and R Basics**             | Tuesday, August 20   |
+| **Lecture 2: Data Visualization**             | Wednesday, August 21 |
+| **Lecture 3: Data Wrangling and HPC**         | Thursday, August 22  |
 
-All sessions will be held in **SSB 114** (and on Zoom) between **1 PM and 2 PM**.
-The [**Zoom meeting**](https://usc.zoom.us/j/94981155347) is password-protected and password will be provided with RSVP.
+All sessions will be held in **SSB 114** between **1 PM and 2 PM**. For those unable to attend in-person, we will also host a [**Zoom meeting**](https://usc.zoom.us/j/99781668832?pwd=w9odQH0EcTpex9edRcS5btMH7hgjOw.1) (password is "USCbiostat").
 
 ## RSVP and More info
 
-Please RSVP [**here**](https://forms.gle/X5vQJE2S7vKeyEWTA).
+Please RSVP [**here**](https://forms.gle/X5vQJE2S7vKeyEWTA) (yes, it says "2021", but we're using it again for this year).
 
-For more details, including a detailed version of the program, please visit our website
-https://bit.ly/usc-rbootcamp, or send an email to **kelly.street\@usc.edu**.
+For more details, please visit our website [https://bit.ly/usc-rbootcamp](https://bit.ly/usc-rbootcamp), or feel free to send an email to **kelly.street\@usc.edu**.
