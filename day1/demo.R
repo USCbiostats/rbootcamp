@@ -1,4 +1,6 @@
 
+# Base R cheatsheet: https://rstudio.github.io/cheatsheets/base-r.pdf
+
 #####################
 # R AS A CALCULATOR #
 #####################
@@ -32,6 +34,7 @@ Inf
 # t distribution
 pt(-2.4, df = 15)
 pt(2.4, df = 15)
+?pt
 
 #########################
 # VARIABLES AND VECTORS #
@@ -97,6 +100,8 @@ class(x)
 
 x <- c("b","a","b","c")
 sort(x)
+table(x)
+unique(x)
 
 x <- factor(x)
 class(x)
@@ -123,6 +128,7 @@ x[0]
 x == "c"
 x[x == "c"]
 x[x != "c"]
+x[x %in% c("a","e")]
 
 
 y <- rnorm(100)
@@ -198,6 +204,9 @@ x
 ###############
 iris
 iris <- iris
+
+class(iris)
+str(iris)
 
 iris[1,]
 iris[,1]
