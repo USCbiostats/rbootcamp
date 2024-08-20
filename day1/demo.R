@@ -9,6 +9,9 @@
 27 * 34
 3 / 7
 
+2 + 3 * 4
+(2 + 3) * 4
+
 3^10
 
 sqrt(36)
@@ -189,18 +192,6 @@ sapply(c(3,-5,12,2), sqrt)
 
 x
 
-sapply(1:10, function(i){
-  # do something complicated
-  j <- i + 5
-  if(j > 7){
-    j <- j - 2
-  }
-  k <- j/3
-  2*k - 1
-})
-
-
-
 
 ###############
 # DATA FRAMES #
@@ -256,4 +247,40 @@ iris$newvar <- 1
 install.packages('ggplot2')
 library(ggplot2)
 
+
+#############
+# FUNCTIONS #
+#############
+
+myFun <- function(){
+  print("OK")
+}
+myFun()
+
+myFun <- function(x){
+  (x + 5) / 2
+}
+myFun()
+
+myFun <- function(x){
+  y <- (x + 5) / 2
+  if(y > 10){
+    return(11)
+  }else{
+    return(y)
+  }
+}
+myFun(2)
+myFun(50)
+
+
+sapply(1:10, function(i){
+  # do something complicated
+  j <- i + 5
+  if(j > 7){
+    j <- j - 2
+  }
+  k <- j/3
+  2*k - 1
+})
 
