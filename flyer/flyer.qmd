@@ -4,28 +4,28 @@ format: pdf
 editor: visual
 ---
 
-# R Bootcamp for Scientific Computing 2024
+# R Bootcamp for Scientific Computing 2025
 
 ![](../fig/hex-stickers.png){width="600"}
 
 ## What
 
-Each year, volunteers from the Department of Population and Public Health Sciences offer "**The R Bootcamp**." This year, we are excited to be back to hosting this event in person. The Bootcamp consists of three lectures and will provide a general overview of the R programming language.
+Each year, volunteers from the Department of Population and Public Health Sciences offer "**The R Bootcamp**." This year, we are excited to be hosting this event in person, as well as online. The Bootcamp consists of three lectures and will provide a general overview of the R programming language.
 
 ## When
 
-The event consists of three lectures:
+The event consists of three lectures, all taking place on **Thursday, August 21st**:
 
-|                                               | Day                  |
-|:----------------------------------------------|:---------------------|
-| **Lecture 1: Intro and R Basics**             | Tuesday, August 20   |
-| **Lecture 2: Data Visualization**             | Wednesday, August 21 |
-| **Lecture 3: Data Wrangling and HPC**         | Thursday, August 22  |
+|                                       | Time        |
+|:--------------------------------------|:------------|
+| **Lecture 1: Intro and R Basics**     | 11am - 12pm |
+| **Lecture 2: Data Visualization**     | 1pm - 2pm   |
+| **Lecture 3: Data Wrangling and HPC** | 2pm - 3pm   |
 
-All sessions will be held in **SSB 114** between **1 PM and 2 PM**. For those unable to attend in-person, we will also host a [**Zoom meeting**](https://usc.zoom.us/j/99781668832?pwd=w9odQH0EcTpex9edRcS5btMH7hgjOw.1) (password is "USCbiostat").
+All sessions will be held in **SSB 114**. For those unable to attend in-person, we will also host a [**Zoom meeting**](https://usc.zoom.us/j/99781668832?pwd=w9odQH0EcTpex9edRcS5btMH7hgjOw.1) (password is "USCbiostat").
 
 ## RSVP and More info
 
-Please RSVP here: [https://forms.gle/v99MuTUiwNCJ2Fw87](https://forms.gle/v99MuTUiwNCJ2Fw87) 
+Please RSVP here: <https://forms.gle/v99MuTUiwNCJ2Fw87>
 
-For more details, please visit our website [https://bit.ly/usc-rbootcamp](https://bit.ly/usc-rbootcamp), or feel free to send an email to **kelly.street\@usc.edu**.
+For more details and course materials, please visit our website <https://bit.ly/usc-rbootcamp>, or feel free to send an email to **kelly.street\@usc.edu**.
